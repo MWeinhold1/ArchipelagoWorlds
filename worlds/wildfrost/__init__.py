@@ -38,3 +38,5 @@ class WildfrostWorld(World):
     #def extend_hint_information(self, hint_data: Dict[int, Dict[int, str]])
     #def create_item(self, name: str) -> "Item"
     #def get_filler_item_name(self)
+    #def collect_item(self, state: "CollectionState", item: "Item", remove: bool = False) -> Optional[str]
+    

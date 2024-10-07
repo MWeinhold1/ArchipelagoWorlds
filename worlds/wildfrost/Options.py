@@ -205,82 +205,94 @@ class TBWeightCount(Range):
 
 class TBInkBlot(Range):
     """Apply 5 ink to all active companions."""
-    display_name = "Ink Blot - WIP"
+    display_name = "Ink Blot Trap - WIP"
     range_start = 0
     range_end = 25
 
 class TBHoghead(Range):
     """Apply hogheaded to all active companions."""
-    display_name = "Hoghead - WIP"
+    display_name = "Hoghead Trap - WIP"
     range_start = 0
     range_end = 25
 
 class TBSupportDeath(Range):
     """All Shades and Clunkers on both sides are killed."""
-    display_name = "Support Death - WIP"
+    display_name = "Support Death Event - WIP"
     range_start = 0
     range_end = 25
 
 class TBBombard(Range):
     """Prepares a Phase 2 Krunker Bombard for the next turn."""
-    display_name = "Bombard - WIP"
+    display_name = "Bombard Trap - WIP"
     range_start = 0
     range_end = 25
 
 class TBIceWall(Range):
     """All active enemies get 1 ice block."""
-    display_name = "Ice Wall - WIP"
+    display_name = "Ice Wall Trap - WIP"
     range_start = 0
     range_end = 25
 
 class TBThrowShade(Range):
-    """Does one of the following:\n
-    - Fill all empty enemy spaces with Beepop.
-    - Spawn a Tigris on the enemy side.
-    - Spawn a Leech, Pom, or Sheepopper on your side, with either Frontline or Backline."""
-    display_name = "Throwing Shade - WIP"
+    """Spawns shade(s) on either side of the map. Shades might be helpful or harmful.\n"""
+    # Helpful:
+    # Summon Chikani
+    # Summon a copy of your leader
+    # Fill enemy spaces with Sheepoppers
+    # Summon a copy of a random enemy
+    #
+    # Harmful:
+    # Spawn a Tigris on the enemy side
+    # Spawn a Backline Leech on your side 
+    # Spawn a Frontline Sheepopper on your side 
+    # Spawn Chikagoru on emey side
+    #
+    # Either:
+    # Fill all empty spaces with Beepop (both sides)
+    # Summon a Shade Monch
+    display_name = "Throwing Shade Event - WIP"
     range_start = 0
     range_end = 25
 
 class TBSpeedBoost(Range):
     """Adds a Zoomlin Consume Sun Rod to your hand."""
-    display_name = "Speed Boost - WIP"
+    display_name = "Speed Boon - WIP"
     range_start = 0
     range_end = 25
 
 class TBSnowDay(Range):
     """Adds 2 snow to all enemies."""
-    display_name = "Snow Day - WIP"
+    display_name = "Snowy Boon - WIP"
     range_start = 0
     range_end = 25
 
 class TBSpicy(Range):
     """Adds a Zoomlin Consume Peppering to your hand."""
-    display_name = "Spicy - WIP"
+    display_name = "Spicy Boon - WIP"
     range_start = 0
     range_end = 25
 
 class TBSunSmite(Range):
-    """Gain a 50 attack Consume card to your hand."""
-    display_name = "Bombard - WIP"
+    """Gain a 20 attack Consume card to your hand."""
+    display_name = "Sun Smite Boon - WIP"
     range_start = 0
     range_end = 25
 
-class TBBerryPicking(Range):
+class TBBerryBoon(Range):
     """Adds a Zoomlin Consume Berry Basket to your hand."""
-    display_name = "Bombard - WIP"
+    display_name = "Berry Basket Boon - WIP"
     range_start = 0
     range_end = 25
 
 class TBPayday(Range):
     """Gain 100 bling"""
-    display_name = "Payday - WIP"
+    display_name = "Bling Bling Boon - WIP"
     range_start = 0
     range_end = 25
 
 class TBGunk(Range):
     """Adds 5 Gunk Fruits to your deck."""
-    display_name = "Gunk - WIP"
+    display_name = "Gunk Bomb Trap - WIP"
     range_start = 0
     range_end = 25
 
@@ -289,6 +301,21 @@ class TBCurseCrown(Range):
     display_name = "Cursed Crown - WIP"
     range_start = 0
     range_end = 25
+
+class TBGoofyGobbler(Range):
+    """Fills the enemy side with Gobblers. Can be any combination of Gunk/Shroom/Snow/Standard Gobblers."""
+    display_name = "Goofy Gobbler Trap - WIP"
+    range_start = 0
+    range_end = 25
+
+# class TBGnomeageddon(Range):
+#     """Gnomelation 20:9-10 \"And they marched up over the broad plain of the earth and surrounded the
+#     camp of the snow and the beloved dwelling, but overburn came down from heaven and consumed them, and the
+#     gnome who had deceived them was thrown into the lake of frost and snow where the Eye and the False
+#     Heart were, and they will be tormented day and night forever and ever.\""""
+#     display_name = "Gnomeageddon - WIP"
+#     range_start = 0
+#     range_end = 5
 
 wildfrost_option_groups = [
     OptionGroup("Town Options", [
@@ -318,7 +345,7 @@ wildfrost_option_groups = [
     OptionGroup("Traps and Boons", [
         TrapsBoons,
         TBWeightCount,
-        TBBerryPicking,
+        TBBerryBoon,
         TBBombard,
         TBCurseCrown,
         TBGunk,
@@ -330,7 +357,8 @@ wildfrost_option_groups = [
         TBSpeedBoost,
         TBSpicy,
         TBSupportDeath,
-        TBThrowShade
+        TBThrowShade,
+        TBGoofyGobbler
     ])
 ]
 
@@ -361,7 +389,7 @@ class WildfrostOptions(PerGameCommonOptions):
     
     traps_boons: TrapsBoons
     tb_weight_count: TBWeightCount
-    tb_berry_picking: TBBerryPicking
+    tb_berry_picking: TBBerryBoon
     tb_bombard: TBBombard
     tb_curse_crown: TBCurseCrown
     tb_gunk: TBGunk

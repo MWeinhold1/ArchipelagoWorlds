@@ -27,12 +27,12 @@ buildings = {
 }
 
 building_challenges = {
-    "Shademancer Unlock":       (False),
-    "Clunkmasters Unlock":      (False),
-    "Pet House Unlock":         (False),
-    "Inventors Hut Unlock":     (False),
-    "Icebreaker Cabin Unlock":  (False),
-    "Hot Spring Unlock":        (False)
+    "Shademancer Challenge":       (False),
+    "Clunkmasters Challenge":      (False),
+    "Pet House Challenge":         (False),
+    "Inventors Hut Challenge":     (False),
+    "Icebreaker Cabin Challenge":  (False),
+    "Hot Spring Challenge":        (False)
 }
 
 idols = {
@@ -130,6 +130,41 @@ enemy_kills = {
     "Kill Woolly Drek":    (False),
 }
 
-boss_kills = {
+clunker_kills = {
+    "Kill Bombarder":    (False),
+    "Kill Ice Forge":    (False),
+    "Kill Ice Lantern":    (False),
+    "Kill Mega Mimik":    (False),
+    "Kill Mimik":    (False),
+    "Kill Octobom":    (False),
+    "Kill Plinker":    (False),
+    "Kill Spike Wall":    (False),
+}
 
+miniboss_kills = {
+    "Kill Big Peng":    (False),
+    "Kill Bigloo":    (False),
+    "Kill Bogberry":    (False),
+    "Kill Bolgo":    (False),
+    "Kill Bumbo":    (False),
+    "Kill King Moko":    (False),
+    "Kill Lumako":    (False),
+    "Kill Maw Jaw":    (False),
+    "Kill Muttonhead":    (False),
+    "Kill Nimbus":    (False),
+    "Kill Numskull":    (False),
+    "Kill Queen Globerry":    (False),
+    "Kill Razor":    (False),
+    "Kill The Ringer":    (False),
+    "Kill The Snow Knight":    (False),
+    "Kill Veiled Lady":    (False),
+    "Kill Weevil":    (False),
+}
+
+boss_kills = {
+    "Kill Infernoko":    (False),
+    "Kill Bamboozle":    (False),
+    "Kill Truffle":    (False),
+    "Kill Krunker":    (False),
+    "Kill The Frost Guardian":    (False),
 }

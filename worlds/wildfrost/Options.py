@@ -44,10 +44,10 @@ class TownSequence(Choice):
     all_challenges = 2
     all_at_once = 3
 
-class RandomTribes(Toggle):
+class ShuffleTribes(Toggle):
     """Adds the Shademancers and Clunkmasters to the item pool.
     Tribe Hall challenges become Archipelago checks."""
-    display_name = "Randomize Tribes - WIP"
+    display_name = "Shuffle Tribes - WIP"
 
 class LockMoreEvents(Toggle):
     """Adds the Injured Companion, Muncher, and Blingsnail map events to the item pool."""
@@ -322,7 +322,7 @@ wildfrost_option_groups = [
         TownBuildings,
         BuildingChallenges,
         TownSequence,
-        RandomTribes,
+        ShuffleTribes,
         LockMoreEvents
     ]),
     OptionGroup("Inventory Options", [
@@ -370,7 +370,7 @@ class WildfrostOptions(PerGameCommonOptions):
     town_buildings: TownBuildings
     building_challenges: BuildingChallenges
     town_sequence: TownSequence
-    random_tribes: RandomTribes
+    shuffle_tribes: ShuffleTribes
     lock_more_events: LockMoreEvents
     
     random_inventory: RandomInventory

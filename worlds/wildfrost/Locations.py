@@ -1,5 +1,3 @@
-
-
 #   Name                        Dynamic Size
 reward_pools = {
     "General Companion":        (True),

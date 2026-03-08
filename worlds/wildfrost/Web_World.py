@@ -1,4 +1,5 @@
 from worlds.AutoWorld import WebWorld
+from . import Options as WildfrostOptions
 
 class WildfrostWeb(WebWorld):
     theme = "ice"

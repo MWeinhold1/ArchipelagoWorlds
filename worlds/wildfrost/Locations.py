@@ -1,3 +1,37 @@
+from BaseClasses import Location
+from . import WildfrostWorld as World
+
+class WildfrostLocation(Location):
+    game = World.game
+
+# Location IDs are 5 digit numbers in the format of XYZZZ
+# X = Location category
+# Y = Location sub-category
+# ZZZ = Incremented location number.
+#
+# Example: ID 51025
+# X = 5 = Item Card
+# Y = 1 = Shademancer Card Pool
+# ZZZ = 25 = The 25th location in the card pool
+
+LOCATION_CATEGORIES = {
+    1: "Town",
+    2: "Idol",
+    3: "Enemy",
+    4: "Boss",
+    5: "Item",
+    6: "Companion",
+    7: "Charm",
+    8: "Bell"
+}
+
+LOCATION_SUBCATEGORIES = {
+    0: "General",
+    1: "Snowdweller",
+    2: "Shademancer",
+    3: "Clunkmaster"
+}
+
 #   Name
 reward_pools = {
     # "General Companion", # Sounds like we're not doing generic locations, only tribe-specific locations

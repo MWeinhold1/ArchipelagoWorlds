@@ -18,7 +18,8 @@ class WildfrostWorld(World):
     #TODO - Override functions
     #def stage_assert_generate(cls, multiworld: "MultiWorld") -> None
     #def generate_early(self) -> None
-    #def create_regions(self) -> None
+    def create_regions(self) -> None:
+        Regions.create_and_connect_regions(self)
     #def create_items(self) -> None
     #def set_rules(self) -> None
     #def generate_basic(self) -> None

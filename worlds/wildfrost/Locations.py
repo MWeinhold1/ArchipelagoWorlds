@@ -1,9 +1,6 @@
 from BaseClasses import Location
 from . import WildfrostWorld as World
 
-class WildfrostLocation(Location):
-    game = World.game
-
 # Location IDs are 5 digit numbers in the format of XYZZZ
 # X = Location category
 # Y = Location sub-category
@@ -12,53 +9,33 @@ class WildfrostLocation(Location):
 # Example: ID 51025
 # X = 5 = Item Card
 # Y = 1 = Shademancer Card Pool
-# ZZZ = 25 = The 25th location in the card pool
+# ZZZ = 25 = The 25th location in the item card pool
 
-LOCATION_CATEGORIES = {
-    1: "Town",
-    2: "Idol",
-    3: "Enemy",
-    4: "Boss",
-    5: "Item",
-    6: "Companion",
-    7: "Charm",
-    8: "Bell"
-}
+# Location Categories
+# 1: Town
+# 2: Idol
+# 3: Enemy
+# 4: Boss
+# 5: Item
+# 6: Companion
+# 7: Charm
+# 8: Boss rewards (AKA Bells)
+# 
+# _0: Generic
+# _1: Snowdweller
+# _2: Shademancer
+# _3: Clunkmaster
 
-LOCATION_SUBCATEGORIES = {
-    0: "General",
-    1: "Snowdweller",
-    2: "Shademancer",
-    3: "Clunkmaster"
-}
+class WildfrostLocation(Location):
+    game = World.game
 
-#   Name
-reward_pools = {
-    # "General Companion", # Sounds like we're not doing generic locations, only tribe-specific locations
-    "Snowdweller Companion",
-    "Shademancer Companion",
-    "Clunkmaster Companion",
-    # "General Item",
-    "Snowdweller Item",
-    "Shademancer Item",
-    "Clunkmaster Item",
-    # "General Charm",
-    "Snowdweller Charm",
-    "Shademancer Charm",
-    "Clunkmaster Charm",
-    "Boss Fight Reward" # Mainly for use with bells
-}
-
-buildings = {
-    # "Build Frostoscope", # Should this be a location, if it's unlocked by beating EotS?
+# Static Location Names
+building_challenges = {
     "Build Hot Spring",
     "Build Icebreaker Cabin",
     "Build Inventor Hut",
     "Build Pet House",
     "Build Tribe Hall"
-}
-
-building_challenges = {
     "Tribe Hall Challenge - Kill 100 Enemies",
     "Tribe Hall Challenge - Deal 1000 Damage",
     "Pet House Challenge - Recall 3 Companions",
@@ -83,7 +60,6 @@ building_challenges = {
     "Hot Spring Challenge - Summon 50 allies",
     "Hot Spring Challenge - Add 10 Scrap to Clunkers"
 }
-
 idols = {
     "Balloonist Idol",
     "Beastmaster Idol",
@@ -113,7 +89,6 @@ idols = {
     "Toxic Idol",
     "Undefeated Idol",
 }
-
 enemy_kills = {
     "Kill Baby Snowbo",
     "Kill Beeberry",
@@ -177,9 +152,7 @@ enemy_kills = {
     "Kill Willow",
     "Kill Winter Worm",
     "Kill Woolly Drek",
-}
-
-clunker_kills = {
+    # Clunkers
     "Kill Bombarder",
     "Kill Ice Forge",
     "Kill Ice Lantern",
@@ -189,8 +162,8 @@ clunker_kills = {
     "Kill Plinker",
     "Kill Spike Wall",
 }
-
-miniboss_kills = {
+boss_kills = {
+    # Minibosses
     "Kill Big Peng",
     "Kill Bigloo",
     "Kill Bogberry",
@@ -208,12 +181,54 @@ miniboss_kills = {
     "Kill The Snow Knight",
     "Kill Veiled Lady",
     "Kill Weevil",
-}
-
-boss_kills = {
+    # Bosses
     "Kill Infernoko",
     "Kill Bamboozle",
     "Kill Truffle",
     "Kill Krunker",
     "Kill The Frost Guardian",
+}
+
+# Dynamic Sized Location Name Parts
+snowName = "Snowdweller"
+shadeName = "Shademancer"
+clunkName = "Clunkmaster"
+itemCardName = " Item Card "
+companionName = " Companion "
+charmName = " Charm "
+bossRewardName = "Boss Reward "
+
+# Static Location Maps
+building_challenges_map = {x: 10000 + i for i,x in enumerate(building_challenges)}
+idols_map = {x: 20000 + i for i,x in enumerate(idols)}
+enemy_kills_map = {x: 30000 + i for i,x in enumerate(enemy_kills)}
+boss_kills_map = {x: 40000 + i for i,x in enumerate(boss_kills)}
+
+# Dynamic Sized Location Maps (currently limited to 99 per type)
+item_card_map = {
+    **{snowName + itemCardName + str(i): 51000 + i for i in range(1,99)}
+    **{shadeName + itemCardName + str(i): 52000 + i for i in range(1,99)}
+    **{clunkName + itemCardName + str(i): 53000 + i for i in range(1,99)}
+}
+companions_map = {
+    **{snowName + companionName + str(i): 61000 + i for i in range(1,99)}
+    **{shadeName + companionName + str(i): 62000 + i for i in range(1,99)}
+    **{clunkName + companionName + str(i): 63000 + i for i in range(1,99)}
+}
+charm_map = {
+    **{snowName + charmName + str(i): 71000 + i for i in range(1,99)}
+    **{shadeName + charmName + str(i): 72000 + i for i in range(1,99)}
+    **{clunkName + charmName + str(i): 73000 + i for i in range(1,99)}
+}
+boss_reward_map = {bossRewardName + str(i): 80000 + i for i in range(1,99)}
+
+allLocationsMap = {
+    **building_challenges_map,
+    **idols_map,
+    **enemy_kills_map,
+    **boss_kills_map,
+    **item_card_map,
+    **companions_map,
+    **charm_map,
+    **boss_reward_map
 }

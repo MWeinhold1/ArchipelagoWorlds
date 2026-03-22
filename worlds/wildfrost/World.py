@@ -1,5 +1,5 @@
 from worlds.AutoWorld import World
-from . import Web_World, Regions
+from . import Web_World, Regions, Locations
 
 class WildfrostWorld(World):
     """Take on the elements in Wildfrost, a tactical roguelike deckbuilder!"""
@@ -11,9 +11,9 @@ class WildfrostWorld(World):
 
     #TODO
     #item_name_to_id
-    #location_name_to_id
-    #item_name_groups
-    #location_name_groups
+    location_name_to_id = Locations.allLocationsMap
+    #options_dataclass
+    #options
 
     #TODO - Override functions
     #def stage_assert_generate(cls, multiworld: "MultiWorld") -> None

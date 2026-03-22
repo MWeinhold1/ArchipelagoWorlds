@@ -1,5 +1,5 @@
 from BaseClasses import Location
-from . import WildfrostWorld as World
+from . import WildfrostWorld
 
 # Location IDs are 5 digit numbers in the format of XYZZZ
 # X = Location category
@@ -27,7 +27,7 @@ from . import WildfrostWorld as World
 # _3: Clunkmaster
 
 class WildfrostLocation(Location):
-    game = World.game
+    game = WildfrostWorld.game
 
 # Static Location Names
 building_challenges = {
@@ -190,13 +190,13 @@ boss_kills = {
 }
 
 # Dynamic Sized Location Name Parts
-snowName = "Snowdweller"
-shadeName = "Shademancer"
-clunkName = "Clunkmaster"
-itemCardName = " Item Card "
-companionName = " Companion "
-charmName = " Charm "
-bossRewardName = "Boss Reward "
+snow_name = "Snowdweller"
+shade_name = "Shademancer"
+clunk_name = "Clunkmaster"
+item_card_name = " Item Card "
+companion_name = " Companion "
+charm_name = " Charm "
+boss_reward_name = "Boss Reward "
 
 # Static Location Maps
 building_challenges_map = {x: 10000 + i for i,x in enumerate(building_challenges)}
@@ -206,23 +206,23 @@ boss_kills_map = {x: 40000 + i for i,x in enumerate(boss_kills)}
 
 # Dynamic Sized Location Maps (currently limited to 99 per type)
 item_card_map = {
-    **{snowName + itemCardName + str(i): 51000 + i for i in range(1,99)}
-    **{shadeName + itemCardName + str(i): 52000 + i for i in range(1,99)}
-    **{clunkName + itemCardName + str(i): 53000 + i for i in range(1,99)}
+    **{snow_name + item_card_name + str(i): 51000 + i for i in range(1,99)}
+    **{shade_name + item_card_name + str(i): 52000 + i for i in range(1,99)}
+    **{clunk_name + item_card_name + str(i): 53000 + i for i in range(1,99)}
 }
 companions_map = {
-    **{snowName + companionName + str(i): 61000 + i for i in range(1,99)}
-    **{shadeName + companionName + str(i): 62000 + i for i in range(1,99)}
-    **{clunkName + companionName + str(i): 63000 + i for i in range(1,99)}
+    **{snow_name + companion_name + str(i): 61000 + i for i in range(1,99)}
+    **{shade_name + companion_name + str(i): 62000 + i for i in range(1,99)}
+    **{clunk_name + companion_name + str(i): 63000 + i for i in range(1,99)}
 }
 charm_map = {
-    **{snowName + charmName + str(i): 71000 + i for i in range(1,99)}
-    **{shadeName + charmName + str(i): 72000 + i for i in range(1,99)}
-    **{clunkName + charmName + str(i): 73000 + i for i in range(1,99)}
+    **{snow_name + charm_name + str(i): 71000 + i for i in range(1,99)}
+    **{shade_name + charm_name + str(i): 72000 + i for i in range(1,99)}
+    **{clunk_name + charm_name + str(i): 73000 + i for i in range(1,99)}
 }
-boss_reward_map = {bossRewardName + str(i): 80000 + i for i in range(1,99)}
+boss_reward_map = {boss_reward_name + str(i): 80000 + i for i in range(1,99)}
 
-allLocationsMap = {
+location_name_to_id = {
     **building_challenges_map,
     **idols_map,
     **enemy_kills_map,

@@ -217,7 +217,7 @@ class TBHoghead(Range):
 
 class TBSupportDeath(Range):
     """All Shades and Clunkers on both sides are killed."""
-    display_name = "Support Death Event - WIP"
+    display_name = "Minion Death Trap - WIP"
     range_start = 0
     range_end = 25
 

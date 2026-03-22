@@ -1,5 +1,5 @@
 from worlds.AutoWorld import World
-from . import Web_World, Regions, Locations, Items
+from . import Web_World, Regions, Locations, Items, Rules
 
 class WildfrostWorld(World):
     """Take on the elements in Wildfrost, a tactical roguelike deckbuilder!"""
@@ -20,7 +20,8 @@ class WildfrostWorld(World):
     #def generate_early(self) -> None
     def create_regions(self) -> None:
         Regions.create_and_connect_regions(self)
-    #def set_rules(self) -> None
+    def set_rules(self) -> None:
+        Rules.set_all_rules(self)
     def create_items(self) -> None:
         Items.create_all_items(self)
     def create_item(self, name: str) -> Items.WildfrostItem:

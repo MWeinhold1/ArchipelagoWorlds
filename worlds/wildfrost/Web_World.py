@@ -1,7 +1,9 @@
 from worlds.AutoWorld import WebWorld
 from . import Options as WildfrostOptions
+from . import World as WildfrostWorld
 
 class WildfrostWeb(WebWorld):
+    game = WildfrostWorld.game
     theme = "ice"
 
     #TODO

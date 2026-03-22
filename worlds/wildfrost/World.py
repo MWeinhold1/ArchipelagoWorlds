@@ -1,6 +1,8 @@
 from worlds.AutoWorld import World
 from . import Web_World, Regions, Locations, Items, Rules
 from . import Options as WildfrostOptions
+from .data.LocationData import LOCATION_NAME_TO_ID
+from .data.ItemData import ITEM_NAME_TO_ID
 
 class WildfrostWorld(World):
     """Take on the elements in Wildfrost, a tactical roguelike deckbuilder!"""
@@ -10,8 +12,8 @@ class WildfrostWorld(World):
 
     origin_region_name = "Snowdwell"
 
-    item_name_to_id = Items.item_name_to_id
-    location_name_to_id = Locations.location_name_to_id
+    item_name_to_id = ITEM_NAME_TO_ID
+    location_name_to_id = LOCATION_NAME_TO_ID
     options_dataclass = WildfrostOptions.WildfrostOptions
     options: WildfrostOptions.WildfrostOptions
 
@@ -20,6 +22,7 @@ class WildfrostWorld(World):
     #def generate_early(self) -> None
     def create_regions(self) -> None:
         Regions.create_and_connect_regions(self)
+        Locations.create_all_locations(self)
     def set_rules(self) -> None:
         Rules.set_all_rules(self)
     def create_items(self) -> None:

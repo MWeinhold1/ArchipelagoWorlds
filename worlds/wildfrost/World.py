@@ -1,5 +1,6 @@
 from worlds.AutoWorld import World
 from . import Web_World, Regions, Locations, Items, Rules
+from . import Options as WildfrostOptions
 
 class WildfrostWorld(World):
     """Take on the elements in Wildfrost, a tactical roguelike deckbuilder!"""
@@ -7,13 +8,12 @@ class WildfrostWorld(World):
     
     web = Web_World.WildfrostWeb()
 
-    origin_region_name = Regions.startingRegion
+    origin_region_name = "Snowdwell"
 
-    #TODO
     item_name_to_id = Items.item_name_to_id
     location_name_to_id = Locations.location_name_to_id
-    #options_dataclass
-    #options
+    options_dataclass = WildfrostOptions.WildfrostOptions
+    options: WildfrostOptions.WildfrostOptions
 
     #TODO - Override functions
     #def stage_assert_generate(cls, multiworld: "MultiWorld") -> None

@@ -1,9 +1,12 @@
-from enum import Enum
+from __future__ import annotations
 from BaseClasses import Item, ItemClassification
-from . import WildfrostWorld
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from .World import WildfrostWorld
 
 class WildfrostItem(Item):
-    game = WildfrostWorld.game
+    game = "Wildfrost"
 
 
 # Item Types
@@ -348,17 +351,10 @@ filler_list = {
     "Cursed Crown Trap":    (80016, ItemClassification.trap)
 }
 
-full_item_list = {
-    **building_list,
-    **charm_list,
-    **unit_list,
-    **item_card_list,
-    **bell_list,
-    **map_event_list,
-    **tribe_list,
-    **filler_list
-}
+# Full name to ID *and* classificaiton dictionary
+full_item_list = building_list | charm_list | unit_list | item_card_list | bell_list | map_event_list | tribe_list | filler_list
 
+# Full name to ID dictionary
 item_name_to_id = {x: full_item_list[x][0] for x in full_item_list}
 
 def get_random_filler_item_name(world: WildfrostWorld) -> str:
@@ -372,23 +368,26 @@ def create_item(world: WildfrostWorld, name: str) -> WildfrostItem:
 
 def create_all_items(world: WildfrostWorld) -> None:
     # Start with items that are always put into the item pool
-    itempool: list[Item] = [
-        *{world.create_item(x) for x in building_list.keys}
-        *{world.create_item(x) for x in charm_list.keys}
-        *{world.create_item(x) for x in unit_list.keys}
-        *{world.create_item(x) for x in item_card_list.keys}
-        *{world.create_item(x) for x in bell_list.keys}
-        *{world.create_item(x) for x in tribe_list.keys}
-    ]
+    itempool: list[Item] = []
+    itempool += [(world.create_item(x)) for x in building_list.keys()]
+    itempool += [(world.create_item(x)) for x in charm_list.keys()]
+    itempool += [(world.create_item(x)) for x in unit_list.keys()]
+    itempool += [(world.create_item(x)) for x in item_card_list.keys()]
+    itempool += [(world.create_item(x)) for x in bell_list.keys()]
+    itempool += [(world.create_item(x)) for x in tribe_list.keys()]
 
     # TODO: Add optional items
-    itempool += [(world.create_item(x)) for x in map_event_list.keys]
+    itempool += [(world.create_item(x)) for x in map_event_list.keys()]
 
     # Determine number of filler items needed
     num_of_items = len(itempool)
     num_unfilled_locations = len(world.multiworld.get_unfilled_locations(world.player))
     num_filler_items = num_unfilled_locations - num_of_items
     
+    print("Number of items: " + str(num_of_items))
+    print("Number of empty locations: " + str(num_unfilled_locations))
+    print("Number of filler items: " + str(num_filler_items))
+
     # Use helper function to add filler items
     itempool += [world.create_filler() for _ in range(num_filler_items)]
 

@@ -1,4 +1,8 @@
-from . import World as WildfrostWorld
+from __future__ import annotations
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from .World import WildfrostWorld
 
 def set_all_rules(world: WildfrostWorld) -> None:
     set_all_entrance_rules(world)

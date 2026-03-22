@@ -1,5 +1,9 @@
+from __future__ import annotations
 from BaseClasses import Region
-from .World import WildfrostWorld
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from .World import WildfrostWorld
 
 startingRegion = "Snowdwell"
 shademancerRegion = "Shademancers"

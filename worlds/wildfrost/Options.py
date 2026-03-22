@@ -17,9 +17,9 @@ class Goal(Choice):
     option_frost_guardian = 0
     option_heart_of_the_storm = 1
     option_complete_snowdwell = 2
-    default = 0
+    default = option_frost_guardian
 
-class TownBuildings(Choice):
+class TownBuildings(Toggle):
     """Buildings are added to the item pool. The building process provides an Archipelago check instead"""
     display_name = "Town Buildings - WIP"
 
@@ -39,10 +39,11 @@ class TownSequence(Choice):
     All At Once: Combines the All Buildings and All Challenges options.
     Buildings must still be unlocked before their challenges can be started."""
     display_name = "Town Unlock Sequence - WIP"
-    vanilla = 0
-    all_buildings = 1
-    all_challenges = 2
-    all_at_once = 3
+    option_vanilla = 0
+    option_all_buildings = 1
+    option_all_challenges = 2
+    option_all_at_once = 3
+    default = option_vanilla
 
 class ShuffleTribes(Toggle):
     """Adds the Shademancers and Clunkmasters to the item pool.
@@ -65,14 +66,15 @@ class IdolDifficulty(Choice):
     Gnomebringer: Disables the idol for winning with the Naked Gnome.
     """
     display_name = "Idol Difficulty - WIP"
-    none = 0
-    sunbringer = 1
-    undefeated = 2
-    gnomebringer = 3
-    sunbringer_undefeated = 4
-    sunbringer_gnomebringer = 5
-    undefeated_gnomebringer = 6
-    all_three = 7
+    option_none = 0
+    option_sunbringer = 1
+    option_undefeated = 2
+    option_gnomebringer = 3
+    option_sunbringer_undefeated = 4
+    option_sunbringer_gnomebringer = 5
+    option_undefeated_gnomebringer = 6
+    option_all_three = 7
+    default = option_none
 
 class RandomInventory(Toggle):
     """Add items from the starting inventory to the item pool.
@@ -89,9 +91,10 @@ class RandomLuminVase(Choice):
     
     Parts: The Broken Vase, Lumin Goop, and The Lumin Vase are added to the item pool as separate items."""
     display_name = "Randomize Lumin Vase - WIP"
-    off = 0
-    single = 1
-    parts = 2
+    option_off = 0
+    option_single = 1
+    option_parts = 2
+    default = option_off
 
 class RandomSnoof(Toggle):
     """If enabled, Snoof is added to the list of randomized companions.
@@ -123,9 +126,10 @@ class BellSanity(Choice):
     Bellsanity: Unlocked Bells are automatically enabled for every run.
     Bells cannot be disabled."""
     display_name = "Bell-Sanity - WIP"
-    standard = 0
-    selection = 1
-    bellsanity = 2
+    option_standard = 0
+    option_selection = 1
+    option_bellsanity = 2
+    default = option_standard
 
 class ArchipelaGnome(Toggle):
     """Replaces the Naked Gnome with the Archipela-Gnome. Gives a free hint when spared.
@@ -147,11 +151,12 @@ class KillChecks(Choice):
     Enemies+: Same as the Enemies option, but includes certain enemies that can
     only appear in the Eye of the Storm, based on previous team compositions"""
     display_name = "Add Unique Boss Kill Checks - WIP"
-    off = 0
-    bosses = 1
-    mini_bosses = 2
-    enemies = 3
-    enemies_plus = 4
+    option_off = 0
+    option_bosses = 1
+    option_mini_bosses = 2
+    option_enemies = 3
+    option_enemies_plus = 4
+    default = option_off
 
 class RandomFights(Choice):
     """Changes the order of where fights will appear. Eye/Heart of the Storm will never be randomized.
@@ -162,9 +167,10 @@ class RandomFights(Choice):
     
     Chaos: All fights can appear in any order, including bosses."""
     display_name = "Randomize Fight Appearance - WIP"
-    off = 0
-    zone = 1
-    chaos = 2
+    option_off = 0
+    option_zone = 1
+    option_chaos = 2
+    default = option_off
 
 class FightBalance(Choice):
     """Randomizes what enemy waves can appear within a fight.
@@ -175,9 +181,10 @@ class FightBalance(Choice):
     
     Wild: New waves with bizarre wave changes can appear."""
     display_name = "Randomize Fight Waves - WIP"
-    off = 0
-    mild = 1
-    wild = 2
+    option_off = 0
+    option_mild = 1
+    option_wild = 2
+    default = option_off
 
 
 class TrapsBoons(Choice):
@@ -192,9 +199,10 @@ class TrapsBoons(Choice):
     Weight: Traps and Boons are randomly added to the pool, using the weight to determine
     how likely each trap/boon will appear."""
     display_name = "Use Traps and Boons - WIP"
-    off = 0
-    exact = 1
-    weight = 2
+    option_off = 0
+    option_exact = 1
+    option_weight = 2
+    default = option_off
 
 class TBWeightCount(Range):
     """If the \"Use Traps and Boons\" setting is set to \"Weight\", this determines how many total
@@ -202,6 +210,7 @@ class TBWeightCount(Range):
     display_name = "Weight Count - WIP"
     range_start = 1
     range_end = 100
+    default = 1
 
 class TBInkBlot(Range):
     """Apply 5 ink to all active companions."""
@@ -323,7 +332,8 @@ wildfrost_option_groups = [
         BuildingChallenges,
         TownSequence,
         ShuffleTribes,
-        LockMoreEvents
+        LockMoreEvents,
+        IdolDifficulty
     ]),
     OptionGroup("Inventory Options", [
         RandomInventory,
@@ -372,6 +382,7 @@ class WildfrostOptions(PerGameCommonOptions):
     town_sequence: TownSequence
     shuffle_tribes: ShuffleTribes
     lock_more_events: LockMoreEvents
+    idol_difficulty: IdolDifficulty
     
     random_inventory: RandomInventory
     random_lumin_vase: RandomLuminVase

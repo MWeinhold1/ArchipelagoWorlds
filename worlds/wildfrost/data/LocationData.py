@@ -4,7 +4,6 @@ building_challenges = {
     "Build Icebreaker Cabin",
     "Build Inventor Hut",
     "Build Pet House",
-    #"Build Tribe Hall",
     "Tribe Hall Challenge - Kill 100 Enemies",
     "Tribe Hall Challenge - Deal 1000 Damage",
     "Pet House Challenge - Recall 3 Companions",

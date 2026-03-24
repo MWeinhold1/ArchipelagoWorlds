@@ -1,15 +1,21 @@
 from BaseClasses import ItemClassification
 
 # Item Types
-# Building = 1
-# Tribe = 2
-# Pet = 3
-# Map Event = not implemented yet
-# Item Card = 5
-# Unit = 6
-# Charm = 7
-# Bell = 8
-# Filler/Trap = 9
+# Building: 1
+# Tribe: 2
+# Pet: 3
+# Map Event: 4
+# Item Card: 5
+# Unit: 6
+# Charm: 7
+# Bell: 8
+# Filler/Trap: 9
+#
+# Subtypes
+# _0: Generic
+# _1: Snowdweller
+# _2: Shademancer
+# _3: Clunkmaster
 
 #   Name                    (Progression Level)
 building_list = {
@@ -350,9 +356,9 @@ bell_list = {
 
 #   Name                    (Progression Level)
 map_event_list = {
-    "Gnome Traveller":      (ItemClassification.useful),
     "Shade Sculptor":       (ItemClassification.useful),
     "Charm Merchant":       (ItemClassification.useful),
+    "Gnome Traveller":      (ItemClassification.useful),
     "Injured Companion":    (ItemClassification.useful),
     "Muncher":              (ItemClassification.useful),
     "Blingsnail Cave":      (ItemClassification.useful)
@@ -407,7 +413,7 @@ bell_map = {x: 80000 + i for i,x in enumerate(bell_list)}
 filler_map = {x: 90000 + i for i,x in enumerate(filler_list)}
 
 # Full name to ID *and* classificaiton dictionary
-FULL_ITEM_LIST = buildings_map | tribe_map | pet_map | item_card_map | companions_map | charm_map | bell_map #| filler_map
+FULL_ITEM_LIST = buildings_map | tribe_map | pet_map | item_card_map | companions_map | charm_map | bell_map | filler_map
 
 # Full name to ID dictionary
 ITEM_NAME_TO_ID = {x: FULL_ITEM_LIST[x] for x in FULL_ITEM_LIST}

@@ -1,7 +1,7 @@
 from __future__ import annotations
 from BaseClasses import Item
 from typing import TYPE_CHECKING
-from .data.ItemData import FULL_ITEM_LIST, building_list, charm_list, unit_list, item_card_list, bell_list, map_event_list, tribe_list, filler_list
+from .data.ItemData import ITEM_NAME_TO_ID, ITEM_NAME_TO_CLASSIFICATION, building_list, charm_map, companions_map, item_card_map, bell_list, map_event_list, tribe_list, filler_list
 
 if TYPE_CHECKING:
     from .World import WildfrostWorld
@@ -15,16 +15,17 @@ def get_random_filler_item_name(world: WildfrostWorld) -> str:
     return list(filler_list.keys())[0]
 
 def create_item(world: WildfrostWorld, name: str) -> WildfrostItem:
-    item = FULL_ITEM_LIST[name]
-    return WildfrostItem(name, item[1], item[0], world.player)
+    id = ITEM_NAME_TO_ID[name]
+    classification = ITEM_NAME_TO_CLASSIFICATION[name]
+    return WildfrostItem(name, classification, id, world.player)
 
 def create_all_items(world: WildfrostWorld) -> None:
     # Start with items that are always put into the item pool
     itempool: list[Item] = []
     itempool += [(world.create_item(x)) for x in building_list.keys()]
-    itempool += [(world.create_item(x)) for x in charm_list.keys()]
-    itempool += [(world.create_item(x)) for x in unit_list.keys()]
-    itempool += [(world.create_item(x)) for x in item_card_list.keys()]
+    itempool += [(world.create_item(x)) for x in charm_map.keys()]
+    itempool += [(world.create_item(x)) for x in companions_map.keys()]
+    itempool += [(world.create_item(x)) for x in item_card_map.keys()]
     itempool += [(world.create_item(x)) for x in bell_list.keys()]
     itempool += [(world.create_item(x)) for x in tribe_list.keys()]
 

@@ -44,6 +44,16 @@ pet_list = {
 }
 
 #   Name                    (Progression Level)
+map_event_list = {
+    "Shade Sculptor":       (ItemClassification.useful),
+    "Charm Merchant":       (ItemClassification.useful),
+    "Gnome Traveller":      (ItemClassification.useful),
+    "Injured Companion":    (ItemClassification.useful),
+    "Muncher":              (ItemClassification.useful),
+    "Blingsnail Cave":      (ItemClassification.useful)
+}
+
+#   Name                    (Progression Level)
 general_item_card_list = {
     # Items
     "Berry Basket":         (ItemClassification.useful),
@@ -355,16 +365,6 @@ bell_list = {
 }
 
 #   Name                    (Progression Level)
-map_event_list = {
-    "Shade Sculptor":       (ItemClassification.useful),
-    "Charm Merchant":       (ItemClassification.useful),
-    "Gnome Traveller":      (ItemClassification.useful),
-    "Injured Companion":    (ItemClassification.useful),
-    "Muncher":              (ItemClassification.useful),
-    "Blingsnail Cave":      (ItemClassification.useful)
-}
-
-#   Name                    (Progression Level)
 filler_list = {
     "25 Bling":             (ItemClassification.filler),
     "Berry Basket Boon":    (ItemClassification.filler),
@@ -387,6 +387,7 @@ filler_list = {
 buildings_map = {x: 10000 + i for i,x in enumerate(building_list)}
 tribe_map = {x: 20000 + i for i,x in enumerate(tribe_list)}
 pet_map = {x: 30000 + i for i,x in enumerate(pet_list)}
+map_event_map = {x: 40000 + i for i,x in enumerate(map_event_list)}
 
 general_item_cards = {x: 50000 + i for i,x in enumerate(general_item_card_list)}
 snow_item_cards = {x: 51000 + i for i,x in enumerate(snowdweller_item_card_list)}
@@ -412,8 +413,13 @@ charm_map = general_charms | snow_charms | shade_charms | clunk_charms
 bell_map = {x: 80000 + i for i,x in enumerate(bell_list)}
 filler_map = {x: 90000 + i for i,x in enumerate(filler_list)}
 
-# Full name to ID *and* classificaiton dictionary
-FULL_ITEM_LIST = buildings_map | tribe_map | pet_map | item_card_map | companions_map | charm_map | bell_map | filler_map
+# Full name to ID
+ITEM_NAME_TO_ID = buildings_map | tribe_map | pet_map | map_event_map | item_card_map | companions_map | charm_map | bell_map | filler_map
 
-# Full name to ID dictionary
-ITEM_NAME_TO_ID = {x: FULL_ITEM_LIST[x] for x in FULL_ITEM_LIST}
+# There's a lot of dicts to combine, using intermediate dicts to not have a massive single line
+classification_a = building_list | tribe_list | pet_list | bell_list | filler_list | map_event_list
+classification_b = general_item_card_list | snowdweller_item_card_list | shademancer_item_card_list | clunkmaster_item_card_list
+classification_c = general_companion_list | snowdweller_companion_list | shademancer_companion_list | clunkmaster_companion_list
+classification_d = general_charm_list | snowdweller_charm_list | shademancer_charm_list | clunkmaster_charm_list
+# Full name to classification
+ITEM_NAME_TO_CLASSIFICATION = classification_a | classification_b | classification_c | classification_d

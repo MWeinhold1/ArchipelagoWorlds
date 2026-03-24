@@ -59,11 +59,11 @@ class IdolDifficulty(Choice):
     Daily Voyage is not enabled while randomized, meaning that idol will always be removed.
     Removed idols will not be required for the \"Complete Snowdwell\" goal
 
-    Sunbringer: Disables the idol for defeating the Heart of the Storm.
+    Sunbringer: Disables the idol for defeating the Heart of the Storm. Auto-disabled for both victory conditions.
     
-    Undefeated: Disables the idol for a 3 Win Streak.
+    Undefeated: Disables the idol for a 3 Win Streak. Auto-disabled for Frost Guardian victory condition.
     
-    Gnomebringer: Disables the idol for winning with the Naked Gnome.
+    Gnomebringer: Disables the idol for winning with the Naked Gnome. Auto-disabled for Frost Guardian victory condition.
     """
     display_name = "Idol Difficulty - WIP"
     option_none = 0
@@ -138,7 +138,7 @@ class ArchipelaGnome(Toggle):
 
 class KillChecks(Choice):
     """Adds extra checks for unique kills on enemies.
-    NOTE: Excludes the Gnome and Heart of the Storm Bosses. Bosses only count when all phases/splits are defeated.
+    NOTE: Bosses only count when all phases/splits are defeated. Heart of the Storm bosses do not give checks.
     
     Off: Unique kills do not give checks.
     
@@ -316,15 +316,6 @@ class TBGoofyGobbler(Range):
     display_name = "Goofy Gobbler Trap - WIP"
     range_start = 0
     range_end = 25
-
-# class TBGnomeageddon(Range):
-#     """Gnomelation 20:9-10 \"And they marched up over the broad plain of the earth and surrounded the
-#     camp of the snow and the beloved dwelling, but overburn came down from heaven and consumed them, and the
-#     gnome who had deceived them was thrown into the lake of frost and snow where the Eye and the False
-#     Heart were, and they will be tormented day and night forever and ever.\""""
-#     display_name = "Gnomeageddon - WIP"
-#     range_start = 0
-#     range_end = 5
 
 wildfrost_option_groups = [
     OptionGroup("Town Options", [

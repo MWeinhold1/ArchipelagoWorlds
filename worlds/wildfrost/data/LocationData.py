@@ -1,34 +1,34 @@
 # Static Location Names
-building_challenges = {
+building_challenges = (
     "Build Hot Spring",
     "Build Icebreaker Cabin",
     "Build Inventor Hut",
     "Build Pet House",
-    "Tribe Hall Challenge - Kill 100 Enemies",
-    "Tribe Hall Challenge - Deal 1000 Damage",
-    "Pet House Challenge - Recall 3 Companions",
-    "Pet House Challenge - Kill 3 Demonized enemies",
-    "Pet House Challenge - Buy 5 discounted Items",
-    "Pet House Challenge - Kill 10 enemies with Teeth",
-    "Pet House Challenge - Hit the Enemy Wave Bell 5 times",
-    "Pet House Challenge - Achieve a 6x kill combo",
+    "Hot Spring Challenge - Equip 10 Charms",
+    "Hot Spring Challenge - Deal 10 damage to your own team",
+    "Hot Spring Challenge - Achieve a 4x kill combo",
+    "Hot Spring Challenge - Kill 20 enemies with Smackback",
+    "Hot Spring Challenge - Summon 50 allies",
+    "Hot Spring Challenge - Add 10 Scrap to Clunkers",
+    "Icebreaker Cabin Challenge - Gain 50 Bling from a Single battle",
+    "Icebreaker Cabin Challenge - Kill 15 Enemies with Shroom",
+    "Icebreaker Cabin Challenge - Feed the Muncher 5 Times",
     "Inventors Hut Challenge - Achieve a 3x kill combo",
     "Inventors Hut Challenge - Add 3 Clunkers to your deck",
     "Inventors Hut Challenge - Kill 20 enemies with Items",
     "Inventors Hut Challenge - Block 10 hits with Clunkers",
     "Inventors Hut Challenge - Apply 60 Shell",
     "Inventors Hut Challenge - Buy 10 Crown",
-    "Icebreaker Cabin Challenge - Gain 50 Bling from a Single battle",
-    "Icebreaker Cabin Challenge - Kill 15 Enemies with Shroom",
-    "Icebreaker Cabin Challenge - Feed the Muncher 5 Times",
-    "Hot Spring Challenge - Equip 10 Charms",
-    "Hot Spring Challenge - Deal 10 damage to your own team",
-    "Hot Spring Challenge - Achieve a 4x kill combo",
-    "Hot Spring Challenge - Kill 20 enemies with Smackback",
-    "Hot Spring Challenge - Summon 50 allies",
-    "Hot Spring Challenge - Add 10 Scrap to Clunkers"
-}
-idols = {
+    "Pet House Challenge - Recall 3 Companions",
+    "Pet House Challenge - Kill 3 Demonized enemies",
+    "Pet House Challenge - Buy 5 discounted Items",
+    "Pet House Challenge - Kill 10 enemies with Teeth",
+    "Pet House Challenge - Hit the Enemy Wave Bell 5 times",
+    "Pet House Challenge - Achieve a 6x kill combo",
+    "Tribe Hall Challenge - Kill 100 Enemies",
+    "Tribe Hall Challenge - Deal 1000 Damage",
+)
+idols = (
     "Balloonist Idol",
     "Beastmaster Idol",
     "Berry Good Idol",
@@ -56,8 +56,8 @@ idols = {
     "Tough Nut Idol",
     "Toxic Idol",
     "Undefeated Idol",
-}
-enemy_kills = {
+)
+enemy_kills = (
     "Kill Baby Snowbo",
     "Kill Beeberry",
     "Kill Berry Witch",
@@ -91,7 +91,6 @@ enemy_kills = {
     "Kill Makoko",
     "Kill Marrow",
     "Kill Minimoko",
-    "Kill Naked Gnome",
     "Kill Octako",
     "Kill Ooba Bear",
     "Kill Paw Paw",
@@ -120,6 +119,8 @@ enemy_kills = {
     "Kill Willow",
     "Kill Winter Worm",
     "Kill Woolly Drek",
+    "Kill Naked Gnome",
+    "Kill ArchipelaGnome",
     # Clunkers
     "Kill Bombarder",
     "Kill Ice Forge",
@@ -129,8 +130,8 @@ enemy_kills = {
     "Kill Octobom",
     "Kill Plinker",
     "Kill Spike Wall",
-}
-boss_kills = {
+)
+boss_kills = (
     # Minibosses
     "Kill Big Peng",
     "Kill Bigloo",
@@ -150,12 +151,18 @@ boss_kills = {
     "Kill Veiled Lady",
     "Kill Weevil",
     # Bosses
-    "Kill Infernoko",
     "Kill Bamboozle",
-    "Kill Truffle",
+    "Kill Infernoko",
     "Kill Krunker",
+    "Kill Truffle",
     "Kill The Frost Guardian",
-}
+    "Kill Frost Bomber",
+    "Kill Frost Crusher",
+    "Kill Frost Jailer",
+    "Kill Frost Junker",
+    "Kill Frost Muncher",
+    "Kill Frost Lancer",
+)
 
 # Dynamic Sized Location Name Parts
 snow_name = "Snowdweller"

@@ -1,3 +1,5 @@
+#WIP
+#TODO: Actually read item data
 stormstrength_values = {
     # Values for all the storm bell strengths
     "Blingsnail Bell":  1,

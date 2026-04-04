@@ -28,6 +28,7 @@ building_challenges = (
     "Tribe Hall Challenge - Kill 100 Enemies",
     "Tribe Hall Challenge - Deal 1000 Damage",
 )
+
 idols = (
     "Balloonist Idol",
     "Beastmaster Idol",
@@ -57,6 +58,7 @@ idols = (
     "Toxic Idol",
     "Undefeated Idol",
 )
+
 enemy_kills = (
     "Kill Baby Snowbo",
     "Kill Beeberry",
@@ -131,6 +133,7 @@ enemy_kills = (
     "Kill Plinker",
     "Kill Spike Wall",
 )
+
 miniboss_kills = (
     # Minibosses
     "Kill Big Peng",
@@ -151,6 +154,7 @@ miniboss_kills = (
     "Kill Veiled Lady",
     "Kill Weevil",
 )
+
 boss_kills = (
     # Bosses
     "Kill Bamboozle",

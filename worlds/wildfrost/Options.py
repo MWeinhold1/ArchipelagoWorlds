@@ -45,11 +45,21 @@ class TownSequence(Choice):
     option_all_at_once = 3
     default = option_vanilla
 
-class ShuffleTribes(Toggle):
-    """Adds the Shademancers and Clunkmasters to the item pool.
-    Tribe Hall challenges become Archipelago checks."""
-    display_name = "Shuffle Tribes - WIP"
+class ShuffleTribes(Choice):
+    """Whether to shuffle the three tribes.
+    Tribe Hall challenges become Archipelago checks if shuffled.
+    
+    Enabled: Tribes are shuffled, and a randomly chosen tribe is started with.
 
+    Snowdwellers: Snowdwellers are unlocked at the start, Shademancers and Clunkmasters are added to the pool.
+
+    Disabled: All tribes are enabled from the start.
+    """
+    display_name = "Shuffle Tribes - WIP"
+    option_enabled = 1
+    option_snowdwellers = 2
+    option_disabled = 0
+    
 class LockMoreEvents(Toggle):
     """Adds the Injured Companion, Muncher, and Blingsnail map events to the item pool."""
     display_name = "Lock More Map Events - WIP"
@@ -74,6 +84,15 @@ class RandomInventory(Toggle):
 
     Excludes Scrappy Sword, Tar Blade, Gearhammer, and Junk."""
     display_name = "Randomize Starting Inventory - WIP"
+
+class ShuffleCharms(Toggle):
+    """Option to add charms to the item pool.
+
+    When enabled, every charm will be locked at the start as items.
+    Adds a random location for every charm.
+    """
+    display_name = "Shuffle Charms"
+    default = 1
 
 class RandomLuminVase(Choice):
     """Option to add the Lumin Vase to the item pool.
@@ -313,7 +332,8 @@ wildfrost_option_groups = [
         TownSequence,
         ShuffleTribes,
         LockMoreEvents,
-        IdolDifficulty
+        IdolDifficulty,
+        ShuffleCharms
     ]),
     OptionGroup("Inventory Options", [
         RandomInventory,

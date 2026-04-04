@@ -17,6 +17,7 @@ def create_all_locations(world: WildfrostWorld) -> None:
 
 def create_regular_locations(world: WildfrostWorld) -> None:
     # TODO: Place items in correct regions, and in correct amounts
+    # TODO: Remove locations based on options, like tribe challenges.
     snowdwell = world.get_region("Snowdwell")
     locations_to_use = LOCATION_NAME_TO_ID
     locations_to_remove = []

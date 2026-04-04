@@ -323,7 +323,7 @@ clunkmaster_charm_list = {
 }
 
 #   Name                    (Progression Level)
-bell_list = {
+sun_bell_list = {
     # Sun Bells
     "Sun Bell of Hands":    (ItemClassification.useful),
     "Sun Bell of Fellowship":(ItemClassification.useful),
@@ -335,7 +335,10 @@ bell_list = {
     "Noomlin Sun Bell":     (ItemClassification.useful),
     "Sun Bell of Strength": (ItemClassification.useful),
     "Breakfast Sun Bell":   (ItemClassification.useful),
-    "Infinity Sun Bell":    (ItemClassification.useful),
+    "Infinity Sun Bell":    (ItemClassification.useful)
+}
+
+storm_bell_list = {
     # Storm Bells
     "Blingsnail Bell":      (ItemClassification.progression),
     "Bell of Death":        (ItemClassification.progression),
@@ -349,7 +352,10 @@ bell_list = {
     "Gobbler Bell":         (ItemClassification.progression),
     "Tyrant Bell":          (ItemClassification.progression),
     "Dread Bell":           (ItemClassification.progression),
-    "Blood Bell":           (ItemClassification.progression),
+    "Blood Bell":           (ItemClassification.progression)
+}
+
+voyage_bell_list = {
     # Voyage Bells
     "Battle Bell":          (ItemClassification.useful),
     "Blingsack Bell":       (ItemClassification.useful),
@@ -364,6 +370,8 @@ bell_list = {
     "Lumin Bell":           (ItemClassification.useful),
     "Party Bell":           (ItemClassification.useful)
 }
+
+bell_list = sun_bell_list | storm_bell_list | voyage_bell_list
 
 #   Name                    (Progression Level)
 filler_list = {
@@ -411,7 +419,11 @@ clunk_charms = {x: 73000 + i for i,x in enumerate(clunkmaster_charm_list)}
 
 charm_map = general_charms | snow_charms | shade_charms | clunk_charms
 
-bell_map = {x: 80000 + i for i,x in enumerate(bell_list)}
+sun_bell_map = {x: 80000 + i for i,x in enumerate(sun_bell_list)}
+storm_bell_map = {x: 81000 + i for i,x in enumerate(storm_bell_list)}
+voyage_bell_map = {x: 82000 + i for i,x in enumerate(voyage_bell_list)}
+bell_map = sun_bell_map | storm_bell_map | voyage_bell_map
+
 filler_map = {x: 90000 + i for i,x in enumerate(filler_list)}
 
 # Full name to ID

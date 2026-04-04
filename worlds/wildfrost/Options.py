@@ -20,7 +20,7 @@ class Goal(Choice):
     default = option_frost_guardian
 
 class TownBuildings(Toggle):
-    """Buildings are added to the item pool. The building process provides an Archipelago check instead"""
+    """Buildings are added to the item pool. The building challenge provides an Archipelago check instead"""
     display_name = "Town Buildings - WIP"
 
 class BuildingChallenges(Toggle):
@@ -49,7 +49,7 @@ class ShuffleTribes(Choice):
     """Whether to shuffle the three tribes.
     Tribe Hall challenges become Archipelago checks if shuffled.
     
-    Enabled: Tribes are shuffled, and a randomly chosen tribe is started with.
+    Enabled: Tribes are shuffled, and a randomly chosen tribe is started with. (WIP)
 
     Snowdwellers: Snowdwellers are unlocked at the start, Shademancers and Clunkmasters are added to the pool.
 
@@ -159,12 +159,12 @@ class KillChecks(OptionSet):
     Enemies: All enemies give extra checks
 
     ***NOT RECOMMENDED***
-    Extra: Certain enemies that can only appear in the Eye of the Storm, 
+    Storm Only: Certain enemies that can only appear in the Eye of the Storm, 
     based on previous team compositions, give extra checks"""
 
     display_name = "Add Unique Boss Kill Checks - WIP"
-    valid_keys = {"Bosses", "Mini Bosses", "Enemies", "Extra"}
-    default = []
+    valid_keys = {"Bosses", "Mini Bosses", "Enemies", "Storm Only"}
+    default = ["Bosses", "Mini Bosses"]
 
 class RandomFights(Choice):
     """Changes the order of where fights will appear. Eye/Heart of the Storm will never be randomized.
@@ -381,6 +381,7 @@ class WildfrostOptions(PerGameCommonOptions):
     building_challenges: BuildingChallenges
     town_sequence: TownSequence
     shuffle_tribes: ShuffleTribes
+    shuffle_charms: ShuffleCharms
     lock_more_events: LockMoreEvents
     idol_difficulty: IdolDifficulty
     

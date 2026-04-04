@@ -21,31 +21,32 @@ def create_item(world: WildfrostWorld, name: str) -> WildfrostItem:
     return WildfrostItem(name, classification, id, world.player)
 
 def create_all_items(world: WildfrostWorld) -> None:
-    # Start with items that are always put into the item pool ## Really?
+    # Start with items that are always put into the item pool ## Really? These are not always included
     itempool: list[Item] = []
     
     #Item Cards and Companions: Always shuffle
-    itempool += [(world.create_item(x)) for x in companions_map.keys()]
-    itempool += [(world.create_item(x)) for x in item_card_map.keys()]
+    if True:
+        itempool += [(world.create_item(x)) for x in companions_map.keys()]
+        itempool += [(world.create_item(x)) for x in item_card_map.keys()]
 
     #Tribes: These will be added if Choice ShuffleTribes is postive.
-    if world.options.ShuffleTribes:
+    if world.options.shuffle_tribes:
         itempool += [(world.create_item(x)) for x in tribe_list.keys()]
 
     #Buildings: These will be added if Toggle TownBuildings is enabled.
-    if world.options.TownBuildings:
+    if world.options.town_buildings:
         itempool += [(world.create_item(x)) for x in building_list.keys()]
 
     #Charms: These will be added if Toggle ShuffleCharms is enabled.
-    if world.options.ShuffleCharms:
+    if world.options.shuffle_charms:
         itempool += [(world.create_item(x)) for x in charm_map.keys()]
 
     #Bells: Shuffle if the requested bells should be shuffled.
-    if world.options.SunbBells:
+    if world.options.sun_bells:
         itempool += [(world.create_item(x)) for x in sun_bell_list.keys()]
-    if world.options.StormBells:
+    if world.options.storm_bells:
         itempool += [(world.create_item(x)) for x in storm_bell_list.keys()]
-    if world.options.VoyageBells:
+    if world.options.voyage_bells:
         itempool += [(world.create_item(x)) for x in voyage_bell_list.keys()]
 
     # TODO: Add optional items
@@ -59,8 +60,6 @@ def create_all_items(world: WildfrostWorld) -> None:
     print(f"Number of items: {num_of_items}")
     print(f"Number of empty locations: {num_unfilled_locations}")
     print(f"Number of filler items: {num_filler_items}")
-    if num_filler_items < 0:
-        raise ValueError(f"More items than locations in Wildfrost for player {world.player_name}.")
 
     # Use helper function to add filler items
     itempool += [world.create_filler() for _ in range(num_filler_items)]

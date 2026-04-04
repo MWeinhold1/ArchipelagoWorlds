@@ -1,4 +1,5 @@
 # Static Location Names
+# TODO: Sperate these for proper regioning
 building_challenges = (
     "Build Hot Spring",
     "Build Icebreaker Cabin",
@@ -77,7 +78,6 @@ enemy_kills = (
     "Kill Gogong",
     "Kill Gok",
     "Kill Grink",
-    "Kill Grizzle",
     "Kill Grog",
     "Kill Gromble",
     "Kill Grouchy",
@@ -99,7 +99,6 @@ enemy_kills = (
     "Kill Pecan",
     "Kill Pengoon",
     "Kill Pepper Witch",
-    "Kill Plum",
     "Kill Popshroom",
     "Kill Porkypine",
     "Kill Prickle",
@@ -118,20 +117,25 @@ enemy_kills = (
     "Kill Waddlegoons",
     "Kill Warthog",
     "Kill Wild Snoolf",
-    "Kill Willow",
     "Kill Winter Worm",
     "Kill Woolly Drek",
     "Kill Naked Gnome",
     "Kill ArchipelaGnome",
     # Clunkers
-    "Kill Bombarder",
     "Kill Ice Forge",
     "Kill Ice Lantern",
-    "Kill Mega Mimik",
     "Kill Mimik",
     "Kill Octobom",
-    "Kill Plinker",
     "Kill Spike Wall",
+)
+
+extra_enemy_kills = (
+    "Kill Grizzle",
+    "Kill Plum",
+    "Kill Willow",
+    "Kill Bombarder",
+    "Kill Mega Mimik",
+    "Kill Plinker"
 )
 
 miniboss_kills = (
@@ -208,7 +212,9 @@ boss_reward_name = "Boss Reward "
 building_challenges_map = {x: 10000 + i for i,x in enumerate(building_challenges)}
 idols_map = {x: 20000 + i for i,x in enumerate(idols)}
 enemy_kills_map = {x: 30000 + i for i,x in enumerate(enemy_kills)}
-boss_kills_map = {x: 40000 + i for i,x in enumerate(miniboss_kills + boss_kills)}
+extra_enemy_kills_map = {x: 31000 + i for i,x in enumerate(extra_enemy_kills)}
+miniboss_kills_map = {x: 40000 + i for i,x in enumerate(miniboss_kills)}
+boss_kills_map = {x: 41000 + i for i,x in enumerate(boss_kills)}
 
 # Dynamic Sized Location Maps (currently limited to 99 per type)
 snow_cards = {snow_name + item_card_name + str(i): 51000 + i for i in range(1,99)}
@@ -229,4 +235,4 @@ charm_map = snow_charms | shade_charms | clunk_charms
 boss_reward_map = {boss_reward_name + str(i): 80000 + i for i in range(1,99)}
 
 # Full name to ID dictionary
-LOCATION_NAME_TO_ID = building_challenges_map | idols_map | enemy_kills_map | boss_kills_map | item_card_map | companions_map | charm_map | boss_reward_map
+LOCATION_NAME_TO_ID = building_challenges_map | idols_map | enemy_kills_map | extra_enemy_kills_map | miniboss_kills_map | boss_kills_map | item_card_map | companions_map | charm_map | boss_reward_map

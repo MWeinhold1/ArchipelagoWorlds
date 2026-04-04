@@ -29,19 +29,11 @@ def create_regular_locations(world: WildfrostWorld) -> None:
         "Mega Mimik",
         "Plinker"
     )
-    
-    remove_bosses_flag = False
-    remove_minibosses_flag = False
-    remove_enemies_flag = False
-    remove_extra_enemies_flag = False
-    if not ("Bosses" in world.options.kill_checks.value):
-        remove_bosses_flag = True
-    if not ("Mini Bosses" in world.options.kill_checks.value):
-        remove_minibosses_flag = True
-    if not ("Enemy" in world.options.kill_checks.value):
-        remove_enemies_flag = True
-    if not ("Extra" in world.options.kill_checks.value):
-        remove_extra_enemies_flag = True
+
+    remove_bosses_flag        = not ("Bosses" in world.options.kill_checks.value)
+    remove_minibosses_flag    = not ("Mini Bosses" in world.options.kill_checks.value)
+    remove_enemies_flag       = not ("Enemy" in world.options.kill_checks.value)
+    remove_extra_enemies_flag = not ("Extra" in world.options.kill_checks.value)
 
     for key in locations_to_use.keys():
         if key in LocationData.boss_kills and remove_bosses_flag:

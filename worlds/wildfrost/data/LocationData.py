@@ -212,9 +212,9 @@ boss_reward_name = "Boss Reward "
 building_challenges_map = {x: 10000 + i for i,x in enumerate(building_challenges)}
 idols_map = {x: 20000 + i for i,x in enumerate(idols)}
 enemy_kills_map = {x: 30000 + i for i,x in enumerate(enemy_kills)}
-extra_enemy_kills_map = {x: 31000 + i for i,x in enumerate(extra_enemy_kills)}
+extra_enemy_kills_map = {x: 30000 + len(enemy_kills) + i for i,x in enumerate(extra_enemy_kills)}
 miniboss_kills_map = {x: 40000 + i for i,x in enumerate(miniboss_kills)}
-boss_kills_map = {x: 41000 + i for i,x in enumerate(boss_kills)}
+boss_kills_map = {x: 40000 + len(miniboss_kills) + i for i,x in enumerate(boss_kills)}
 
 # Dynamic Sized Location Maps (currently limited to 99 per type)
 snow_cards = {snow_name + item_card_name + str(i): 51000 + i for i in range(1,99)}

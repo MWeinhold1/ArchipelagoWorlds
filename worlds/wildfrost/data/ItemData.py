@@ -272,7 +272,7 @@ general_charm_list = {
     "Hog Charm":            (ItemClassification.useful),
     "Hook Charm":           (ItemClassification.useful),
     "Jimbo Charm":          (ItemClassification.useful),
-    "Lumin Ring":          (ItemClassification.useful),
+    "Lumin Ring":           (ItemClassification.useful),
     "Moko Charm":           (ItemClassification.useful),
     "Molten Egg Charm":     (ItemClassification.useful),
     "Moose Charm":          (ItemClassification.useful),
@@ -420,8 +420,8 @@ clunk_charms = {x: 73000 + i for i,x in enumerate(clunkmaster_charm_list)}
 charm_map = general_charms | snow_charms | shade_charms | clunk_charms
 
 sun_bell_map = {x: 80000 + i for i,x in enumerate(sun_bell_list)}
-storm_bell_map = {x: 81000 + i for i,x in enumerate(storm_bell_list)}
-voyage_bell_map = {x: 82000 + i for i,x in enumerate(voyage_bell_list)}
+storm_bell_map = {x: 80000 + len(sun_bell_list) + i for i,x in enumerate(storm_bell_list)}
+voyage_bell_map = {x: 80000 + len(sun_bell_list) + len(storm_bell_list) + i for i,x in enumerate(voyage_bell_list)}
 bell_map = sun_bell_map | storm_bell_map | voyage_bell_map
 
 filler_map = {x: 90000 + i for i,x in enumerate(filler_list)}

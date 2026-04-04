@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 import typing
 
-from Options import Option, Choice, Range, Toggle, DeathLink, OptionGroup, PerGameCommonOptions
+from Options import Option, Choice, Range, Toggle, DeathLink, OptionGroup, PerGameCommonOptions, OptionSet
 from worlds.ladx.LADXR.mapgen.wfc import Cell
 
 class Goal(Choice):
@@ -54,7 +54,7 @@ class LockMoreEvents(Toggle):
     """Adds the Injured Companion, Muncher, and Blingsnail map events to the item pool."""
     display_name = "Lock More Map Events - WIP"
 
-class IdolDifficulty(Choice):
+class IdolDifficulty(OptionSet):
     """Chooses which tedious idols are removed from the Archipelago checks.
     Daily Voyage is not enabled while randomized, meaning that idol will always be removed.
     Removed idols will not be required for the \"Complete Snowdwell\" goal
@@ -66,15 +66,8 @@ class IdolDifficulty(Choice):
     Gnomebringer: Disables the idol for winning with the Naked Gnome. Auto-disabled for Frost Guardian victory condition.
     """
     display_name = "Idol Difficulty - WIP"
-    option_none = 0
-    option_sunbringer = 1
-    option_undefeated = 2
-    option_gnomebringer = 3
-    option_sunbringer_undefeated = 4
-    option_sunbringer_gnomebringer = 5
-    option_undefeated_gnomebringer = 6
-    option_all_three = 7
-    default = option_none
+    valid_keys = {"Sunbringer", "Undefeated", "Gnomebringer"}
+    default = valid_keys
 
 class RandomInventory(Toggle):
     """Add items from the starting inventory to the item pool.
@@ -98,7 +91,7 @@ class RandomLuminVase(Choice):
 
 class RandomSnoof(Toggle):
     """If enabled, Snoof is added to the list of randomized companions.
-    Otherwise, Snoof is unlocked as soon as the Pet House is built."""
+    Otherwise, Snoof is unlocked from the start."""
     display_name = "Randomize Snoof - WIP"
 
 class SunBells(Toggle):
@@ -136,27 +129,23 @@ class ArchipelaGnome(Toggle):
     Naked Gnome will instead appear in Frozen Travelers."""
     display_name = "Archipela-Gnome - WIP"
 
-class KillChecks(Choice):
+class KillChecks(OptionSet):
     """Adds extra checks for unique kills on enemies.
-    NOTE: Bosses only count when all phases/splits are defeated. Heart of the Storm bosses do not give checks.
-    
-    Off: Unique kills do not give checks.
+    NOTE: Boss kills only count as completed when the fight is won.
     
     Bosses: Bosses give extra checks.
     
-    Mini-Bosses: Bosses and Mini-Bosses give extra checks.
+    Mini Bosses: Mini-Bosses give extra checks.
     
-    Enemies: All enemies give extra checks, as well as Bosses and Mini-Bosses.
-    
-    Enemies+: Same as the Enemies option, but includes certain enemies that can
-    only appear in the Eye of the Storm, based on previous team compositions"""
+    Enemies: All enemies give extra checks
+
+    ***NOT RECOMMENDED***
+    Extra: Certain enemies that can only appear in the Eye of the Storm, 
+    based on previous team compositions, give extra checks"""
+
     display_name = "Add Unique Boss Kill Checks - WIP"
-    option_off = 0
-    option_bosses = 1
-    option_mini_bosses = 2
-    option_enemies = 3
-    option_enemies_plus = 4
-    default = option_off
+    valid_keys = {"Bosses", "Mini Bosses", "Enemies", "Extra"}
+    default = []
 
 class RandomFights(Choice):
     """Changes the order of where fights will appear. Eye/Heart of the Storm will never be randomized.

@@ -75,7 +75,6 @@ class UndertaleWorld(World):
             "rando_item_button": bool(self.options.rando_item_button.value),
             "route_required": int(self.options.route_required.value),
             "temy_include": int(self.options.temy_include.value)
-
         }
 
     def get_filler_item_name(self):

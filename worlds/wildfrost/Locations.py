@@ -15,7 +15,7 @@ def create_all_locations(world: WildfrostWorld) -> None:
     create_regular_locations(world)
     create_events(world)
 
-def add_location_to_pool(world: WildfrostWorld, region: Region, location_name: str) -> WildfrostLocation:
+def add_location_to_pool(world: WildfrostWorld, region: Region, location_name: str) -> WildfrostLocation: # type: ignore
     "A basic function for adding a specific location to the location pool for the create_regular_locations function."
     return (WildfrostLocation(world.player, location_name, LOCATION_NAME_TO_ID[location_name], region))
 

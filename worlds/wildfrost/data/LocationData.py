@@ -178,10 +178,10 @@ boss_kills = (
 snow_name = "Snowdweller"
 shade_name = "Shademancer"
 clunk_name = "Clunkmaster"
-item_card_name = " Item Card "
-companion_name = " Companion "
-charm_name = " Charm "
-boss_reward_name = "Boss Reward "
+item_card_name = "Item Card"
+companion_name = "Companion"
+charm_name = "Charm"
+boss_reward_name = "Boss Reward"
 
 # Location IDs are 5 digit numbers in the format of XYZZZ
 # X = Location category
@@ -217,22 +217,22 @@ miniboss_kills_map = {x: 40000 + i for i,x in enumerate(miniboss_kills)}
 boss_kills_map = {x: 40000 + len(miniboss_kills) + i for i,x in enumerate(boss_kills)}
 
 # Dynamic Sized Location Maps (currently limited to 99 per type)
-snow_cards = {snow_name + item_card_name + str(i): 51000 + i for i in range(1,99)}
-shade_cards = {shade_name + item_card_name + str(i): 52000 + i for i in range(1,99)}
-clunk_cards = {clunk_name + item_card_name + str(i): 53000 + i for i in range(1,99)}
+snow_cards = {f"{snow_name} {item_card_name} {i}": 51000 + i for i in range(1,99)}
+shade_cards = {f"{shade_name} {item_card_name} {i}": 52000 + i for i in range(1,99)}
+clunk_cards = {f"{clunk_name} {item_card_name} {i}": 53000 + i for i in range(1,99)}
 item_card_map = snow_cards | shade_cards | clunk_cards
 
-snow_companions = {snow_name + companion_name + str(i): 61000 + i for i in range(1,99)}
-shade_companions = {shade_name + companion_name + str(i): 62000 + i for i in range(1,99)}
-clunk_companions = {clunk_name + companion_name + str(i): 63000 + i for i in range(1,99)}
+snow_companions = {f"{snow_name} {companion_name} {i}": 61000 + i for i in range(1,99)}
+shade_companions = {f"{shade_name} {companion_name} {i}": 62000 + i for i in range(1,99)}
+clunk_companions = {f"{clunk_name} {companion_name} {i}": 63000 + i for i in range(1,99)}
 companions_map = snow_companions | shade_companions | clunk_companions
 
-snow_charms = {snow_name + charm_name + str(i): 71000 + i for i in range(1,99)}
-shade_charms = {shade_name + charm_name + str(i): 72000 + i for i in range(1,99)}
-clunk_charms = {clunk_name + charm_name + str(i): 73000 + i for i in range(1,99)}
+snow_charms = {f"{snow_name} {charm_name} {i}": 71000 + i for i in range(1,99)}
+shade_charms = {f"{shade_name} {charm_name} {i}": 72000 + i for i in range(1,99)}
+clunk_charms = {f"{clunk_name} {charm_name} {i}": 73000 + i for i in range(1,99)}
 charm_map = snow_charms | shade_charms | clunk_charms
 
-boss_reward_map = {boss_reward_name + str(i): 80000 + i for i in range(1,99)}
+boss_reward_map = {f"{boss_reward_name} {i}": 80000 + i for i in range(1,99)}
 
 # Full name to ID dictionary
 LOCATION_NAME_TO_ID = building_challenges_map | idols_map | enemy_kills_map | extra_enemy_kills_map | miniboss_kills_map | boss_kills_map | item_card_map | companions_map | charm_map | boss_reward_map

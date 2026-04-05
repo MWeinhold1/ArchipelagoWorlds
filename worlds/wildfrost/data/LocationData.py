@@ -183,6 +183,9 @@ companion_name = "Companion"
 charm_name = "Charm"
 boss_reward_name = "Boss Reward"
 
+#Number of repeatable locations per location
+num_repeatable_locations = 99
+
 # Location IDs are 5 digit numbers in the format of XYZZZ
 # X = Location category
 # Y = Location sub-category
@@ -210,29 +213,29 @@ boss_reward_name = "Boss Reward"
 
 # Static Location Maps
 building_challenges_map = {x: 10000 + i for i,x in enumerate(building_challenges)}
-idols_map = {x: 20000 + i for i,x in enumerate(idols)}
-enemy_kills_map = {x: 30000 + i for i,x in enumerate(enemy_kills)}
-extra_enemy_kills_map = {x: 30000 + len(enemy_kills) + i for i,x in enumerate(extra_enemy_kills)}
-miniboss_kills_map = {x: 40000 + i for i,x in enumerate(miniboss_kills)}
-boss_kills_map = {x: 40000 + len(miniboss_kills) + i for i,x in enumerate(boss_kills)}
+idols_map               = {x: 20000 + i for i,x in enumerate(idols)}
+enemy_kills_map         = {x: 30000 + i for i,x in enumerate(enemy_kills)}
+extra_enemy_kills_map   = {x: 30000 + len(enemy_kills) + i for i,x in enumerate(extra_enemy_kills)}
+miniboss_kills_map      = {x: 40000 + i for i,x in enumerate(miniboss_kills)}
+boss_kills_map          = {x: 40000 + len(miniboss_kills) + i for i,x in enumerate(boss_kills)}
 
 # Dynamic Sized Location Maps (currently limited to 99 per type)
-snow_cards = {f"{snow_name} {item_card_name} {i}": 51000 + i for i in range(1,99)}
-shade_cards = {f"{shade_name} {item_card_name} {i}": 52000 + i for i in range(1,99)}
-clunk_cards = {f"{clunk_name} {item_card_name} {i}": 53000 + i for i in range(1,99)}
-item_card_map = snow_cards | shade_cards | clunk_cards
+snow_cards       = {f"{snow_name } {item_card_name} {i}": 51000 + i for i in range(1, num_repeatable_locations)}
+shade_cards      = {f"{shade_name} {item_card_name} {i}": 52000 + i for i in range(1, num_repeatable_locations)}
+clunk_cards      = {f"{clunk_name} {item_card_name} {i}": 53000 + i for i in range(1, num_repeatable_locations)}
+item_card_map    = snow_cards | shade_cards | clunk_cards
 
-snow_companions = {f"{snow_name} {companion_name} {i}": 61000 + i for i in range(1,99)}
-shade_companions = {f"{shade_name} {companion_name} {i}": 62000 + i for i in range(1,99)}
-clunk_companions = {f"{clunk_name} {companion_name} {i}": 63000 + i for i in range(1,99)}
-companions_map = snow_companions | shade_companions | clunk_companions
+snow_companions  = {f"{snow_name } {companion_name} {i}": 61000 + i for i in range(1, num_repeatable_locations)}
+shade_companions = {f"{shade_name} {companion_name} {i}": 62000 + i for i in range(1, num_repeatable_locations)}
+clunk_companions = {f"{clunk_name} {companion_name} {i}": 63000 + i for i in range(1, num_repeatable_locations)}
+companions_map   = snow_companions | shade_companions | clunk_companions
 
-snow_charms = {f"{snow_name} {charm_name} {i}": 71000 + i for i in range(1,99)}
-shade_charms = {f"{shade_name} {charm_name} {i}": 72000 + i for i in range(1,99)}
-clunk_charms = {f"{clunk_name} {charm_name} {i}": 73000 + i for i in range(1,99)}
-charm_map = snow_charms | shade_charms | clunk_charms
+snow_charms      = {f"{snow_name } {charm_name} {i}":     71000 + i for i in range(1, num_repeatable_locations)}
+shade_charms     = {f"{shade_name} {charm_name} {i}":     72000 + i for i in range(1, num_repeatable_locations)}
+clunk_charms     = {f"{clunk_name} {charm_name} {i}":     73000 + i for i in range(1, num_repeatable_locations)}
+charm_map        = snow_charms | shade_charms | clunk_charms
 
-boss_reward_map = {f"{boss_reward_name} {i}": 80000 + i for i in range(1,99)}
+boss_reward_map  = {f"{boss_reward_name} {i}":            80000 + i for i in range(1, num_repeatable_locations)}
 
 # Full name to ID dictionary
 LOCATION_NAME_TO_ID = building_challenges_map | idols_map | enemy_kills_map | extra_enemy_kills_map | miniboss_kills_map | boss_kills_map | item_card_map | companions_map | charm_map | boss_reward_map

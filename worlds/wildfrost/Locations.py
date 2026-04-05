@@ -52,11 +52,11 @@ def create_regular_locations(world: WildfrostWorld) -> None:
         locationpool += [add_location_to_pool(world, snowdwell, locationName) for locationName in miniboss_kills_map]
 
     #Add locations for boss kills:
-    if "Bosses": #Always enabled (for now)
+    if "Bosses" in world.options.kill_checks.value: #Always enabled (for now)
         locationpool += [add_location_to_pool(world, snowdwell, locationName) for locationName in boss_kills_map]
 
     #Add locations for eye of the storm kills:
-    if "Storm Only": #Always enabled (for now)
+    if "Storm Only" in world.options.kill_checks.value: #Always enabled (for now)
         locationpool += [add_location_to_pool(world, snowdwell, locationName) for locationName in extra_enemy_kills_map]
     
     #Add random location checks for item cards:

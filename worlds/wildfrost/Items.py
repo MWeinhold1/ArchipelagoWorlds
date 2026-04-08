@@ -2,7 +2,6 @@ from __future__ import annotations
 from BaseClasses import Item
 from typing import TYPE_CHECKING
 from .data.ItemData import ITEM_NAME_TO_ID, ITEM_NAME_TO_CLASSIFICATION, building_list, charm_map, companions_map, item_card_map, sun_bell_list, storm_bell_list, voyage_bell_list, map_event_list, tribe_list, filler_list
-from Fill import FillError
 
 if TYPE_CHECKING:
     from .World import WildfrostWorld

@@ -1,34 +1,36 @@
 # Static Location Names
-building_challenges = {
+# TODO: Sperate these for proper regioning
+building_challenges = (
     "Build Hot Spring",
     "Build Icebreaker Cabin",
     "Build Inventor Hut",
     "Build Pet House",
-    "Tribe Hall Challenge - Kill 100 Enemies",
-    "Tribe Hall Challenge - Deal 1000 Damage",
-    "Pet House Challenge - Recall 3 Companions",
-    "Pet House Challenge - Kill 3 Demonized enemies",
-    "Pet House Challenge - Buy 5 discounted Items",
-    "Pet House Challenge - Kill 10 enemies with Teeth",
-    "Pet House Challenge - Hit the Enemy Wave Bell 5 times",
-    "Pet House Challenge - Achieve a 6x kill combo",
+    "Hot Spring Challenge - Equip 10 Charms",
+    "Hot Spring Challenge - Deal 10 damage to your own team",
+    "Hot Spring Challenge - Achieve a 4x kill combo",
+    "Hot Spring Challenge - Kill 20 enemies with Smackback",
+    "Hot Spring Challenge - Summon 50 allies",
+    "Hot Spring Challenge - Add 10 Scrap to Clunkers",
+    "Icebreaker Cabin Challenge - Gain 50 Bling from a Single battle",
+    "Icebreaker Cabin Challenge - Kill 15 Enemies with Shroom",
+    "Icebreaker Cabin Challenge - Feed the Muncher 5 Times",
     "Inventors Hut Challenge - Achieve a 3x kill combo",
     "Inventors Hut Challenge - Add 3 Clunkers to your deck",
     "Inventors Hut Challenge - Kill 20 enemies with Items",
     "Inventors Hut Challenge - Block 10 hits with Clunkers",
     "Inventors Hut Challenge - Apply 60 Shell",
     "Inventors Hut Challenge - Buy 10 Crown",
-    "Icebreaker Cabin Challenge - Gain 50 Bling from a Single battle",
-    "Icebreaker Cabin Challenge - Kill 15 Enemies with Shroom",
-    "Icebreaker Cabin Challenge - Feed the Muncher 5 Times",
-    "Hot Spring Challenge - Equip 10 Charms",
-    "Hot Spring Challenge - Deal 10 damage to your own team",
-    "Hot Spring Challenge - Achieve a 4x kill combo",
-    "Hot Spring Challenge - Kill 20 enemies with Smackback",
-    "Hot Spring Challenge - Summon 50 allies",
-    "Hot Spring Challenge - Add 10 Scrap to Clunkers"
-}
-idols = {
+    "Pet House Challenge - Recall 3 Companions",
+    "Pet House Challenge - Kill 3 Demonized enemies",
+    "Pet House Challenge - Buy 5 discounted Items",
+    "Pet House Challenge - Kill 10 enemies with Teeth",
+    "Pet House Challenge - Hit the Enemy Wave Bell 5 times",
+    "Pet House Challenge - Achieve a 6x kill combo",
+    "Tribe Hall Challenge - Kill 100 Enemies",
+    "Tribe Hall Challenge - Deal 1000 Damage",
+)
+
+idols = (
     "Balloonist Idol",
     "Beastmaster Idol",
     "Berry Good Idol",
@@ -56,8 +58,9 @@ idols = {
     "Tough Nut Idol",
     "Toxic Idol",
     "Undefeated Idol",
-}
-enemy_kills = {
+)
+
+enemy_kills = (
     "Kill Baby Snowbo",
     "Kill Beeberry",
     "Kill Berry Witch",
@@ -75,7 +78,6 @@ enemy_kills = {
     "Kill Gogong",
     "Kill Gok",
     "Kill Grink",
-    "Kill Grizzle",
     "Kill Grog",
     "Kill Gromble",
     "Kill Grouchy",
@@ -91,14 +93,12 @@ enemy_kills = {
     "Kill Makoko",
     "Kill Marrow",
     "Kill Minimoko",
-    "Kill Naked Gnome",
     "Kill Octako",
     "Kill Ooba Bear",
     "Kill Paw Paw",
     "Kill Pecan",
     "Kill Pengoon",
     "Kill Pepper Witch",
-    "Kill Plum",
     "Kill Popshroom",
     "Kill Porkypine",
     "Kill Prickle",
@@ -117,20 +117,28 @@ enemy_kills = {
     "Kill Waddlegoons",
     "Kill Warthog",
     "Kill Wild Snoolf",
-    "Kill Willow",
     "Kill Winter Worm",
     "Kill Woolly Drek",
+    "Kill Naked Gnome",
+    "Kill ArchipelaGnome",
     # Clunkers
-    "Kill Bombarder",
     "Kill Ice Forge",
     "Kill Ice Lantern",
-    "Kill Mega Mimik",
     "Kill Mimik",
     "Kill Octobom",
-    "Kill Plinker",
     "Kill Spike Wall",
-}
-boss_kills = {
+)
+
+extra_enemy_kills = (
+    "Kill Grizzle",
+    "Kill Plum",
+    "Kill Willow",
+    "Kill Bombarder",
+    "Kill Mega Mimik",
+    "Kill Plinker"
+)
+
+miniboss_kills = (
     # Minibosses
     "Kill Big Peng",
     "Kill Bigloo",
@@ -149,22 +157,34 @@ boss_kills = {
     "Kill The Snow Knight",
     "Kill Veiled Lady",
     "Kill Weevil",
+)
+
+boss_kills = (
     # Bosses
-    "Kill Infernoko",
     "Kill Bamboozle",
-    "Kill Truffle",
+    "Kill Infernoko",
     "Kill Krunker",
+    "Kill Truffle",
     "Kill The Frost Guardian",
-}
+    "Kill Frost Bomber",
+    "Kill Frost Crusher",
+    "Kill Frost Jailer",
+    "Kill Frost Junker",
+    "Kill Frost Muncher",
+    "Kill Frost Lancer",
+)
 
 # Dynamic Sized Location Name Parts
 snow_name = "Snowdweller"
 shade_name = "Shademancer"
 clunk_name = "Clunkmaster"
-item_card_name = " Item Card "
-companion_name = " Companion "
-charm_name = " Charm "
-boss_reward_name = "Boss Reward "
+item_card_name = "Item Card"
+companion_name = "Companion"
+charm_name = "Charm"
+boss_reward_name = "Boss Reward"
+
+#Number of repeatable locations per location
+num_repeatable_locations = 99
 
 # Location IDs are 5 digit numbers in the format of XYZZZ
 # X = Location category
@@ -193,27 +213,29 @@ boss_reward_name = "Boss Reward "
 
 # Static Location Maps
 building_challenges_map = {x: 10000 + i for i,x in enumerate(building_challenges)}
-idols_map = {x: 20000 + i for i,x in enumerate(idols)}
-enemy_kills_map = {x: 30000 + i for i,x in enumerate(enemy_kills)}
-boss_kills_map = {x: 40000 + i for i,x in enumerate(boss_kills)}
+idols_map               = {x: 20000 + i for i,x in enumerate(idols)}
+enemy_kills_map         = {x: 30000 + i for i,x in enumerate(enemy_kills)}
+extra_enemy_kills_map   = {x: 30000 + len(enemy_kills) + i for i,x in enumerate(extra_enemy_kills)}
+miniboss_kills_map      = {x: 40000 + i for i,x in enumerate(miniboss_kills)}
+boss_kills_map          = {x: 40000 + len(miniboss_kills) + i for i,x in enumerate(boss_kills)}
 
 # Dynamic Sized Location Maps (currently limited to 99 per type)
-snow_cards = {snow_name + item_card_name + str(i): 51000 + i for i in range(1,99)}
-shade_cards = {shade_name + item_card_name + str(i): 52000 + i for i in range(1,99)}
-clunk_cards = {clunk_name + item_card_name + str(i): 53000 + i for i in range(1,99)}
-item_card_map = snow_cards | shade_cards | clunk_cards
+snow_cards       = {f"{snow_name } {item_card_name} {i}": 51000 + i for i in range(1, num_repeatable_locations)}
+shade_cards      = {f"{shade_name} {item_card_name} {i}": 52000 + i for i in range(1, num_repeatable_locations)}
+clunk_cards      = {f"{clunk_name} {item_card_name} {i}": 53000 + i for i in range(1, num_repeatable_locations)}
+item_card_map    = snow_cards | shade_cards | clunk_cards
 
-snow_companions = {snow_name + companion_name + str(i): 61000 + i for i in range(1,99)}
-shade_companions = {shade_name + companion_name + str(i): 62000 + i for i in range(1,99)}
-clunk_companions = {clunk_name + companion_name + str(i): 63000 + i for i in range(1,99)}
-companions_map = snow_companions | shade_companions | clunk_companions
+snow_companions  = {f"{snow_name } {companion_name} {i}": 61000 + i for i in range(1, num_repeatable_locations)}
+shade_companions = {f"{shade_name} {companion_name} {i}": 62000 + i for i in range(1, num_repeatable_locations)}
+clunk_companions = {f"{clunk_name} {companion_name} {i}": 63000 + i for i in range(1, num_repeatable_locations)}
+companions_map   = snow_companions | shade_companions | clunk_companions
 
-snow_charms = {snow_name + charm_name + str(i): 71000 + i for i in range(1,99)}
-shade_charms = {shade_name + charm_name + str(i): 72000 + i for i in range(1,99)}
-clunk_charms = {clunk_name + charm_name + str(i): 73000 + i for i in range(1,99)}
-charm_map = snow_charms | shade_charms | clunk_charms
+snow_charms      = {f"{snow_name } {charm_name} {i}":     71000 + i for i in range(1, num_repeatable_locations)}
+shade_charms     = {f"{shade_name} {charm_name} {i}":     72000 + i for i in range(1, num_repeatable_locations)}
+clunk_charms     = {f"{clunk_name} {charm_name} {i}":     73000 + i for i in range(1, num_repeatable_locations)}
+charm_map        = snow_charms | shade_charms | clunk_charms
 
-boss_reward_map = {boss_reward_name + str(i): 80000 + i for i in range(1,99)}
+boss_reward_map  = {f"{boss_reward_name} {i}":            80000 + i for i in range(1, num_repeatable_locations)}
 
 # Full name to ID dictionary
-LOCATION_NAME_TO_ID = building_challenges_map | idols_map | enemy_kills_map | boss_kills_map | item_card_map | companions_map | charm_map | boss_reward_map
+LOCATION_NAME_TO_ID = building_challenges_map | idols_map | enemy_kills_map | extra_enemy_kills_map | miniboss_kills_map | boss_kills_map | item_card_map | companions_map | charm_map | boss_reward_map

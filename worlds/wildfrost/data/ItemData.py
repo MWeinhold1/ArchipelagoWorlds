@@ -61,7 +61,6 @@ general_item_card_list = {
     "Blaze Tea":            (ItemClassification.useful),
     "Demonheart":           (ItemClassification.useful),
     "Frost Bell":           (ItemClassification.useful),
-    "Frostbite Shard":      (ItemClassification.useful),
     "Frostbloom":           (ItemClassification.useful),
     "Grabber":              (ItemClassification.useful),
     "Ice Dice":             (ItemClassification.useful),
@@ -125,16 +124,17 @@ shademancer_item_card_list = {
     "Beepop Mask":          (ItemClassification.useful),
     "Berry Bell":           (ItemClassification.useful),
     "Blank Mask":           (ItemClassification.useful),
+    "Blizzard Bottle":      (ItemClassification.useful),
     "Bonescraper":          (ItemClassification.useful),
     "Fallow Mask":          (ItemClassification.useful),
     "Junjun Mask":          (ItemClassification.useful),
     "Leech Mask":           (ItemClassification.useful),
+    "Pom Mask":             (ItemClassification.useful),
     "Shade Clay":           (ItemClassification.useful),
     "Shade Wisp":           (ItemClassification.useful),
     "Sheepopper Mask":      (ItemClassification.useful),
     "Skull Muffin":         (ItemClassification.useful),
     "Skullmist Tea":        (ItemClassification.useful),
-    "Pom Mask":             (ItemClassification.useful),
     "Snuffer Mask":         (ItemClassification.useful),
     "Soulbound Skulls":     (ItemClassification.useful),
     "Sunburst Tootoo":      (ItemClassification.useful),
@@ -153,6 +153,7 @@ clunkmaster_item_card_list = {
     "Foggy Brew":           (ItemClassification.useful),
     "Forging Stove":        (ItemClassification.useful),
     "Frenzy Wrench":        (ItemClassification.useful),
+    "Frostbite Shard":      (ItemClassification.useful),
     "Gigi's Cookie Box":    (ItemClassification.useful),
     "Gigi's Gizmo":         (ItemClassification.useful),
     "Haze Keg":             (ItemClassification.useful),
@@ -271,7 +272,7 @@ general_charm_list = {
     "Hog Charm":            (ItemClassification.useful),
     "Hook Charm":           (ItemClassification.useful),
     "Jimbo Charm":          (ItemClassification.useful),
-    "Lumin Ring":          (ItemClassification.useful),
+    "Lumin Ring":           (ItemClassification.useful),
     "Moko Charm":           (ItemClassification.useful),
     "Molten Egg Charm":     (ItemClassification.useful),
     "Moose Charm":          (ItemClassification.useful),
@@ -322,7 +323,7 @@ clunkmaster_charm_list = {
 }
 
 #   Name                    (Progression Level)
-bell_list = {
+sun_bell_list = {
     # Sun Bells
     "Sun Bell of Hands":    (ItemClassification.useful),
     "Sun Bell of Fellowship":(ItemClassification.useful),
@@ -334,7 +335,10 @@ bell_list = {
     "Noomlin Sun Bell":     (ItemClassification.useful),
     "Sun Bell of Strength": (ItemClassification.useful),
     "Breakfast Sun Bell":   (ItemClassification.useful),
-    "Infinity Sun Bell":    (ItemClassification.useful),
+    "Infinity Sun Bell":    (ItemClassification.useful)
+}
+
+storm_bell_list = {
     # Storm Bells
     "Blingsnail Bell":      (ItemClassification.progression),
     "Bell of Death":        (ItemClassification.progression),
@@ -348,7 +352,10 @@ bell_list = {
     "Gobbler Bell":         (ItemClassification.progression),
     "Tyrant Bell":          (ItemClassification.progression),
     "Dread Bell":           (ItemClassification.progression),
-    "Blood Bell":           (ItemClassification.progression),
+    "Blood Bell":           (ItemClassification.progression)
+}
+
+voyage_bell_list = {
     # Voyage Bells
     "Battle Bell":          (ItemClassification.useful),
     "Blingsack Bell":       (ItemClassification.useful),
@@ -363,6 +370,8 @@ bell_list = {
     "Lumin Bell":           (ItemClassification.useful),
     "Party Bell":           (ItemClassification.useful)
 }
+
+bell_list = sun_bell_list | storm_bell_list | voyage_bell_list
 
 #   Name                    (Progression Level)
 filler_list = {
@@ -410,16 +419,19 @@ clunk_charms = {x: 73000 + i for i,x in enumerate(clunkmaster_charm_list)}
 
 charm_map = general_charms | snow_charms | shade_charms | clunk_charms
 
-bell_map = {x: 80000 + i for i,x in enumerate(bell_list)}
+sun_bell_map = {x: 80000 + i for i,x in enumerate(sun_bell_list)}
+storm_bell_map = {x: 80000 + len(sun_bell_list) + i for i,x in enumerate(storm_bell_list)}
+voyage_bell_map = {x: 80000 + len(sun_bell_list) + len(storm_bell_list) + i for i,x in enumerate(voyage_bell_list)}
+bell_map = sun_bell_map | storm_bell_map | voyage_bell_map
+
 filler_map = {x: 90000 + i for i,x in enumerate(filler_list)}
 
 # Full name to ID
 ITEM_NAME_TO_ID = buildings_map | tribe_map | pet_map | map_event_map | item_card_map | companions_map | charm_map | bell_map | filler_map
 
-# There's a lot of dicts to combine, using intermediate dicts to not have a massive single line
-classification_a = building_list | tribe_list | pet_list | bell_list | filler_list | map_event_list
-classification_b = general_item_card_list | snowdweller_item_card_list | shademancer_item_card_list | clunkmaster_item_card_list
-classification_c = general_companion_list | snowdweller_companion_list | shademancer_companion_list | clunkmaster_companion_list
-classification_d = general_charm_list | snowdweller_charm_list | shademancer_charm_list | clunkmaster_charm_list
-# Full name to classification
-ITEM_NAME_TO_CLASSIFICATION = classification_a | classification_b | classification_c | classification_d
+
+
+ITEM_NAME_TO_CLASSIFICATION = building_list | tribe_list | pet_list | bell_list | filler_list | map_event_list |\
+        general_item_card_list | snowdweller_item_card_list | shademancer_item_card_list | clunkmaster_item_card_list|\
+        general_companion_list | snowdweller_companion_list | shademancer_companion_list | clunkmaster_companion_list|\
+        general_charm_list | snowdweller_charm_list | shademancer_charm_list | clunkmaster_charm_list

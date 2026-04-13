@@ -429,10 +429,9 @@ filler_map = {x: 90000 + i for i,x in enumerate(filler_list)}
 # Full name to ID
 ITEM_NAME_TO_ID = buildings_map | tribe_map | pet_map | map_event_map | item_card_map | companions_map | charm_map | bell_map | filler_map
 
-# There's a lot of dicts to combine, using intermediate dicts to not have a massive single line
-classification_a = building_list | tribe_list | pet_list | bell_list | filler_list | map_event_list
-classification_b = general_item_card_list | snowdweller_item_card_list | shademancer_item_card_list | clunkmaster_item_card_list
-classification_c = general_companion_list | snowdweller_companion_list | shademancer_companion_list | clunkmaster_companion_list
-classification_d = general_charm_list | snowdweller_charm_list | shademancer_charm_list | clunkmaster_charm_list
-# Full name to classification
-ITEM_NAME_TO_CLASSIFICATION = classification_a | classification_b | classification_c | classification_d
+
+
+ITEM_NAME_TO_CLASSIFICATION = building_list | tribe_list | pet_list | bell_list | filler_list | map_event_list |\
+        general_item_card_list | snowdweller_item_card_list | shademancer_item_card_list | clunkmaster_item_card_list|\
+        general_companion_list | snowdweller_companion_list | shademancer_companion_list | clunkmaster_companion_list|\
+        general_charm_list | snowdweller_charm_list | shademancer_charm_list | clunkmaster_charm_list

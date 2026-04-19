@@ -27,41 +27,38 @@ class BuildingChallenges(Toggle):
     """In-building challenge rewards are added to the item pool. Challenges provide an Archipelago check instead"""
     display_name = "Building Challenges - WIP"
 
-class TownSequence(Choice):
-    """Determines the progression of town challenges.
-
-    Vanilla: Buildings/Challenges must be completed before the next building/challenge progression starts.
-
-    All Buildings: All buildings can be built at the same time.
-
-    All Challenges: Once a building is built, all challenges in that building can be progressed at the same time.
-
-    All At Once: Combines the All Buildings and All Challenges options.
-    Buildings must still be unlocked before their challenges can be started."""
-    display_name = "Town Unlock Sequence - WIP"
-    option_vanilla = 0
-    option_all_buildings = 1
-    option_all_challenges = 2
-    option_all_at_once = 3
-    default = option_vanilla
-
-class ShuffleTribes(Choice):
-    """Whether to shuffle the three tribes.
-    Tribe Hall challenges become Archipelago checks if shuffled.
+class BypassBuildingOrder(Toggle):
+    """If enabled, you can progress towards any build challenge from the start.
+    Otherwise, you can only progress towards a build challenge if the previous one has been completed (like in vanilla).
+    """
+    display_name = "Bypass Building Order - (WIP)"
+    default = 1
     
-    Enabled: Tribes are shuffled, and a randomly chosen tribe is started with. (WIP)
+class BypassQuestOrder(Toggle):
+    """If enabled, you can progress towards any building quest as soon as the related building is built.
+    Otherwise, you can only progress towards a building quest if the previous one within the same building has been completed (like in vanilla).
+    """
+    display_name = "Bypass Quest Order - (WIP)"
+    default = 1
 
-    Snowdwellers: Snowdwellers are unlocked at the start, Shademancers and Clunkmasters are added to the pool.
-
-    Disabled: All tribes are enabled from the start.
+class ShuffleTribes(Toggle):
+    """Whether to randomize the three tribes.
+    Tribe Hall challenges become Archipelago checks if shuffled.
     """
     display_name = "Shuffle Tribes - WIP"
-    option_enabled = 1
-    option_snowdwellers = 2
-    option_disabled = 0
+
+class StartingTribes(OptionSet):
+    """Determines which tribes start unlocked.
+    Does nothing if "Shuffle Tribes" is disabled.
     
+    Valid keys: Snowdwellers, Shademancers, Clunkmasters.
+    """
+    display_name = "Starting Tribes - WIP"
+    valid_keys = {"Snowdwellers", "Shademancers", "Clunkmasters"}
+    default = valid_keys
+
 class LockMoreEvents(Toggle):
-    """Adds the Injured Companion, Muncher, and Blingsnail map events to the item pool."""
+    """Adds the Injured Companion, Muncher, and Blingsnail Cave map events to the item pool."""
     display_name = "Lock More Map Events - WIP"
 
 class IdolDifficulty(OptionSet):
@@ -329,8 +326,10 @@ wildfrost_option_groups = [
     OptionGroup("Town Options", [
         TownBuildings,
         BuildingChallenges,
-        TownSequence,
+        BypassBuildingOrder,
+        BypassQuestOrder,
         ShuffleTribes,
+        StartingTribes,
         LockMoreEvents,
         IdolDifficulty,
         ShuffleCharms
@@ -379,8 +378,10 @@ class WildfrostOptions(PerGameCommonOptions):
 
     town_buildings: TownBuildings
     building_challenges: BuildingChallenges
-    town_sequence: TownSequence
+    bypass_building_order: BypassBuildingOrder
+    bypass_quest_order: BypassQuestOrder
     shuffle_tribes: ShuffleTribes
+    starting_tribes: StartingTribes
     shuffle_charms: ShuffleCharms
     lock_more_events: LockMoreEvents
     idol_difficulty: IdolDifficulty

@@ -5,27 +5,37 @@ building_challenges = (
     "Build Icebreaker Cabin",
     "Build Inventor Hut",
     "Build Pet House",
+)
+hotspring_challenges = (
     "Hot Spring Challenge - Equip 10 Charms",
     "Hot Spring Challenge - Deal 10 damage to your own team",
     "Hot Spring Challenge - Achieve a 4x kill combo",
     "Hot Spring Challenge - Kill 20 enemies with Smackback",
     "Hot Spring Challenge - Summon 50 allies",
     "Hot Spring Challenge - Add 10 Scrap to Clunkers",
+)
+icebreaker_challenges = (
     "Icebreaker Cabin Challenge - Gain 50 Bling from a Single battle",
     "Icebreaker Cabin Challenge - Kill 15 Enemies with Shroom",
     "Icebreaker Cabin Challenge - Feed the Muncher 5 Times",
+)
+inventors_challenges = (
     "Inventors Hut Challenge - Achieve a 3x kill combo",
     "Inventors Hut Challenge - Add 3 Clunkers to your deck",
     "Inventors Hut Challenge - Kill 20 enemies with Items",
     "Inventors Hut Challenge - Block 10 hits with Clunkers",
     "Inventors Hut Challenge - Apply 60 Shell",
     "Inventors Hut Challenge - Buy 10 Crown",
+)
+pethouse_challenges = (
     "Pet House Challenge - Recall 3 Companions",
     "Pet House Challenge - Kill 3 Demonized enemies",
     "Pet House Challenge - Buy 5 discounted Items",
     "Pet House Challenge - Kill 10 enemies with Teeth",
     "Pet House Challenge - Hit the Enemy Wave Bell 5 times",
     "Pet House Challenge - Achieve a 6x kill combo",
+)
+tribehall_challenges = (
     "Tribe Hall Challenge - Kill 100 Enemies",
     "Tribe Hall Challenge - Deal 1000 Damage",
 )
@@ -213,6 +223,23 @@ num_repeatable_locations = 99
 
 # Static Location Maps
 building_challenges_map = {x: 10000 + i for i,x in enumerate(building_challenges)}
+total_category_ids = len(building_challenges)
+
+hotspring_challenges_map = {x: 10000 + total_category_ids + i for i,x in enumerate(hotspring_challenges)}
+total_category_ids += len(hotspring_challenges_map)
+
+icebreaker_challenges_map = {x: 10000 + total_category_ids + i for i,x in enumerate(icebreaker_challenges)}
+total_category_ids += len(icebreaker_challenges_map)
+
+inventors_challenges_map = {x: 10000 + total_category_ids + i for i,x in enumerate(inventors_challenges)}
+total_category_ids += len(inventors_challenges_map)
+
+pethouse_challenges_map = {x: 10000 + total_category_ids + i for i,x in enumerate(pethouse_challenges)}
+total_category_ids += len(pethouse_challenges_map)
+
+tribehall_challenges_map = {x: 10000 + total_category_ids + i for i,x in enumerate(tribehall_challenges)}
+
+
 idols_map               = {x: 20000 + i for i,x in enumerate(idols)}
 enemy_kills_map         = {x: 30000 + i for i,x in enumerate(enemy_kills)}
 extra_enemy_kills_map   = {x: 30000 + len(enemy_kills) + i for i,x in enumerate(extra_enemy_kills)}

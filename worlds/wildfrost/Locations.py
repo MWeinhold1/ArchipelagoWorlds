@@ -3,7 +3,11 @@ from BaseClasses import Location
 from . import Items
 from typing import TYPE_CHECKING
 from .data import LocationData
-from .data.LocationData import LOCATION_NAME_TO_ID, building_challenges_map, idols_map, enemy_kills_map, miniboss_kills_map, boss_kills_map, extra_enemy_kills_map, item_card_map, companions_map, charm_map, boss_reward_map
+from .data.LocationData import LOCATION_NAME_TO_ID, building_challenges_map,\
+    hotspring_challenges_map, icebreaker_challenges_map, inventors_challenges_map,\
+    pethouse_challenges_map, tribehall_challenges_map, idols_map, enemy_kills_map,\
+    miniboss_kills_map, boss_kills_map, extra_enemy_kills_map, item_card_map,\
+    companions_map, charm_map, boss_reward_map
 
 if TYPE_CHECKING:
     from .World import WildfrostWorld
@@ -26,16 +30,24 @@ def create_regular_locations(world: WildfrostWorld) -> None:
 
     #Regions (I hope using string names works)
     snowdwell    = world.get_region("Snowdwell")
+    snowdwellers = world.get_region("Snowdwellers")
     shademancers = world.get_region("Shademancers")
     clunkmasters = world.get_region("Clunkmasters")
-    # pethouse     = world.get_region("Pethouse")       #These dont work
-    # inventors    = world.get_region("Inventors")
-    # icebreaker   = world.get_region("Icebreaker")
-    # hotspring    = world.get_region("HotSpring")
+    pethouse     = world.get_region("Pet House")     
+    inventors    = world.get_region("Inventor's Hut")
+    icebreaker   = world.get_region("Icebreaker's Cabin")
+    hotspring    = world.get_region("Hot Springs")
 
+
+    #Add challenges from the buildings
+    if True:
+        locationpool += [add_location_to_pool(world, hotspring, locationName) for locationName in hotspring_challenges_map]
+        locationpool += [add_location_to_pool(world, icebreaker, locationName) for locationName in icebreaker_challenges_map]
+        locationpool += [add_location_to_pool(world, inventors, locationName) for locationName in inventors_challenges_map]
+        locationpool += [add_location_to_pool(world, pethouse, locationName) for locationName in pethouse_challenges_map]
+        locationpool += [add_location_to_pool(world, snowdwell, locationName) for locationName in tribehall_challenges_map]
 
     #Add building challenge locations, if enabled:
-    #TODO: Seperate building challenges into regions
     if world.options.town_buildings:
         locationpool += [add_location_to_pool(world, snowdwell, locationName) for locationName in building_challenges_map]
     

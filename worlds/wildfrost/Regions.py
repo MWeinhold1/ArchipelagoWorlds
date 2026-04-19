@@ -6,6 +6,7 @@ if TYPE_CHECKING:
     from .World import WildfrostWorld
 
 startingRegion = "Snowdwell"
+snowdwellerRegion = "Snowdwellers"
 shademancerRegion = "Shademancers"
 clunkmasterRegion = "Clunkmasters"
 pethouseRegion = "Pet House"
@@ -20,6 +21,7 @@ def create_and_connect_regions(world: WildfrostWorld) -> None:
 def create_all_regions(world: WildfrostWorld) -> None:
     # Define regions that can have multiple locations hidden behind them
     snowdwell = Region(startingRegion, world.player, world.multiworld)
+    snowdwellers = Region(snowdwellerRegion, world.player, world.multiworld)
     shademancers = Region(shademancerRegion, world.player, world.multiworld)
     clunkmasters = Region(clunkmasterRegion, world.player, world.multiworld)
     pethouse = Region(pethouseRegion, world.player, world.multiworld)
@@ -27,7 +29,7 @@ def create_all_regions(world: WildfrostWorld) -> None:
     icebreaker = Region(icebreakerRegion, world.player, world.multiworld)
     hotspring = Region(hotspringRegion, world.player, world.multiworld)
 
-    regions = [snowdwell, shademancers, clunkmasters, pethouse, inventors, icebreaker, hotspring]
+    regions = [snowdwell, snowdwellers, shademancers, clunkmasters, pethouse, inventors, icebreaker, hotspring]
     
     # TODO: Use options to determine if fights are also regions for monster kills
 
@@ -36,6 +38,7 @@ def create_all_regions(world: WildfrostWorld) -> None:
 def connect_regions(world: WildfrostWorld) -> None:
     # Fetch regions, since we're out of scope from create_all_regions
     snowdwell = world.get_region(startingRegion)
+    snowdwellers = world.get_region(snowdwellerRegion)
     shademancers = world.get_region(shademancerRegion)
     clunkmasters = world.get_region(clunkmasterRegion)
     pethouse = world.get_region(pethouseRegion)
@@ -44,6 +47,7 @@ def connect_regions(world: WildfrostWorld) -> None:
     hotspring = world.get_region(hotspringRegion)
 
     # For now, everything connects to snowdwell. TODO: define rules
+    snowdwell.connect(snowdwellers, "Unlock Snowdwellers")
     snowdwell.connect(shademancers, "Unlock Shademancers")
     snowdwell.connect(clunkmasters, "Unlock Clunkmasters")
     snowdwell.connect(pethouse, "Build Pet House")

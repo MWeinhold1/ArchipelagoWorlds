@@ -42,10 +42,10 @@ def create_regular_locations(world: WildfrostWorld) -> None:
     #Add challenges from the buildings
     if True:
         locationpool += [add_location_to_pool(world, hotspring, locationName) for locationName in hotspring_challenges_map]
-        locationpool += [add_location_to_pool(world, icebreaker, locationName) for locationName in icebreaker_challenges_map]
-        locationpool += [add_location_to_pool(world, inventors, locationName) for locationName in inventors_challenges_map]
-        locationpool += [add_location_to_pool(world, pethouse, locationName) for locationName in pethouse_challenges_map]
-        locationpool += [add_location_to_pool(world, snowdwell, locationName) for locationName in tribehall_challenges_map]
+        icebreaker.locations += [add_location_to_pool(world, icebreaker, locationName) for locationName in icebreaker_challenges_map]
+        inventors.locations += [add_location_to_pool(world, inventors, locationName) for locationName in inventors_challenges_map]
+        pethouse.locations += [add_location_to_pool(world, pethouse, locationName) for locationName in pethouse_challenges_map]
+        hotspring.locations += [add_location_to_pool(world, snowdwell, locationName) for locationName in tribehall_challenges_map]
 
     #Add building challenge locations, if enabled:
     if world.options.town_buildings:

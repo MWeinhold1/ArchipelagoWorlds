@@ -59,10 +59,9 @@ def set_all_location_rules(world: WildfrostWorld) -> None:
             #        order_rule = def accessible(state):
             #            return set(state.advancements) >= set(tribehall_challenges[:order])
             match location.name:
-                #case "Hot Spring Challenge - Equip 10 Charms":
-                    #rule = lambda state: state.has_any({name for name in world.item_names if name.endswith("Charm")}, world.player)
+                case "Hot Spring Challenge - Equip 10 Charms":
+                    rule = lambda state: state.has_any({name for name in world.item_names if name.endswith("Charm")}, world.player)
                 case "Hot Spring Challenge - Summon 50 allies":
-                    print("ADDING RULE2")
                     rule = lambda state: \
                         (state.has("Shademancers Tribe", world.player) \
                             or not world.options.shuffle_tribes) \

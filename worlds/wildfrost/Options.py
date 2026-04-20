@@ -27,18 +27,18 @@ class BuildingChallenges(Toggle):
     """In-building challenge rewards are added to the item pool. Challenges provide an Archipelago check instead"""
     display_name = "Building Challenges - WIP"
 
-class BypassBuildingOrder(Toggle):
+class BypassTownOrder(Toggle):
     """If enabled, you can progress towards any build challenge from the start.
     Otherwise, you can only progress towards a build challenge if the previous one has been completed (like in vanilla).
     """
-    display_name = "Bypass Building Order - (WIP)"
+    display_name = "Bypass Town Order - (WIP)"
     default = 1
     
-class BypassQuestOrder(Toggle):
+class BypassBuildingOrder(Toggle):
     """If enabled, you can progress towards any building quest as soon as the related building is built.
     Otherwise, you can only progress towards a building quest if the previous one within the same building has been completed (like in vanilla).
     """
-    display_name = "Bypass Quest Order - (WIP)"
+    display_name = "Bypass Building Order - (WIP)"
     default = 1
 
 class ShuffleTribes(Toggle):
@@ -326,8 +326,8 @@ wildfrost_option_groups = [
     OptionGroup("Town Options", [
         TownBuildings,
         BuildingChallenges,
+        BypassTownOrder,
         BypassBuildingOrder,
-        BypassQuestOrder,
         ShuffleTribes,
         StartingTribes,
         LockMoreEvents,
@@ -378,8 +378,8 @@ class WildfrostOptions(PerGameCommonOptions):
 
     town_buildings: TownBuildings
     building_challenges: BuildingChallenges
+    bypass_town_order: BypassTownOrder
     bypass_building_order: BypassBuildingOrder
-    bypass_quest_order: BypassQuestOrder
     shuffle_tribes: ShuffleTribes
     starting_tribes: StartingTribes
     shuffle_charms: ShuffleCharms

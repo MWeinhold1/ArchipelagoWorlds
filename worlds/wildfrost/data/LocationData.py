@@ -239,6 +239,9 @@ total_category_ids += len(pethouse_challenges_map)
 
 tribehall_challenges_map = {x: 10000 + total_category_ids + i for i,x in enumerate(tribehall_challenges)}
 
+town_challenges_map = building_challenges_map | hotspring_challenges_map | icebreaker_challenges_map \
+| inventors_challenges_map | pethouse_challenges_map | tribehall_challenges_map
+
 
 idols_map               = {x: 20000 + i for i,x in enumerate(idols)}
 enemy_kills_map         = {x: 30000 + i for i,x in enumerate(enemy_kills)}
@@ -265,4 +268,4 @@ charm_map        = snow_charms | shade_charms | clunk_charms
 boss_reward_map  = {f"{boss_reward_name} {i}":            80000 + i for i in range(1, num_repeatable_locations)}
 
 # Full name to ID dictionary
-LOCATION_NAME_TO_ID = building_challenges_map | idols_map | enemy_kills_map | extra_enemy_kills_map | miniboss_kills_map | boss_kills_map | item_card_map | companions_map | charm_map | boss_reward_map
+LOCATION_NAME_TO_ID = town_challenges_map | idols_map | enemy_kills_map | extra_enemy_kills_map | miniboss_kills_map | boss_kills_map | item_card_map | companions_map | charm_map | boss_reward_map

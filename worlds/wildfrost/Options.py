@@ -30,6 +30,7 @@ class BuildingChallenges(Toggle):
 class BypassTownOrder(Toggle):
     """If enabled, you can progress towards any build challenge from the start.
     Otherwise, you can only progress towards a build challenge if the previous one has been completed (like in vanilla).
+    Doesn't do anything if \"Town Buildings\" is disabled.
     """
     display_name = "Bypass Town Order - (WIP)"
     default = 1
@@ -37,6 +38,7 @@ class BypassTownOrder(Toggle):
 class BypassBuildingOrder(Toggle):
     """If enabled, you can progress towards any building quest as soon as the related building is built.
     Otherwise, you can only progress towards a building quest if the previous one within the same building has been completed (like in vanilla).
+    Doesn't do anything if \"Building Challenges\" is disabled.
     """
     display_name = "Bypass Building Order - (WIP)"
     default = 1
@@ -49,13 +51,13 @@ class ShuffleTribes(Toggle):
 
 class StartingTribes(OptionSet):
     """Determines which tribes start unlocked.
-    Does nothing if "Shuffle Tribes" is disabled.
+    Does nothing if \"Shuffle Tribes\" is disabled.
     
     Valid keys: Snowdwellers, Shademancers, Clunkmasters.
     """
     display_name = "Starting Tribes - WIP"
     valid_keys = {"Snowdwellers", "Shademancers", "Clunkmasters"}
-    default = valid_keys
+    default = {"Snowdwellers"}
 
 class LockMoreEvents(Toggle):
     """Adds the Injured Companion, Muncher, and Blingsnail Cave map events to the item pool."""
@@ -71,9 +73,19 @@ class IdolDifficulty(OptionSet):
     Undefeated: Disables the idol for a 3 Win Streak. Auto-disabled for Frost Guardian victory condition.
     
     Gnomebringer: Disables the idol for winning with the Naked Gnome. Auto-disabled for Frost Guardian victory condition.
+    
+    Best Friends: Disables the idol for winning with only your pet as an active companion. Auto-disabled for Frost Guardian victory condition.
+    
+    Snowdweller: Disables the idol for winning with the Snowdwellers tribe. Auto-disabled for Frost Guardian victory condition.
+    
+    Shademancer: Disables the idol for winning with the Shademancers tribe. Auto-disabled for Frost Guardian victory condition.
+    
+    Clunkmaster: Disables the idol for winning with the Clunkmasters tribe. Auto-disabled for Frost Guardian victory condition.
+    
+    One Punch: Disables the idol for killing the Frost Guardian with a Scrappy Sword. Auto-disabled for Frost Guardian victory condition.
     """
     display_name = "Idol Difficulty - WIP"
-    valid_keys = {"Sunbringer", "Undefeated", "Gnomebringer"}
+    valid_keys = {"Sunbringer", "Undefeated", "Gnomebringer", "Best Friends", "Clunkmaster", "Shademancer", "Snowdweller", "One Punch"}
     default = valid_keys
 
 class RandomInventory(Toggle):

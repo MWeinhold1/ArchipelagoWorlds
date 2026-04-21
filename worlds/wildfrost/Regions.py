@@ -46,14 +46,26 @@ def connect_regions(world: WildfrostWorld) -> None:
     icebreaker = world.get_region(icebreakerRegion)
     hotspring = world.get_region(hotspringRegion)
 
-    # For now, everything connects to snowdwell. TODO: define rules
-    snowdwell.connect(snowdwellers, "Unlock Snowdwellers")
-    snowdwell.connect(shademancers, "Unlock Shademancers")
-    snowdwell.connect(clunkmasters, "Unlock Clunkmasters")
-    snowdwell.connect(pethouse, "Build Pet House")
-    snowdwell.connect(inventors, "Build Inventor's Hut")
-    snowdwell.connect(icebreaker, "Build Icebreaker Cabin")
-    snowdwell.connect(hotspring, "Build Hot Spring")
+    snowdwell.connect(snowdwellers, "Unlock Snowdwellers", lambda state: state.has("Snowdwellers Tribe", world.player))
+    snowdwell.connect(shademancers, "Unlock Shademancers", lambda state: state.has("Shademancers Tribe", world.player))
+    snowdwell.connect(clunkmasters, "Unlock Clunkmasters", lambda state: state.has("Clunkmasters Tribe", world.player))
+
+    if world.options.town_buildings:
+        if world.options.bypass_town_order:
+            snowdwell.connect(pethouse, "Build Pet House", lambda state: state.has("Pet House", world.player))
+            snowdwell.connect(inventors, "Build Inventor's Hut", lambda state: state.has("Inventor's Hut", world.player))
+            snowdwell.connect(icebreaker, "Build Icebreaker Cabin", lambda state: state.has("Icebreaker Cabin", world.player))
+            snowdwell.connect(hotspring, "Build Hot Spring", lambda state: state.has("Hot Spring", world.player))
+        else:
+            snowdwell.connect(pethouse, "Build Pet House", lambda state: state.has("Pet House", world.player))
+            pethouse.connect(inventors, "Build Inventor's Hut", lambda state: state.has("Inventor's Hut", world.player))
+            inventors.connect(icebreaker, "Build Icebreaker Cabin", lambda state: state.has("Icebreaker Cabin", world.player))
+            icebreaker.connect(hotspring, "Build Hot Spring", lambda state: state.has("Hot Spring", world.player))
+    else:
+        snowdwell.connect(pethouse, "Build Pet House")
+        snowdwell.connect(inventors, "Build Inventor's Hut")
+        snowdwell.connect(icebreaker, "Build Icebreaker Cabin")
+        snowdwell.connect(hotspring, "Build Hot Spring")
 
     # TODO: Use options to define rules for monsters
 

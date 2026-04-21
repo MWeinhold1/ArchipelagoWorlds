@@ -7,7 +7,10 @@ from .data.LocationData import LOCATION_NAME_TO_ID, building_challenges_map,\
     hotspring_challenges_map, icebreaker_challenges_map, inventors_challenges_map,\
     pethouse_challenges_map, tribehall_challenges_map, idols_map, enemy_kills_map,\
     miniboss_kills_map, boss_kills_map, extra_enemy_kills_map, item_card_map,\
-    companions_map, charm_map, boss_reward_map
+    companions_map, charm_map, boss_reward_map,\
+    snow_cards, snow_companions, snow_charms,\
+    shade_cards, shade_companions, shade_charms,\
+    clunk_cards, clunk_companions, clunk_charms
 
 if TYPE_CHECKING:
     from .World import WildfrostWorld
@@ -53,7 +56,7 @@ def create_regular_locations(world: WildfrostWorld) -> None:
     
     #Add locations for idols, if enabled:
     if True: #Always enabled (for now)
-        locationpool += [add_location_to_pool(world, snowdwell, locationName) for locationName in idols_map if locationName not in world.options.idol_difficulty] #Remove the idols disabled by the option
+        locationpool += [add_location_to_pool(world, snowdwell, locationName) for locationName in idols_map if locationName + " Idol" not in world.options.idol_difficulty] #Remove the idols disabled by the option
     
     #Add locations for enemy kills:
     if "Enemies" in world.options.kill_checks.value:
@@ -73,15 +76,24 @@ def create_regular_locations(world: WildfrostWorld) -> None:
     
     #Add random location checks for item cards:
     if True: #Always enabled (for now)
-        locationpool += [add_location_to_pool(world, snowdwell, locationName) for locationName in item_card_map]
+        snowdwellers.locations += [add_location_to_pool(world, snowdwellers, locationName) for locationName in snow_cards]
+        shademancers.locations += [add_location_to_pool(world, shademancers, locationName) for locationName in shade_cards]
+        clunkmasters.locations += [add_location_to_pool(world, clunkmasters, locationName) for locationName in clunk_cards]
+        #locationpool += [add_location_to_pool(world, snowdwell, locationName) for locationName in item_card_map]
     
     #Add random location checks for companions:
     if True: #Always enabled (for now)
-        locationpool += [add_location_to_pool(world, snowdwell, locationName) for locationName in companions_map]
+        snowdwellers.locations += [add_location_to_pool(world, snowdwellers, locationName) for locationName in snow_companions]
+        shademancers.locations += [add_location_to_pool(world, shademancers, locationName) for locationName in shade_companions]
+        clunkmasters.locations += [add_location_to_pool(world, clunkmasters, locationName) for locationName in clunk_companions]
+        #locationpool += [add_location_to_pool(world, snowdwell, locationName) for locationName in companions_map]
     
     #Add random locations checks for gaining charms:
     if world.options.shuffle_charms: #Toggle
-        locationpool += [add_location_to_pool(world, snowdwell, locationName) for locationName in charm_map]
+        snowdwellers.locations += [add_location_to_pool(world, snowdwellers, locationName) for locationName in snow_charms]
+        shademancers.locations += [add_location_to_pool(world, shademancers, locationName) for locationName in shade_charms]
+        clunkmasters.locations += [add_location_to_pool(world, clunkmasters, locationName) for locationName in clunk_charms]
+        #locationpool += [add_location_to_pool(world, snowdwell, locationName) for locationName in charm_map]
     
     #Add locations for boss rewards:
     if True: #Always enabled (for now)

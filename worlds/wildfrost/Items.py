@@ -31,7 +31,7 @@ def create_all_items(world: WildfrostWorld) -> None:
         itempool += [(world.create_item(x)) for x in companions_map.keys()]
         itempool += [(world.create_item(x)) for x in item_card_map.keys() if x not in starting_cards or world.options.random_inventory]
         if not world.options.random_inventory:
-            world.multiworld.push_precollected((world.create_item(x)) for x in starting_cards)
+            (world.multiworld.push_precollected((world.create_item(x))) for x in starting_cards)
         itempool += [(world.create_item(x)) for x in pet_list.keys() if x != "Snoof" or world.options.random_snoof]
         if not world.options.random_snoof:
             world.multiworld.push_precollected((world.create_item("Snoof")))
@@ -39,8 +39,7 @@ def create_all_items(world: WildfrostWorld) -> None:
     #Tribes: These will be added if Choice ShuffleTribes is postive.
     if world.options.shuffle_tribes:
         itempool += [(world.create_item(x)) for x in tribe_list.keys() if x + " Tribe" not in world.options.starting_tribes.value]
-        for tribe in world.options.starting_tribes.value:
-            world.multiworld.push_precollected(world.create_item(tribe + " Tribe"))
+        (world.multiworld.push_precollected((world.create_item(x + " Tribe"))) for x in charm_map.keys())
     else:
         world.multiworld.push_precollected(world.create_item("Snowdwellers Tribe"))
         world.multiworld.push_precollected(world.create_item("Shademancers Tribe"))
@@ -57,21 +56,21 @@ def create_all_items(world: WildfrostWorld) -> None:
     if world.options.shuffle_charms:
         itempool += [(world.create_item(x)) for x in charm_map.keys()]
     else:
-        world.multiworld.push_precollected((world.create_item(x)) for x in charm_map.keys())
+        (world.multiworld.push_precollected((world.create_item(x))) for x in charm_map.keys())
 
     #Bells: Shuffle if the requested bells should be shuffled.
     if world.options.sun_bells:
         itempool += [(world.create_item(x)) for x in sun_bell_list.keys()]
     else:
-        world.multiworld.push_precollected((world.create_item(x)) for x in sun_bell_list.keys())
+        (world.multiworld.push_precollected((world.create_item(x))) for x in sun_bell_list.keys())
     if world.options.storm_bells:
         itempool += [(world.create_item(x)) for x in storm_bell_list.keys()]
     else:
-        world.multiworld.push_precollected((world.create_item(x)) for x in storm_bell_list.keys())
+        (world.multiworld.push_precollected((world.create_item(x))) for x in storm_bell_list.keys())
     if world.options.voyage_bells:
         itempool += [(world.create_item(x)) for x in voyage_bell_list.keys()]
     else:
-        world.multiworld.push_precollected((world.create_item(x)) for x in voyage_bell_list.keys())
+        (world.multiworld.push_precollected((world.create_item(x))) for x in voyage_bell_list.keys())
 
     # TODO: Add optional items
     itempool += [(world.create_item(x)) for x in map_event_list.keys()]

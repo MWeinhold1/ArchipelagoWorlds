@@ -21,33 +21,36 @@ class Goal(Choice):
 
 class TownBuildings(Toggle):
     """Buildings are added to the item pool. The building challenge provides an Archipelago check instead"""
-    display_name = "Town Buildings - WIP"
+    display_name = "Town Buildings"
 
+#TODO: add support for this being disabled in the client
 class BuildingChallenges(Toggle):
     """In-building challenge rewards are added to the item pool. Challenges provide an Archipelago check instead"""
     display_name = "Building Challenges - WIP"
 
+#TODO: add support for this in the client
 class BypassTownOrder(Toggle):
     """If enabled, you can progress towards any build challenge from the start.
     Otherwise, you can only progress towards a build challenge if the previous one has been completed (like in vanilla).
     Doesn't do anything if \"Town Buildings\" is disabled.
     """
-    display_name = "Bypass Town Order - (WIP)"
+    display_name = "Bypass Town Order - WIP"
     default = 1
     
+#TODO: add support for this in the client
 class BypassBuildingOrder(Toggle):
     """If enabled, you can progress towards any building quest as soon as the related building is built.
     Otherwise, you can only progress towards a building quest if the previous one within the same building has been completed (like in vanilla).
     Doesn't do anything if \"Building Challenges\" is disabled.
     """
-    display_name = "Bypass Building Order - (WIP)"
+    display_name = "Bypass Building Order - WIP"
     default = 1
 
 class ShuffleTribes(Toggle):
     """Whether to randomize the three tribes.
     Tribe Hall challenges become Archipelago checks if shuffled.
     """
-    display_name = "Shuffle Tribes - WIP"
+    display_name = "Shuffle Tribes"
 
 class StartingTribes(OptionSet):
     """Determines which tribes start unlocked.
@@ -55,14 +58,16 @@ class StartingTribes(OptionSet):
     
     Valid keys: Snowdwellers, Shademancers, Clunkmasters.
     """
-    display_name = "Starting Tribes - WIP"
+    display_name = "Starting Tribes"
     valid_keys = {"Snowdwellers", "Shademancers", "Clunkmasters"}
     default = {"Snowdwellers"}
 
+#TODO
 class LockMoreEvents(Toggle):
     """Adds the Injured Companion, Muncher, and Blingsnail Cave map events to the item pool."""
     display_name = "Lock More Map Events - WIP"
 
+#TODO: add support for this in the client
 class IdolDifficulty(OptionSet):
     """Chooses which tedious idols are removed from the Archipelago checks.
     Daily Voyage is not enabled while randomized, meaning that idol will always be removed.
@@ -88,6 +93,7 @@ class IdolDifficulty(OptionSet):
     valid_keys = {"Sunbringer", "Undefeated", "Gnomebringer", "Best Friends", "Clunkmaster", "Shademancer", "Snowdweller", "One Punch"}
     default = valid_keys
 
+#TODO: add support for this in the client
 class RandomInventory(Toggle):
     """Add items from the starting inventory to the item pool.
 
@@ -103,6 +109,7 @@ class ShuffleCharms(Toggle):
     display_name = "Shuffle Charms"
     default = 1
 
+#TODO: add support for this
 class RandomLuminVase(Choice):
     """Option to add the Lumin Vase to the item pool.
     
@@ -120,20 +127,23 @@ class RandomLuminVase(Choice):
 class RandomSnoof(Toggle):
     """If enabled, Snoof is added to the list of randomized companions.
     Otherwise, Snoof is unlocked from the start."""
-    display_name = "Randomize Snoof - WIP"
+    display_name = "Randomize Snoof"
 
 class SunBells(Toggle):
     """Adds Sun Bells to the item pool."""
-    display_name = "Sun Bells - WIP"
+    display_name = "Sun Bells"
 
 class StormBells(Toggle):
     """Adds Storm Bells to the item pool."""
-    display_name = "Storm Bells - WIP"
+    display_name = "Storm Bells"
 
+
+#TODO: add support for this in the client
 class VoyageBells(Toggle):
     """Adds Bells unique to the Daily Voyage to the item pool."""
     display_name = "Voyage Bells - WIP"
 
+#TODO: add support for this in the client
 class BellSanity(Choice):
     """Changes how bell selection works.
 
@@ -152,11 +162,13 @@ class BellSanity(Choice):
     option_bellsanity = 2
     default = option_standard
 
+#TODO: add support for this in the client
 class ArchipelaGnome(Toggle):
     """Replaces the Naked Gnome with the Archipela-Gnome. Gives a free hint when spared.
     Naked Gnome will instead appear in Frozen Travelers."""
     display_name = "Archipela-Gnome - WIP"
 
+#TODO: add logic to this
 class KillChecks(OptionSet):
     """Adds extra checks for unique kills on enemies.
     NOTE: Boss kills only count as completed when the fight is won.
@@ -175,6 +187,7 @@ class KillChecks(OptionSet):
     valid_keys = {"Bosses", "Mini Bosses", "Enemies", "Storm Only"}
     default = ["Bosses", "Mini Bosses"]
 
+#TODO
 class RandomFights(Choice):
     """Changes the order of where fights will appear. Eye/Heart of the Storm will never be randomized.
     
@@ -189,6 +202,7 @@ class RandomFights(Choice):
     option_chaos = 2
     default = option_off
 
+#TODO
 class FightBalance(Choice):
     """Randomizes what enemy waves can appear within a fight.
     
@@ -203,7 +217,7 @@ class FightBalance(Choice):
     option_wild = 2
     default = option_off
 
-
+#TODO
 class TrapsBoons(Choice):
     """Add traps and boons to the item pool. For each trap/boon added to the item pool, an
     additional check will be added to the companions, items, charms, or bells checks,

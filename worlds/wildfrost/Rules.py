@@ -104,7 +104,7 @@ def set_all_location_rules(world: WildfrostWorld) -> None:
                     #I still don't know how to access our ItemData tuples from here since it errors on accessibility check saying it doesn't exist
                 case "Pet House Challenge - Kill 3 Demonized enemies":
                     rule = lambda state: state.has("Loki", world.player) \
-                        or state.has_any({"Demonheart", "Totem of the Goat", "Goat Charm"})
+                        or state.has_any({"Demonheart", "Totem of the Goat", "Goat Charm"}, world.player)
                 case "Pet House Challenge - Kill 10 enemies with Teeth":
                     rule = lambda state: state.has("Spike", world.player) \
                         or (state.has("Shademancers Tribe", world.player) \
@@ -113,13 +113,13 @@ def set_all_location_rules(world: WildfrostWorld) -> None:
                     #TODO: requires access to a boss fight
                 case "Berry Good Idol":
                     rule = lambda state: state.has("Pinkberry Juice", world.player) \
-                        or (state.has_all("Snowdwellers Tribe", "Jewelberry Charm", world.player) \
+                        or (state.has_all({"Snowdwellers Tribe", "Jewelberry Charm"}, world.player) \
                             and state.has_any({"Booshu", "Nourish Charm", "Berry Basket", "Demonheart", "Heartmist Station", "Bonnie"}, world.player)) \
                         or (state.has("Shademancers Tribe", world.player) \
                             and (state.has("Berry Sis", world.player)\
                                 or (state.has_any({"Van Jun", "Monch"}, world.player) \
                                     and (state.has_any({"Beepop Mask", "Fallow Mask", "Junjun Mask",\
-                                        "Leech Mask", "Pom Mask", "Sheepopper Mask", "Snuffer Mask", "Tigris Mask", "Egg", "Chikichi", "Spoof"})\
+                                        "Leech Mask", "Pom Mask", "Sheepopper Mask", "Snuffer Mask", "Tigris Mask", "Egg", "Chikichi", "Spoof"}, world.player)\
                                     )\
                                 )\
                                 or state.has("Berry Bell", world.player)

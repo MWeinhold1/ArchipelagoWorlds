@@ -39,7 +39,8 @@ def create_all_items(world: WildfrostWorld) -> None:
     #Tribes: These will be added if Choice ShuffleTribes is postive.
     if world.options.shuffle_tribes:
         itempool += [(world.create_item(x)) for x in tribe_list.keys() if x + " Tribe" not in world.options.starting_tribes.value]
-        (world.multiworld.push_precollected((world.create_item(x + " Tribe"))) for x in world.options.starting_tribes.value)
+        for tribe in world.options.starting_tribes.value:
+            world.multiworld.push_precollected(world.create_item(tribe + " Tribe"))
     else:
         world.multiworld.push_precollected(world.create_item("Snowdwellers Tribe"))
         world.multiworld.push_precollected(world.create_item("Shademancers Tribe"))

@@ -1,7 +1,7 @@
 from __future__ import annotations
 from BaseClasses import Item
 from typing import TYPE_CHECKING
-from .data.ItemData import ITEM_NAME_TO_ID, ITEM_NAME_TO_CLASSIFICATION, pet_list, building_list, charm_map, companions_map, item_card_map, sun_bell_list, storm_bell_list, voyage_bell_list, map_event_list, tribe_list, filler_list
+from .data.ItemData import ITEM_NAME_TO_ID, ITEM_NAME_TO_CLASSIFICATION, pet_list, building_list, charm_map, companions_map, item_card_map, sun_bell_list, storm_bell_list, voyage_bell_list, map_event_list, tribe_list, filler_list, progressive_list
 
 if TYPE_CHECKING:
     from .World import WildfrostWorld
@@ -25,6 +25,7 @@ def create_all_items(world: WildfrostWorld) -> None:
     starting_cards: set[str] = {"Snow Stick", "Sun Rod", "FlameWater", "Woodhead", \
                                 "Blizzard Bottle", "Junjun Mask", "Berry Bell", "Sunburst Tootoo",\
                                 "Snowzooka", "Sunsong Box", "Junkhead"}
+    vase_pieces: set[str] = {"Broken Vase", "Lumin Goop"}
 
     #Item Cards, Companions and Pets: Always shuffle
     if True:
@@ -72,6 +73,20 @@ def create_all_items(world: WildfrostWorld) -> None:
         itempool += [(world.create_item(x)) for x in voyage_bell_list.keys()]
     else:
         (world.multiworld.push_precollected((world.create_item(x))) for x in voyage_bell_list.keys())
+
+    #Progression Gates
+    match(world.options.fight_gating.value):
+        case 1:
+            for i in range(7 + (1 if world.options.goal.value != 0 else 0) + world.options.extra_progressive_fights.value):
+                itempool += [(world.create_item(x)) for x in progressive_list.keys() if x == "Progressive Fights"]
+        case 2:
+            for i in range(2 + world.options.extra_progressive_acts.value):
+                itempool += [(world.create_item(x)) for x in progressive_list.keys() if x == "Progressive Acts"]
+        case 3:
+            for i in range(7 + (1 if world.options.goal.value != 0 else 0) + world.options.extra_progressive_fights.value):
+                itempool += [(world.create_item(x)) for x in progressive_list.keys() if x == "Progressive Fights"]
+            for i in range(2 + world.options.extra_progressive_acts.value):
+                itempool += [(world.create_item(x)) for x in progressive_list.keys() if x == "Progressive Acts"]
 
     # TODO: Add optional items
     itempool += [(world.create_item(x)) for x in map_event_list.keys()]

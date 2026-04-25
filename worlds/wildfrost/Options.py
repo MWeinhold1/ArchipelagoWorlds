@@ -20,12 +20,12 @@ class Goal(Choice):
     default = option_frost_guardian
 
 class TownBuildings(Toggle):
-    """Buildings are added to the item pool. The building challenge provides an Archipelago check instead"""
+    """Buildings are added to the item pool.""" #The building challenge provides an Archipelago check instead <- text was removed because (at least for now) those locations will exist either way
     display_name = "Town Buildings"
 
 #TODO: add support for this being disabled in the client
 class BuildingChallenges(Toggle):
-    """In-building challenge rewards are added to the item pool. Challenges provide an Archipelago check instead"""
+    """In-building challenge rewards are added to the item pool.""" #Challenges provide an Archipelago check instead <- same as above ^
     display_name = "Building Challenges - WIP"
 
 #TODO: add support for this in the client
@@ -93,7 +93,7 @@ class IdolDifficulty(OptionSet):
     valid_keys = {"Sunbringer", "Undefeated", "Gnomebringer", "Best Friends", "Clunkmaster", "Shademancer", "Snowdweller", "One Punch"}
     default = valid_keys
 
-#TODO: add support for this in the client
+#TODO: implement this in the client
 class RandomInventory(Toggle):
     """Add items from the starting inventory to the item pool.
 
@@ -104,12 +104,11 @@ class ShuffleCharms(Toggle):
     """Option to add charms to the item pool.
 
     When enabled, every charm will be locked at the start as items.
-    Adds a random location for every charm.
-    """
+    """ #Adds a random location for every charm. <- removed for same reasons as building challenges and town buildings had their similar text removed
     display_name = "Shuffle Charms"
     default = 1
 
-#TODO: add support for this
+#TODO
 class RandomLuminVase(Choice):
     """Option to add the Lumin Vase to the item pool.
     
@@ -117,7 +116,7 @@ class RandomLuminVase(Choice):
     
     Single: The Lumin Vase is added to the item pool. Lumin parts will not appear until the Vase is found.
     
-    Parts: The Broken Vase, Lumin Goop, and The Lumin Vase are added to the item pool as separate items."""
+    Parts: The Broken Vase, Lumin Goop, and The Lumin Vase are added to the item pool as separate items. Lumin parts will not appear until the Vase is found"""
     display_name = "Randomize Lumin Vase - WIP"
     option_off = 0
     option_single = 1
@@ -133,17 +132,17 @@ class SunBells(Toggle):
     """Adds Sun Bells to the item pool."""
     display_name = "Sun Bells"
 
+#TODO: implement this in the client
 class StormBells(Toggle):
     """Adds Storm Bells to the item pool."""
     display_name = "Storm Bells"
 
-
-#TODO: add support for this in the client
+#TODO: implement this in the client
 class VoyageBells(Toggle):
     """Adds Bells unique to the Daily Voyage to the item pool."""
     display_name = "Voyage Bells - WIP"
 
-#TODO: add support for this in the client
+#TODO: implement this in the client
 class BellSanity(Choice):
     """Changes how bell selection works.
 
@@ -162,6 +161,43 @@ class BellSanity(Choice):
     option_bellsanity = 2
     default = option_standard
 
+#TODO: implement this in the client
+class FightGating(Choice):
+    """Whether or not fights should be locked behind progressive items.
+
+    None: All fights are available from the start.
+
+    Fight: Adds a "Progressive Fight" item. Each one lets you visit one more fight per run. You start with Fight 1 unlocked
+    
+    Act: Adds a "Progressive Act" item. Each one lets you visit one more area (Whatever the first one's called, Ice Caves, Frostlands) per run. You start with Act 1 unlocked
+    
+    Both: Same as "Fight" but you *also* need Progressive Act to move onto the next area.
+    """
+    display_name = "Fight Gating - WIP"
+    option_none = 0
+    option_fight = 1
+    option_act = 2
+    option_both = 3
+    default = option_act
+
+class ExtraProgressiveFights(Range):
+    """How many extra Progressive Fight items should be in the item pool. 
+    Does nothing if Fight Gating is set to None or Act.
+    Minimum value is 0 and maximum value is 8.
+    """
+    display_name = "Extra Progressive Fights"
+    range_start = 0
+    range_end = 8
+
+class ExtraProgressiveActs(Range):
+    """How many extra Progressive Act items should be in the item pool.
+    Does nothing if Fight Gating is set to None or Fight.
+    Minimum value is 0 and maximum value is 3.
+    """
+    display_name = "Extra Progressive Acts"
+    range_start = 0
+    range_end = 3
+
 #TODO: add support for this in the client
 class ArchipelaGnome(Toggle):
     """Replaces the Naked Gnome with the Archipela-Gnome. Gives a free hint when spared.
@@ -177,7 +213,7 @@ class KillChecks(OptionSet):
     
     Mini Bosses: Mini-Bosses give extra checks.
     
-    Enemies: All enemies give extra checks
+    Enemies: Regular enemies give extra checks.
 
     ***NOT RECOMMENDED***
     Storm Only: Certain enemies that can only appear in the Eye of the Storm, 
@@ -203,7 +239,7 @@ class RandomFights(Choice):
     default = option_off
 
 #TODO
-class FightBalance(Choice):
+class RandomWaves(Choice):
     """Randomizes what enemy waves can appear within a fight.
     
     Off: Normal waves appear in each fight.
@@ -372,10 +408,13 @@ wildfrost_option_groups = [
         BellSanity,
     ]),
     OptionGroup("Fight Options", [
+        FightGating,
+        ExtraProgressiveFights,
+        ExtraProgressiveActs,
         ArchipelaGnome,
         KillChecks,
         RandomFights,
-        FightBalance
+        RandomWaves
     ]),
     OptionGroup("Traps and Boons", [
         TrapsBoons,
@@ -421,10 +460,13 @@ class WildfrostOptions(PerGameCommonOptions):
     voyage_bells: VoyageBells
     bell_sanity: BellSanity
 
+    fight_gating: FightGating
+    extra_progressive_fights: ExtraProgressiveFights
+    extra_progressive_acts: ExtraProgressiveActs
     archipelagnome: ArchipelaGnome
     kill_checks: KillChecks
     random_fights: RandomFights
-    fight_balance: FightBalance
+    random_waves: RandomWaves
     
     traps_boons: TrapsBoons
     tb_weight_count: TBWeightCount

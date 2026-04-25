@@ -10,6 +10,7 @@ from BaseClasses import ItemClassification
 # Charm: 7
 # Bell: 8
 # Filler/Trap: 9
+# Progressive Items: 9 (counting backwards)
 #
 # Subtypes
 # _0: Generic
@@ -393,6 +394,11 @@ filler_list = {
     "Cursed Crown Trap":    (ItemClassification.trap)
 }
 
+progressive_list = {
+    "Progressive Act": (ItemClassification.progression),
+    "Progressive Fight": (ItemClassification.progression)
+}
+
 buildings_map = {x: 10000 + i for i,x in enumerate(building_list)}
 tribe_map = {x: 20000 + i for i,x in enumerate(tribe_list)}
 pet_map = {x: 30000 + i for i,x in enumerate(pet_list)}
@@ -425,13 +431,15 @@ voyage_bell_map = {x: 80000 + len(sun_bell_list) + len(storm_bell_list) + i for 
 bell_map = sun_bell_map | storm_bell_map | voyage_bell_map
 
 filler_map = {x: 90000 + i for i,x in enumerate(filler_list)}
+progressive_map = {x: 99999 - i for i,x in enumerate(progressive_list)}
 
 # Full name to ID
-ITEM_NAME_TO_ID = buildings_map | tribe_map | pet_map | map_event_map | item_card_map | companions_map | charm_map | bell_map | filler_map
+ITEM_NAME_TO_ID = buildings_map | tribe_map | pet_map | map_event_map | item_card_map | companions_map | charm_map | bell_map | filler_map | progressive_map
 
 
 
 ITEM_NAME_TO_CLASSIFICATION = building_list | tribe_list | pet_list | bell_list | filler_list | map_event_list |\
         general_item_card_list | snowdweller_item_card_list | shademancer_item_card_list | clunkmaster_item_card_list|\
         general_companion_list | snowdweller_companion_list | shademancer_companion_list | clunkmaster_companion_list|\
-        general_charm_list | snowdweller_charm_list | shademancer_charm_list | clunkmaster_charm_list
+        general_charm_list | snowdweller_charm_list | shademancer_charm_list | clunkmaster_charm_list|\
+        progressive_list

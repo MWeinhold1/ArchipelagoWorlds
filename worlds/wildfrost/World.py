@@ -43,6 +43,10 @@ class WildfrostWorld(World):
         return {
             "goal": self.options.goal.value,
             "excluded_idols": self.options.idol_difficulty.value,
-            "townsanity": self.options.town_buildings.value,
-            "tribesanity": self.options.shuffle_tribes.value
+            "bypass_town_order": self.options.bypass_town_order.value,
+            "bypass_building_order": self.options.bypass_building_order.value,
+            "bell_sanity": self.options.bell_sanity.value,
+            "fight_gating": self.options.fight_gating.value,
+            "fight_rando": self.options.random_fights.value,
+            "wave_rando": self.options.random_waves.value
         }

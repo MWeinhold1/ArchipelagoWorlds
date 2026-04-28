@@ -68,7 +68,9 @@ def create_regular_locations(world: WildfrostWorld) -> None:
 
     #Add locations for boss kills:
     if "Bosses" in world.options.kill_checks.value: #Always enabled (for now)
-        locationpool += [add_location_to_pool(world, snowdwell, locationName) for locationName in boss_kills_map]
+        locationpool += [add_location_to_pool(world, snowdwell, locationName) for locationName in boss_kills_map if \
+            (locationName != "Kill The Frost Guardian" or world.options.goal.value > 0)\
+                and ((not "Frost" in locationName or "Frost Guardian" in locationName) or world.options.goal.value > 1)]
 
     #Add locations for eye of the storm kills:
     if "Storm Only" in world.options.kill_checks.value: #Always enabled (for now)

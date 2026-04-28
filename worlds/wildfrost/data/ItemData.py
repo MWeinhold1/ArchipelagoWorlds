@@ -5,6 +5,7 @@ from BaseClasses import ItemClassification
 # Tribe: 2
 # Pet: 3
 # Map Event: 4
+# Battle: 41
 # Item Card: 5
 # Unit: 6
 # Charm: 7
@@ -54,6 +55,40 @@ map_event_list = {
     "Blingsnail Cave":      (ItemClassification.useful)
 }
 
+battle_list = {
+    "The Pengoons":         (ItemClassification.progression),
+    "The Snowbo Squad":     (ItemClassification.progression),
+  "The Bog Berries": (ItemClassification.progression),
+  "The Snow Lumps": (ItemClassification.progression),
+
+  "The Globerries": (ItemClassification.progression),
+  "The Frost Shades": (ItemClassification.progression),
+  "The Noxious Shrooms": (ItemClassification.progression),
+  "The Snowland Bears": (ItemClassification.progression),
+
+  "Infernoko": (ItemClassification.progression),
+  "Bamboozle": (ItemClassification.progression),
+
+  "The Demonhorn Goats": (ItemClassification.progression),
+  "The Shelled Husks": (ItemClassification.progression),
+  "The Spice Mokos": (ItemClassification.progression),
+  
+  "The Wooly Drek": (ItemClassification.progression),
+  "The Toothy Shades": (ItemClassification.progression),
+  "The Ink Sacks": (ItemClassification.progression),
+  
+  "Krunker": (ItemClassification.progression),
+  "Truffle": (ItemClassification.progression),
+  
+  "The Ice Krabs": (ItemClassification.progression),
+  "The Wild Hogs": (ItemClassification.progression),
+  "The Gunk Bugs": (ItemClassification.progression),
+
+  "Eye of the Storm": (ItemClassification.progression),
+  
+  "Heart of the Storm": (ItemClassification.progression)
+}
+
 #   Name                    (Progression Level)
 general_item_card_list = {
     # Items
@@ -83,10 +118,6 @@ general_item_card_list = {
     "Mimik":                (ItemClassification.progression | ItemClassification.useful),
     "Totem of the Goat":    (ItemClassification.progression | ItemClassification.useful),
     "Zoomlin Nest":         (ItemClassification.progression | ItemClassification.useful),
-    # Vase
-    "Broken Vase":          (ItemClassification.progression),
-    "Lumin Goop":           (ItemClassification.progression),
-    "The Lumin Vase":       (ItemClassification.progression),
 }
 
 snowdweller_item_card_list = {
@@ -396,13 +427,18 @@ filler_list = {
 
 progressive_list = {
     "Progressive Act": (ItemClassification.progression),
-    "Progressive Fight": (ItemClassification.progression)
+    "Progressive Fight": (ItemClassification.progression),
+    # Vase
+    "Broken Vase":          (ItemClassification.progression),
+    "Lumin Goop":           (ItemClassification.progression),
+    "The Lumin Vase":       (ItemClassification.progression)
 }
 
 buildings_map = {x: 10000 + i for i,x in enumerate(building_list)}
 tribe_map = {x: 20000 + i for i,x in enumerate(tribe_list)}
 pet_map = {x: 30000 + i for i,x in enumerate(pet_list)}
 map_event_map = {x: 40000 + i for i,x in enumerate(map_event_list)}
+battle_map = {x: 41000 + i for i,x in enumerate(battle_list)}
 
 general_item_cards = {x: 50000 + i for i,x in enumerate(general_item_card_list)}
 snow_item_cards = {x: 51000 + i for i,x in enumerate(snowdweller_item_card_list)}
@@ -434,11 +470,11 @@ filler_map = {x: 90000 + i for i,x in enumerate(filler_list)}
 progressive_map = {x: 99999 - i for i,x in enumerate(progressive_list)}
 
 # Full name to ID
-ITEM_NAME_TO_ID = buildings_map | tribe_map | pet_map | map_event_map | item_card_map | companions_map | charm_map | bell_map | filler_map | progressive_map
+ITEM_NAME_TO_ID = buildings_map | tribe_map | pet_map | map_event_map | battle_map | item_card_map | companions_map | charm_map | bell_map | filler_map | progressive_map
 
 
 
-ITEM_NAME_TO_CLASSIFICATION = building_list | tribe_list | pet_list | bell_list | filler_list | map_event_list |\
+ITEM_NAME_TO_CLASSIFICATION = building_list | tribe_list | pet_list | bell_list | filler_list | map_event_list | battle_list |\
         general_item_card_list | snowdweller_item_card_list | shademancer_item_card_list | clunkmaster_item_card_list|\
         general_companion_list | snowdweller_companion_list | shademancer_companion_list | clunkmaster_companion_list|\
         general_charm_list | snowdweller_charm_list | shademancer_charm_list | clunkmaster_charm_list|\

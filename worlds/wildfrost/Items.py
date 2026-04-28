@@ -1,7 +1,7 @@
 from __future__ import annotations
 from BaseClasses import Item
 from typing import TYPE_CHECKING
-from .data.ItemData import ITEM_NAME_TO_ID, ITEM_NAME_TO_CLASSIFICATION, pet_list, building_list, charm_map, companions_map, item_card_map, sun_bell_list, storm_bell_list, voyage_bell_list, map_event_list, tribe_list, filler_list, progressive_list
+from .data.ItemData import ITEM_NAME_TO_ID, ITEM_NAME_TO_CLASSIFICATION, pet_list, building_list, charm_map, companions_map, item_card_map, sun_bell_list, storm_bell_list, voyage_bell_list, map_event_list, tribe_list, filler_list, progressive_list, battle_list
 
 if TYPE_CHECKING:
     from .World import WildfrostWorld
@@ -26,16 +26,25 @@ def create_all_items(world: WildfrostWorld) -> None:
                                 "Blizzard Bottle", "Junjun Mask", "Berry Bell", "Sunburst Tootoo",\
                                 "Snowzooka", "Sunsong Box", "Junkhead"}
     vase_pieces: set[str] = {"Broken Vase", "Lumin Goop"}
+    vanilla_locked_battles: set[str] = {"The Bog Berries", "The Snow Lumps", "The Noxious Shrooms", "The Toothy Shades",\
+                                        "The Ink Sacks", "The Gunk Bugs"}
 
     #Item Cards, Companions and Pets: Always shuffle
     if True:
         itempool += [(world.create_item(x)) for x in companions_map.keys()]
-        itempool += [(world.create_item(x)) for x in item_card_map.keys() if x not in starting_cards or world.options.random_inventory]
+        itempool += [(world.create_item(x)) for x in item_card_map.keys() if (x not in starting_cards or world.options.random_inventory)\
+            and (x not in vase_pieces or world.options.random_lumin_vase.value < 2)\
+                and (x != "The Lumin Vase" or world.options.random_lumin_vase.value == 0)]
         if not world.options.random_inventory:
             (world.multiworld.push_precollected((world.create_item(x))) for x in starting_cards)
-        itempool += [(world.create_item(x)) for x in pet_list.keys() if x != "Snoof" or world.options.random_snoof]
-        if not world.options.random_snoof:
-            world.multiworld.push_precollected((world.create_item("Snoof")))
+        itempool += [(world.create_item(x)) for x in pet_list.keys() if x not in world.options.starting_pets.value]
+        for pet in world.options.starting_pets.value:
+            world.multiworld.push_precollected(world.create_item(pet))
+
+    if world.options.fights_in_pool.value > 1:
+        itempool += [(world.create_item(x)) for x in battle_list if x in vanilla_locked_battles or world.options.fights_in_pool.value == 2]
+        if world.options.fights_in_pool.value == 1:
+            ((world.multiworld.push_precollected(world.create_item(x))) for x in battle_list if not x in vanilla_locked_battles)
 
     #Tribes: These will be added if Choice ShuffleTribes is postive.
     if world.options.shuffle_tribes:
@@ -48,10 +57,10 @@ def create_all_items(world: WildfrostWorld) -> None:
         world.multiworld.push_precollected(world.create_item("Clunkmasters Tribe"))
 
     #Buildings: These will be added if Toggle TownBuildings is enabled.
-    if world.options.town_buildings:
+    if world.options.town_buildings and world.options.building_challenges:
         itempool += [(world.create_item(x)) for x in building_list.keys()]
     else:
-        world.multiworld.push_precollected((world.create_item(x)) for x in building_list.keys())
+        ((world.multiworld.push_precollected(world.create_item(x))) for x in building_list.keys())
 
 
     #Charms: These will be added if Toggle ShuffleCharms is enabled.

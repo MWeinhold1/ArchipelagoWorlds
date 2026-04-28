@@ -42,11 +42,12 @@ class WildfrostWorld(World):
     def fill_slot_data(self) -> Dict[str, Any]:
         return {
             "goal": self.options.goal.value,
-            "excluded_idols": self.options.idol_difficulty.value,
+            #"excluded_idols": self.options.idol_difficulty.value,
             "bypass_town_order": self.options.bypass_town_order.value,
             "bypass_building_order": self.options.bypass_building_order.value,
             "bell_sanity": self.options.bell_sanity.value,
             "fight_gating": self.options.fight_gating.value,
+            "fights_in_pool": self.options.fights_in_pool.value,
             "fight_rando": self.options.random_fights.value,
             "wave_rando": self.options.random_waves.value
         }

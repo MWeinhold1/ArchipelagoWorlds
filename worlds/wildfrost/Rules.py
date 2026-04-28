@@ -3,9 +3,11 @@ from typing import TYPE_CHECKING
 from ..generic.Rules import add_rule, set_rule
 
 if TYPE_CHECKING:
+    from ...BaseClasses import CollectionState
     from .World import WildfrostWorld
     from .data import ItemData
     from .data.LocationData import building_challenges, hotspring_challenges, icebreaker_challenges, inventors_challenges, pethouse_challenges, tribehall_challenges
+    from .data.LogicData import fight_enemies, fight_numbers
 
 def set_all_rules(world: WildfrostWorld) -> None:
     set_all_entrance_rules(world)
@@ -19,8 +21,11 @@ def set_all_entrance_rules(world: WildfrostWorld) -> None:
 def set_all_location_rules(world: WildfrostWorld) -> None:
     # TODO
     # I have no idea if any of this works
+    vanilla_locked_battles: set[str] = {"The Bog Berries", "The Snow Lumps", "The Noxious Shrooms", "The Toothy Shades",\
+                                        "The Ink Sacks", "The Gunk Bugs"}
     for region in world.get_regions():
         for location in region.locations:
+            
             # Spent some time implementing this part then realized this is probably better done with regions (or maybe not idk)
 
             #rules = []
@@ -58,6 +63,34 @@ def set_all_location_rules(world: WildfrostWorld) -> None:
             #        order = tribehall_challenges[location_name]:
             #        order_rule = def accessible(state):
             #            return set(state.advancements) >= set(tribehall_challenges[:order])
+            if location.name.startswith("Kill"):
+                enemyName = location.name.removeprefix("Kill ")
+                fights = []
+                (fights.append(x) for x in fight_enemies.keys() if enemyName in fight_enemies[x])
+                for fight in fights:
+                    match world.options.fights_in_pool.value:
+                        case 0:
+                            if fight in vanilla_locked_battles:
+                                add_rule(lambda state: state.can_access_region(fight_region, world.player)\
+                                    and state.can_access_region("Shademancers", world.player)\
+                                    and state.can_access_region("Clunkmasters",world.player))
+                                    #TODO proper logic for this^
+                            else:
+                                (add_rule(lambda state: state.can_access_region(fight_region, world.player))\
+                                    for fight_region in fight_numbers.keys() if fight in fight_numbers[fight_region])
+                        case 1:
+                            if fight in vanilla_locked_battles:
+                                (add_rule(lambda state: state.can_access_region(fight_region, world.player)\
+                                and state.has(fight, world.player)) \
+                                for fight_region in fight_numbers.keys() if fight in fight_numbers[fight_region])
+                            else:
+                                (add_rule(lambda state: state.can_access_region(fight_region, world.player))\
+                                    for fight_region in fight_numbers.keys() if fight in fight_numbers[fight_region])
+                        case 2:
+                            (add_rule(lambda state: state.can_access_region(fight_region, world.player)\
+                                and state.has(fight, world.player)) \
+                                for fight_region in fight_numbers.keys() if fight in fight_numbers[fight_region])
+                         
             match location.name:
                 case "Hot Spring Challenge - Equip 10 Charms":
                     rule = lambda state: state.has_any({name for name in world.item_names if name.endswith("Charm")}, world.player)
@@ -95,7 +128,7 @@ def set_all_location_rules(world: WildfrostWorld) -> None:
                 #case "Inventors Hut Challenge - Add 3 Clunkers to your deck":
                     #TODO
                 #case "Inventors Hut Challenge - Block 10 hits with Clunkers":
-                    #TODO (with random starting inventory / only shademancer access)
+                    #TODO (impossible with random starting inventory / only shademancer access)
                 case "Inventors Hut Challenge - Apply 60 Shell":
                     rule = lambda state: state.has("Snowdwellers Tribe", world.player) and state.has_any({"Shield Charm", "Shell Shield", "Nutshell Cake", "Shellbo", "Kernel", "Shelly"}, world.player)
                     #can also account for splinter/spoof/shade wisp & shell witch/pecan
@@ -175,3 +208,6 @@ def set_all_location_rules(world: WildfrostWorld) -> None:
 def set_completion_condition(world: WildfrostWorld) -> None:
     # TODO improve
     world.multiworld.completion_condition[world.player] = lambda state: state.has("Victory", world.player)
+
+def can_access_fight(state: CollectionState, world: WildfrostWorld, fight: str, fight_region: str) -> bool:
+    return state.can_access_region(fight_region, world.player) and state.has(fight, world.player)

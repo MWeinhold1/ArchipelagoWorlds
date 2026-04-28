@@ -20,28 +20,25 @@ class Goal(Choice):
     default = option_frost_guardian
 
 class TownBuildings(Toggle):
-    """Buildings are added to the item pool.""" #The building challenge provides an Archipelago check instead <- text was removed because (at least for now) those locations will exist either way
+    """Buildings are added to the item pool. Does nothing if Building Challenges is turned off""" #The building challenge provides an Archipelago check instead <- text was removed because (at least for now) those locations will exist either way
     display_name = "Town Buildings"
 
-#TODO: add support for this being disabled in the client
 class BuildingChallenges(Toggle):
     """In-building challenge rewards are added to the item pool.""" #Challenges provide an Archipelago check instead <- same as above ^
     display_name = "Building Challenges - WIP"
 
-#TODO: add support for this in the client
 class BypassTownOrder(Toggle):
     """If enabled, you can progress towards any build challenge from the start.
     Otherwise, you can only progress towards a build challenge if the previous one has been completed (like in vanilla).
-    Doesn't do anything if \"Town Buildings\" is disabled.
+    Does nothing if \"Town Buildings\" is disabled.
     """
     display_name = "Bypass Town Order - WIP"
     default = 1
     
-#TODO: add support for this in the client
 class BypassBuildingOrder(Toggle):
     """If enabled, you can progress towards any building quest as soon as the related building is built.
     Otherwise, you can only progress towards a building quest if the previous one within the same building has been completed (like in vanilla).
-    Doesn't do anything if \"Building Challenges\" is disabled.
+    Does nothing if \"Building Challenges\" is disabled.
     """
     display_name = "Bypass Building Order - WIP"
     default = 1
@@ -67,7 +64,6 @@ class LockMoreEvents(Toggle):
     """Adds the Injured Companion, Muncher, and Blingsnail Cave map events to the item pool."""
     display_name = "Lock More Map Events - WIP"
 
-#TODO: add support for this in the client
 class IdolDifficulty(OptionSet):
     """Chooses which tedious idols are removed from the Archipelago checks.
     Daily Voyage is not enabled while randomized, meaning that idol will always be removed.
@@ -108,7 +104,7 @@ class ShuffleCharms(Toggle):
     display_name = "Shuffle Charms"
     default = 1
 
-#TODO
+#TODO implement this in the client
 class RandomLuminVase(Choice):
     """Option to add the Lumin Vase to the item pool.
     
@@ -123,10 +119,13 @@ class RandomLuminVase(Choice):
     option_parts = 2
     default = option_off
 
-class RandomSnoof(Toggle):
-    """If enabled, Snoof is added to the list of randomized companions.
-    Otherwise, Snoof is unlocked from the start."""
-    display_name = "Randomize Snoof"
+class StartingPets(OptionSet):
+    """Determines what pets you start with unlocked
+    
+    Valid keys: Snoof, Booshu, Loki, Sneezle, Spike, Binku, Lil\' Gazi"""
+    display_name = "Starting Pets"
+    valid_keys = {"Snoof", "Booshu", "Loki", "Sneezle", "Spike", "Binku", "Lil\' Gazi"}
+    default = {"Snoof"}
 
 class SunBells(Toggle):
     """Adds Sun Bells to the item pool."""
@@ -161,7 +160,7 @@ class BellSanity(Choice):
     option_bellsanity = 2
     default = option_standard
 
-#TODO: implement this in the client
+#TODO test that this works
 class FightGating(Choice):
     """Whether or not fights should be locked behind progressive items.
 
@@ -222,6 +221,21 @@ class KillChecks(OptionSet):
     display_name = "Add Unique Boss Kill Checks - WIP"
     valid_keys = {"Bosses", "Mini Bosses", "Enemies", "Storm Only"}
     default = ["Bosses", "Mini Bosses"]
+
+#TODO
+class FightsInPool(Choice):
+    """Determines whether or not battles are added to the item pool.
+    Off: Acts like vanilla. Most battles are unlocked from the start but some are locked behind the shademancers or clunkmasters tribe.
+
+    SemiVanilla: Battles that are normally locked behind tribes are added to the item pool.
+
+    Random: All battles are added to the item pool. If there aren't any battles for the next battle tier and \"Randomize Fight Appearance\" is disabled, the run restarts upon winning the last possible battle.
+    """
+    display_name = "Add Fights to Item Pools - WIP"
+    option_off = 0
+    option_semi_vanilla = 1
+    option_random = 2
+    default = option_semi_vanilla
 
 #TODO
 class RandomFights(Choice):
@@ -399,7 +413,7 @@ wildfrost_option_groups = [
     OptionGroup("Inventory Options", [
         RandomInventory,
         RandomLuminVase,
-        RandomSnoof
+        StartingPets
     ]),
     OptionGroup("Bell Options", [
         SunBells,
@@ -413,6 +427,7 @@ wildfrost_option_groups = [
         ExtraProgressiveActs,
         ArchipelaGnome,
         KillChecks,
+        FightsInPool,
         RandomFights,
         RandomWaves
     ]),
@@ -453,7 +468,7 @@ class WildfrostOptions(PerGameCommonOptions):
     
     random_inventory: RandomInventory
     random_lumin_vase: RandomLuminVase
-    random_snoof: RandomSnoof
+    starting_pets: StartingPets
 
     sun_bells: SunBells
     storm_bells: StormBells
@@ -465,6 +480,7 @@ class WildfrostOptions(PerGameCommonOptions):
     extra_progressive_acts: ExtraProgressiveActs
     archipelagnome: ArchipelaGnome
     kill_checks: KillChecks
+    fights_in_pool: FightsInPool
     random_fights: RandomFights
     random_waves: RandomWaves
     

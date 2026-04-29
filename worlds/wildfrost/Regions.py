@@ -49,7 +49,7 @@ def create_all_regions(world: WildfrostWorld) -> None:
     eye = Region(eyeRegion, world.player, world.multiworld)
     heart = Region(heartRegion, world.player, world.multiworld)
 
-    regions = [snowdwell, pethouse, inventors, icebreaker, hotspring, fight1, fight2, fight3, fight4, fight5, fight6, fight7, eye, heart]
+    regions = [snowdwell, snowdwellers, shademancers, clunkmasters, pethouse, inventors, icebreaker, hotspring, fight1, fight2, fight3, fight4, fight5, fight6, fight7, eye, heart]
     # \regions = [snowdwell, snowdwellers, shademancers, clunkmasters, pethouse, inventors, icebreaker, hotspring]
     
     # TODO: Use options to determine if fights are also regions for monster kills
@@ -76,6 +76,7 @@ def connect_regions(world: WildfrostWorld) -> None:
     fight7 = world.get_region(fight7Region)
     eye = world.get_region(eyeRegion)
     heart = world.get_region(heartRegion)
+
 
     if (world.options.fight_gating.value == 1 or world.options.fight_gating.value == 3):
         snowdwell.connect(snowdwellers, "Unlock Snowdwellers and Fight 2", lambda state: state.has("Snowdwellers Tribe", world.player) and state.count("Progressive Fight", world.player) > 0)
@@ -115,7 +116,7 @@ def connect_regions(world: WildfrostWorld) -> None:
             snowdwell.connect(eye, "Unlock Eye of the Storm")
             #For now i've opted to have heart of the storm be in logic when the player has 8 bells (since there's no combination of 8 bells that can't reach 10 points)
             #This is because I've had issues earlier where the generator would error when calling the rule lambda at some stage of the gen if it had references to external variables
-            snowdwell.connect(heart, "Unlock Heart of the Storm", lambda state: state.has_all({"The Lumin Vase", "Lumin Goop", "Broken Vase"}, world.count)\
+            snowdwell.connect(heart, "Unlock Heart of the Storm", lambda state: state.has_all({"The Lumin Vase", "Lumin Goop", "Broken Vase"}, world.player)\
             and state.count_from_list({"Blingsnail Bell", "Bell of Death", "Titan Bell", "Frosthand Bell", "Gunk Bell", "Icebourne Bell", "Horde Bell", "Gloom Bell",\
                 "Frostbourne Bell","Gobbler Bell", "Tyrant Bell", "Dread Bell", "Blood Bell"}, world.player) >= 8)
         case 1:
@@ -127,7 +128,7 @@ def connect_regions(world: WildfrostWorld) -> None:
             snowdwell.connect(fight7, "Unlock Fight 7", lambda state: state.count("Progressive Fight", world.player) > 5)
             snowdwell.connect(eye, "Unlock Eye of the Storm", lambda state: state.count("Progressive Fight", world.player) > 6)
             snowdwell.connect(heart, "Unlock Heart of the Storm", lambda state: state.count("Progressive Fight", world.player) > 7\
-            and state.has_all({"The Lumin Vase", "Lumin Goop", "Broken Vase"}, world.count)\
+            and state.has_all({"The Lumin Vase", "Lumin Goop", "Broken Vase"}, world.player)\
             and state.count_from_list({"Blingsnail Bell", "Bell of Death", "Titan Bell", "Frosthand Bell", "Gunk Bell", "Icebourne Bell", "Horde Bell", "Gloom Bell",\
                 "Frostbourne Bell","Gobbler Bell", "Tyrant Bell", "Dread Bell", "Blood Bell"}, world.player) >= 8)
         case 2:
@@ -139,7 +140,7 @@ def connect_regions(world: WildfrostWorld) -> None:
             snowdwell.connect(fight7, "Unlock Fight 7", lambda state: state.count("Progressive Act", world.player) > 1)
             snowdwell.connect(eye, "Unlock Eye of the Storm", lambda state: state.count("Progressive Act", world.player) > 1)
             snowdwell.connect(heart, "Unlock Heart of the Storm", lambda state: state.count("Progressive Act", world.player) > 1\
-            and state.has_all({"The Lumin Vase", "Lumin Goop", "Broken Vase"}, world.count)\
+            and state.has_all({"The Lumin Vase", "Lumin Goop", "Broken Vase"}, world.player)\
             and state.count_from_list({"Blingsnail Bell", "Bell of Death", "Titan Bell", "Frosthand Bell", "Gunk Bell", "Icebourne Bell", "Horde Bell", "Gloom Bell",\
                 "Frostbourne Bell","Gobbler Bell", "Tyrant Bell", "Dread Bell", "Blood Bell"}, world.player) >= 8)
         case 3:
@@ -152,7 +153,7 @@ def connect_regions(world: WildfrostWorld) -> None:
             snowdwell.connect(eye, "Unlock Eye of the Storm", lambda state: state.count("Progressive Fight", world.player) > 6 and state.count("Progressive Act", world.player) > 1)
             snowdwell.connect(heart, "Unlock Heart of the Storm", lambda state: state.count("Progressive Fight", world.player) > 7\
             and state.count("Progressive Act", world.player) > 1\
-            and state.has_all({"The Lumin Vase", "Lumin Goop", "Broken Vase"}, world.count)\
+            and state.has_all({"The Lumin Vase", "Lumin Goop", "Broken Vase"}, world.player)\
             and state.count_from_list({"Blingsnail Bell", "Bell of Death", "Titan Bell", "Frosthand Bell", "Gunk Bell", "Icebourne Bell", "Horde Bell", "Gloom Bell",\
                 "Frostbourne Bell","Gobbler Bell", "Tyrant Bell", "Dread Bell", "Blood Bell"}, world.player) >= 8)
 

@@ -229,12 +229,12 @@ class FightsInPool(Choice):
 
     SemiVanilla: Battles that are normally locked behind tribes are added to the item pool.
 
-    Random: All battles are added to the item pool. If there aren't any battles for the next battle tier and \"Randomize Fight Appearance\" is disabled, the run restarts upon winning the last possible battle.
+    Fightsanity: All battles are added to the item pool. If there aren't any battles for the next battle tier and \"Randomize Fight Appearance\" is disabled, the run restarts upon winning the last possible battle.
     """
     display_name = "Add Fights to Item Pools - WIP"
     option_off = 0
     option_semi_vanilla = 1
-    option_random = 2
+    option_fightsanity = 2
     default = option_semi_vanilla
 
 #TODO

@@ -87,15 +87,15 @@ def create_all_items(world: WildfrostWorld) -> None:
     match(world.options.fight_gating.value):
         case 1:
             for i in range(7 + (1 if world.options.goal.value != 0 else 0) + world.options.extra_progressive_fights.value):
-                itempool += [(world.create_item(x)) for x in progressive_list.keys() if x == "Progressive Fights"]
+                itempool += [world.create_item("Progressive Fight")]
         case 2:
             for i in range(2 + world.options.extra_progressive_acts.value):
-                itempool += [(world.create_item(x)) for x in progressive_list.keys() if x == "Progressive Acts"]
+                itempool += [world.create_item("Progressive Act")]
         case 3:
             for i in range(7 + (1 if world.options.goal.value != 0 else 0) + world.options.extra_progressive_fights.value):
-                itempool += [(world.create_item(x)) for x in progressive_list.keys() if x == "Progressive Fights"]
+                itempool += [world.create_item("Progressive Fight")]
             for i in range(2 + world.options.extra_progressive_acts.value):
-                itempool += [(world.create_item(x)) for x in progressive_list.keys() if x == "Progressive Acts"]
+                itempool += [world.create_item("Progressive Act")]
 
     # TODO: Add optional items
     itempool += [(world.create_item(x)) for x in map_event_list.keys()]

@@ -5,11 +5,13 @@ from BaseClasses import ItemClassification
 # Tribe: 2
 # Pet: 3
 # Map Event: 4
+# Battle: 41
 # Item Card: 5
 # Unit: 6
 # Charm: 7
 # Bell: 8
 # Filler/Trap: 9
+# Progressive Items: 9 (counting backwards)
 #
 # Subtypes
 # _0: Generic
@@ -34,13 +36,13 @@ tribe_list = {
 }
 
 pet_list = {
-    "Snoof":                (ItemClassification.useful),
-    "Booshu":               (ItemClassification.useful),
-    "Loki":                 (ItemClassification.useful),
-    "Sneezle":              (ItemClassification.useful),
-    "Spike":                (ItemClassification.useful),
-    "Binku":                (ItemClassification.useful),
-    "Lil' Gazi":            (ItemClassification.useful),
+    "Snoof":                (ItemClassification.progression | ItemClassification.useful),
+    "Booshu":               (ItemClassification.progression | ItemClassification.useful),
+    "Loki":                 (ItemClassification.progression | ItemClassification.useful),
+    "Sneezle":              (ItemClassification.progression | ItemClassification.useful),
+    "Spike":                (ItemClassification.progression | ItemClassification.useful),
+    "Binku":                (ItemClassification.progression | ItemClassification.useful),
+    "Lil' Gazi":            (ItemClassification.progression | ItemClassification.useful),
 }
 
 #   Name                    (Progression Level)
@@ -49,280 +51,311 @@ map_event_list = {
     "Charm Merchant":       (ItemClassification.useful),
     "Gnome Traveller":      (ItemClassification.useful),
     "Injured Companion":    (ItemClassification.useful),
-    "Muncher":              (ItemClassification.useful),
+    "Muncher":              (ItemClassification.progression | ItemClassification.useful),
     "Blingsnail Cave":      (ItemClassification.useful)
+}
+
+battle_list = {
+    "The Pengoons":         (ItemClassification.progression),
+    "The Snowbo Squad":     (ItemClassification.progression),
+  "The Bog Berries": (ItemClassification.progression),
+  "The Snow Lumps": (ItemClassification.progression),
+
+  "The Globerries": (ItemClassification.progression),
+  "The Frost Shades": (ItemClassification.progression),
+  "The Noxious Shrooms": (ItemClassification.progression),
+  "The Snowland Bears": (ItemClassification.progression),
+
+  "Infernoko": (ItemClassification.progression),
+  "Bamboozle": (ItemClassification.progression),
+
+  "The Demonhorn Goats": (ItemClassification.progression),
+  "The Shelled Husks": (ItemClassification.progression),
+  "The Spice Mokos": (ItemClassification.progression),
+  
+  "The Wooly Drek": (ItemClassification.progression),
+  "The Toothy Shades": (ItemClassification.progression),
+  "The Ink Sacks": (ItemClassification.progression),
+  
+  "Krunker": (ItemClassification.progression),
+  "Truffle": (ItemClassification.progression),
+  
+  "The Ice Krabs": (ItemClassification.progression),
+  "The Wild Hogs": (ItemClassification.progression),
+  "The Gunk Bugs": (ItemClassification.progression),
+
+  "Eye of the Storm": (ItemClassification.progression),
+  
+  "Heart of the Storm": (ItemClassification.progression)
 }
 
 #   Name                    (Progression Level)
 general_item_card_list = {
     # Items
-    "Berry Basket":         (ItemClassification.useful),
-    "Berry Blade":          (ItemClassification.useful),
-    "Blaze Tea":            (ItemClassification.useful),
-    "Demonheart":           (ItemClassification.useful),
-    "Frost Bell":           (ItemClassification.useful),
-    "Frostbite Shard":      (ItemClassification.useful),
-    "Frostbloom":           (ItemClassification.useful),
-    "Grabber":              (ItemClassification.useful),
-    "Ice Dice":             (ItemClassification.useful),
-    "Molten Dip":           (ItemClassification.useful),
-    "Noomlin Biscuit":      (ItemClassification.useful),
-    "Pinkberry Juice":      (ItemClassification.useful),
-    "Pombomb":              (ItemClassification.useful),
-    "Slapcrackers":         (ItemClassification.useful),
-    "Snowcake":             (ItemClassification.useful),
-    "Storm Globe":          (ItemClassification.useful),
-    "Sunlight Drum":        (ItemClassification.useful),
-    "Zoomlin Wafers":       (ItemClassification.useful),
+    "Berry Basket":         (ItemClassification.progression | ItemClassification.useful),
+    "Berry Blade":          (ItemClassification.progression | ItemClassification.useful),
+    "Blaze Tea":            (ItemClassification.progression | ItemClassification.useful),
+    "Demonheart":           (ItemClassification.progression | ItemClassification.useful),
+    "Frost Bell":           (ItemClassification.progression | ItemClassification.useful),
+    "Frostbloom":           (ItemClassification.progression | ItemClassification.useful),
+    "Grabber":              (ItemClassification.progression | ItemClassification.useful),
+    "Ice Dice":             (ItemClassification.progression | ItemClassification.useful),
+    "Molten Dip":           (ItemClassification.progression | ItemClassification.useful),
+    "Noomlin Biscuit":      (ItemClassification.progression | ItemClassification.useful),
+    "Pinkberry Juice":      (ItemClassification.progression | ItemClassification.useful),
+    "Pombomb":              (ItemClassification.progression | ItemClassification.useful),
+    "Slapcrackers":         (ItemClassification.progression | ItemClassification.useful),
+    "Snowcake":             (ItemClassification.progression | ItemClassification.useful),
+    "Storm Globe":          (ItemClassification.progression | ItemClassification.useful),
+    "Sunlight Drum":        (ItemClassification.progression | ItemClassification.useful),
+    "Zoomlin Wafers":       (ItemClassification.progression | ItemClassification.useful),
     # Clunkers
-    "Bitebox":              (ItemClassification.useful),
-    "Bling Bank":           (ItemClassification.useful),
-    "Heartmist Station":    (ItemClassification.useful),
-    "Krono":                (ItemClassification.useful),
-    "Mega Mimik":           (ItemClassification.useful),
-    "Mimik":                (ItemClassification.useful),
-    "Totem of the Goat":    (ItemClassification.useful),
-    "Zoomlin Nest":         (ItemClassification.useful),
-    # Vase
-    "Broken Vase":          (ItemClassification.progression),
-    "Lumin Goop":           (ItemClassification.progression),
-    "The Lumin Vase":       (ItemClassification.progression),
+    "Bitebox":              (ItemClassification.progression | ItemClassification.useful),
+    "Bling Bank":           (ItemClassification.progression | ItemClassification.useful),
+    "Heartmist Station":    (ItemClassification.progression | ItemClassification.useful),
+    "Krono":                (ItemClassification.progression | ItemClassification.useful),
+    "Mega Mimik":           (ItemClassification.progression | ItemClassification.useful),
+    "Mimik":                (ItemClassification.progression | ItemClassification.useful),
+    "Totem of the Goat":    (ItemClassification.progression | ItemClassification.useful),
+    "Zoomlin Nest":         (ItemClassification.progression | ItemClassification.useful),
 }
 
 snowdweller_item_card_list = {
     # Items
-    "Dragon Pepper":        (ItemClassification.useful),
-    "FlameWater":           (ItemClassification.useful),
-    "Hongo's Hammer":       (ItemClassification.useful),
-    "Nutshell Cake":        (ItemClassification.useful),
-    "Peppereaper":          (ItemClassification.useful),
-    "Peppering":            (ItemClassification.useful),
-    "Scrap Pile":           (ItemClassification.useful),
-    "Shell Shield":         (ItemClassification.useful),
-    "Shellbo":              (ItemClassification.useful),
-    "Snow Stick":           (ItemClassification.useful),
-    "Spice Stones":         (ItemClassification.useful),
-    "Spore Pack":           (ItemClassification.useful),
-    "Stormbear Spirit":     (ItemClassification.useful),
-    "Sun Rod":              (ItemClassification.useful),
+    "Dragon Pepper":        (ItemClassification.progression | ItemClassification.useful),
+    "FlameWater":           (ItemClassification.progression | ItemClassification.useful),
+    "Hongo's Hammer":       (ItemClassification.progression | ItemClassification.useful),
+    "Nutshell Cake":        (ItemClassification.progression | ItemClassification.useful),
+    "Peppereaper":          (ItemClassification.progression | ItemClassification.useful),
+    "Peppering":            (ItemClassification.progression | ItemClassification.useful),
+    "Scrap Pile":           (ItemClassification.progression | ItemClassification.useful),
+    "Shell Shield":         (ItemClassification.progression | ItemClassification.useful),
+    "Shellbo":              (ItemClassification.progression | ItemClassification.useful),
+    "Snow Stick":           (ItemClassification.progression | ItemClassification.useful),
+    "Spice Stones":         (ItemClassification.progression | ItemClassification.useful),
+    "Spore Pack":           (ItemClassification.progression | ItemClassification.useful),
+    "Stormbear Spirit":     (ItemClassification.progression | ItemClassification.useful),
+    "Sun Rod":              (ItemClassification.progression | ItemClassification.useful),
     # Clunkers
-    "Fungo Blaster":        (ItemClassification.useful),
-    "Heartforge":           (ItemClassification.useful),
-    "Kobonker":             (ItemClassification.useful),
-    "Mobile Campfire":      (ItemClassification.useful),
-    "Moko Totem":           (ItemClassification.useful),
-    "Pepper Flag":          (ItemClassification.useful),
-    "Shroominator":         (ItemClassification.useful),
-    "Shroomine":            (ItemClassification.useful),
-    "Spice Sparklers":      (ItemClassification.useful),
-    "Woodhead":             (ItemClassification.useful)
+    "Fungo Blaster":        (ItemClassification.progression | ItemClassification.useful),
+    "Heartforge":           (ItemClassification.progression | ItemClassification.useful),
+    "Kobonker":             (ItemClassification.progression | ItemClassification.useful),
+    "Mobile Campfire":      (ItemClassification.progression | ItemClassification.useful),
+    "Moko Totem":           (ItemClassification.progression | ItemClassification.useful),
+    "Pepper Flag":          (ItemClassification.progression | ItemClassification.useful),
+    "Shroominator":         (ItemClassification.progression | ItemClassification.useful),
+    "Shroomine":            (ItemClassification.progression | ItemClassification.useful),
+    "Spice Sparklers":      (ItemClassification.progression | ItemClassification.useful),
+    "Woodhead":             (ItemClassification.progression | ItemClassification.useful)
 }
 
 shademancer_item_card_list = {
-    "Azul Battle Axe":      (ItemClassification.useful),
-    "Azul Candle":          (ItemClassification.useful),
-    "Azul Skull":           (ItemClassification.useful),
-    "Beepop Mask":          (ItemClassification.useful),
-    "Berry Bell":           (ItemClassification.useful),
-    "Blank Mask":           (ItemClassification.useful),
-    "Bonescraper":          (ItemClassification.useful),
-    "Fallow Mask":          (ItemClassification.useful),
-    "Junjun Mask":          (ItemClassification.useful),
-    "Leech Mask":           (ItemClassification.useful),
-    "Shade Clay":           (ItemClassification.useful),
-    "Shade Wisp":           (ItemClassification.useful),
-    "Sheepopper Mask":      (ItemClassification.useful),
-    "Skull Muffin":         (ItemClassification.useful),
-    "Skullmist Tea":        (ItemClassification.useful),
-    "Pom Mask":             (ItemClassification.useful),
-    "Snuffer Mask":         (ItemClassification.useful),
-    "Soulbound Skulls":     (ItemClassification.useful),
-    "Sunburst Tootoo":      (ItemClassification.useful),
-    "Tiger Skull":          (ItemClassification.useful),
-    "Tigris Mask":          (ItemClassification.useful),
-    "Yeti Skull":           (ItemClassification.useful),
+    "Azul Battle Axe":      (ItemClassification.progression | ItemClassification.useful),
+    "Azul Candle":          (ItemClassification.progression | ItemClassification.useful),
+    "Azul Skull":           (ItemClassification.progression | ItemClassification.useful),
+    "Beepop Mask":          (ItemClassification.progression | ItemClassification.useful),
+    "Berry Bell":           (ItemClassification.progression | ItemClassification.useful),
+    "Blank Mask":           (ItemClassification.progression | ItemClassification.useful),
+    "Blizzard Bottle":      (ItemClassification.progression | ItemClassification.useful),
+    "Bonescraper":          (ItemClassification.progression | ItemClassification.useful),
+    "Fallow Mask":          (ItemClassification.progression | ItemClassification.useful),
+    "Junjun Mask":          (ItemClassification.progression | ItemClassification.useful),
+    "Leech Mask":           (ItemClassification.progression | ItemClassification.useful),
+    "Pom Mask":             (ItemClassification.progression | ItemClassification.useful),
+    "Shade Clay":           (ItemClassification.progression | ItemClassification.useful),
+    "Shade Wisp":           (ItemClassification.progression | ItemClassification.useful),
+    "Sheepopper Mask":      (ItemClassification.progression | ItemClassification.useful),
+    "Skull Muffin":         (ItemClassification.progression | ItemClassification.useful),
+    "Skullmist Tea":        (ItemClassification.progression | ItemClassification.useful),
+    "Snuffer Mask":         (ItemClassification.progression | ItemClassification.useful),
+    "Soulbound Skulls":     (ItemClassification.progression | ItemClassification.useful),
+    "Sunburst Tootoo":      (ItemClassification.progression | ItemClassification.useful),
+    "Tiger Skull":          (ItemClassification.progression | ItemClassification.useful),
+    "Tigris Mask":          (ItemClassification.progression | ItemClassification.useful),
+    "Yeti Skull":           (ItemClassification.progression | ItemClassification.useful),
 }
 
 clunkmaster_item_card_list = {
     # Items
-    "B.I.N.K":              (ItemClassification.useful),
-    "Blaze Bom":            (ItemClassification.useful),
-    "Bom Barrel":           (ItemClassification.useful),
-    "Clockwork Bom":        (ItemClassification.useful),
-    "Flask of Ink":         (ItemClassification.useful),
-    "Foggy Brew":           (ItemClassification.useful),
-    "Forging Stove":        (ItemClassification.useful),
-    "Frenzy Wrench":        (ItemClassification.useful),
-    "Gigi's Cookie Box":    (ItemClassification.useful),
-    "Gigi's Gizmo":         (ItemClassification.useful),
-    "Haze Keg":             (ItemClassification.useful),
-    "Lumin Lantern":        (ItemClassification.useful),
-    "Magma Booster":        (ItemClassification.useful),
-    "Mini Muncher":         (ItemClassification.useful),
-    "Proto-Stomper":        (ItemClassification.useful),
-    "Snowzooka":            (ItemClassification.useful),
-    "Suncream":             (ItemClassification.useful),
-    "Sunsong Box":          (ItemClassification.useful),
-    "Supersnower":          (ItemClassification.useful),
+    "B.I.N.K":              (ItemClassification.progression | ItemClassification.useful),
+    "Blaze Bom":            (ItemClassification.progression | ItemClassification.useful),
+    "Bom Barrel":           (ItemClassification.progression | ItemClassification.useful),
+    "Clockwork Bom":        (ItemClassification.progression | ItemClassification.useful),
+    "Flask of Ink":         (ItemClassification.progression | ItemClassification.useful),
+    "Foggy Brew":           (ItemClassification.progression | ItemClassification.useful),
+    "Forging Stove":        (ItemClassification.progression | ItemClassification.useful),
+    "Frenzy Wrench":        (ItemClassification.progression | ItemClassification.useful),
+    "Frostbite Shard":      (ItemClassification.progression | ItemClassification.useful),
+    "Gigi's Cookie Box":    (ItemClassification.progression | ItemClassification.useful),
+    "Gigi's Gizmo":         (ItemClassification.progression | ItemClassification.useful),
+    "Haze Keg":             (ItemClassification.progression | ItemClassification.useful),
+    "Lumin Lantern":        (ItemClassification.progression | ItemClassification.useful),
+    "Magma Booster":        (ItemClassification.progression | ItemClassification.useful),
+    "Mini Muncher":         (ItemClassification.progression | ItemClassification.useful),
+    "Proto-Stomper":        (ItemClassification.progression | ItemClassification.useful),
+    "Snowzooka":            (ItemClassification.progression | ItemClassification.useful),
+    "Suncream":             (ItemClassification.progression | ItemClassification.useful),
+    "Sunsong Box":          (ItemClassification.progression | ItemClassification.useful),
+    "Supersnower":          (ItemClassification.progression | ItemClassification.useful),
     # Clunkers
-    "Blundertank":          (ItemClassification.useful),
-    "Bombarder":            (ItemClassification.useful),
-    "Gachapomper":          (ItemClassification.useful),
-    "Haze Balloon":         (ItemClassification.useful),
-    "I.C.G.M":              (ItemClassification.useful),
-    "Junkhead":             (ItemClassification.useful),
-    "Plinker":              (ItemClassification.useful),
-    "Portable Workbench":   (ItemClassification.useful),
-    "Sunglass Chime":       (ItemClassification.useful),
-    "Tootordion":           (ItemClassification.useful),
+    "Blundertank":          (ItemClassification.progression | ItemClassification.useful),
+    "Bombarder":            (ItemClassification.progression | ItemClassification.useful),
+    "Gachapomper":          (ItemClassification.progression | ItemClassification.useful),
+    "Haze Balloon":         (ItemClassification.progression | ItemClassification.useful),
+    "I.C.G.M":              (ItemClassification.progression | ItemClassification.useful),
+    "Junkhead":             (ItemClassification.progression | ItemClassification.useful),
+    "Plinker":              (ItemClassification.progression | ItemClassification.useful),
+    "Portable Workbench":   (ItemClassification.progression | ItemClassification.useful),
+    "Sunglass Chime":       (ItemClassification.progression | ItemClassification.useful),
+    "Tootordion":           (ItemClassification.progression | ItemClassification.useful),
 }
 
 #   Name                    (Progression Level)
 general_companion_list = {
-    "Big Berry":            (ItemClassification.useful),
-    "Blunky":               (ItemClassification.useful),
-    "Bombom":               (ItemClassification.useful),
-    "Bonnie":               (ItemClassification.useful),
-    "Dimona":               (ItemClassification.useful),
-    "Foxee":                (ItemClassification.useful),
-    "Gojiber":              (ItemClassification.useful),
-    "Jumbo":                (ItemClassification.useful),
-    "Lupa":                 (ItemClassification.useful),
-    "Naked Gnome":          (ItemClassification.useful),
-    "Nova":                 (ItemClassification.useful),
-    "Roibos":               (ItemClassification.useful),
-    "Snobble":              (ItemClassification.useful),
-    "Snoffel":              (ItemClassification.useful),
+    "Big Berry":            (ItemClassification.progression | ItemClassification.useful),
+    "Blunky":               (ItemClassification.progression | ItemClassification.useful),
+    "Bombom":               (ItemClassification.progression | ItemClassification.useful),
+    "Bonnie":               (ItemClassification.progression | ItemClassification.useful),
+    "Dimona":               (ItemClassification.progression | ItemClassification.useful),
+    "Foxee":                (ItemClassification.progression | ItemClassification.useful),
+    "Gojiber":              (ItemClassification.progression | ItemClassification.useful),
+    "Jumbo":                (ItemClassification.progression | ItemClassification.useful),
+    "Lupa":                 (ItemClassification.progression | ItemClassification.useful),
+    "Naked Gnome":          (ItemClassification.progression | ItemClassification.useful),
+    "Nova":                 (ItemClassification.progression | ItemClassification.useful),
+    "Roibos":               (ItemClassification.progression | ItemClassification.useful),
+    "Snobble":              (ItemClassification.progression | ItemClassification.useful),
+    "Snoffel":              (ItemClassification.progression | ItemClassification.useful),
 }
 
 snowdweller_companion_list = {
-    "Chompom":              (ItemClassification.useful),
-    "Firefist":             (ItemClassification.useful),
-    "Fulbert":              (ItemClassification.useful),
-    "Fungun":               (ItemClassification.useful),
-    "Kernel":               (ItemClassification.useful),
-    "Lil' Berry":           (ItemClassification.useful),
-    "Pimento":              (ItemClassification.useful),
-    "Pootie":               (ItemClassification.useful),
-    "Pyra":                 (ItemClassification.useful),
-    "Shelly":               (ItemClassification.useful),
-    "Tiny Tyko":            (ItemClassification.useful),
-    "Wallop":               (ItemClassification.useful),
-    "Wort":                 (ItemClassification.useful),
-    "Yuki":                 (ItemClassification.useful),
+    "Chompom":              (ItemClassification.progression | ItemClassification.useful),
+    "Firefist":             (ItemClassification.progression | ItemClassification.useful),
+    "Fulbert":              (ItemClassification.progression | ItemClassification.useful),
+    "Fungun":               (ItemClassification.progression | ItemClassification.useful),
+    "Kernel":               (ItemClassification.progression | ItemClassification.useful),
+    "Lil' Berry":           (ItemClassification.progression | ItemClassification.useful),
+    "Pimento":              (ItemClassification.progression | ItemClassification.useful),
+    "Pootie":               (ItemClassification.progression | ItemClassification.useful),
+    "Pyra":                 (ItemClassification.progression | ItemClassification.useful),
+    "Shelly":               (ItemClassification.progression | ItemClassification.useful),
+    "Tiny Tyko":            (ItemClassification.progression | ItemClassification.useful),
+    "Wallop":               (ItemClassification.progression | ItemClassification.useful),
+    "Wort":                 (ItemClassification.progression | ItemClassification.useful),
+    "Yuki":                 (ItemClassification.progression | ItemClassification.useful),
 }
 
 shademancer_companion_list = {
-    "Berry Sis":            (ItemClassification.useful),
-    "Chikichi":             (ItemClassification.useful),
-    "Devicro":              (ItemClassification.useful),
-    "Egg":                  (ItemClassification.useful),
-    "Groff":                (ItemClassification.useful),
-    "Monch":                (ItemClassification.useful),
-    "Shen":                 (ItemClassification.useful),
-    "Splinter":             (ItemClassification.useful),
-    "Spoof":                (ItemClassification.useful),
-    "Taiga":                (ItemClassification.useful),
-    "The Baker":            (ItemClassification.useful),
-    "Tusk":                 (ItemClassification.useful),
-    "Van Jun":              (ItemClassification.useful),
-    "Vesta":                (ItemClassification.useful),
-    "Zula":                 (ItemClassification.useful)
+    "Berry Sis":            (ItemClassification.progression | ItemClassification.useful),
+    "Chikichi":             (ItemClassification.progression | ItemClassification.useful),
+    "Devicro":              (ItemClassification.progression | ItemClassification.useful),
+    "Egg":                  (ItemClassification.progression | ItemClassification.useful),
+    "Groff":                (ItemClassification.progression | ItemClassification.useful),
+    "Monch":                (ItemClassification.progression | ItemClassification.useful),
+    "Shen":                 (ItemClassification.progression | ItemClassification.useful),
+    "Splinter":             (ItemClassification.progression | ItemClassification.useful),
+    "Spoof":                (ItemClassification.progression | ItemClassification.useful),
+    "Taiga":                (ItemClassification.progression | ItemClassification.useful),
+    "The Baker":            (ItemClassification.progression | ItemClassification.useful),
+    "Tusk":                 (ItemClassification.progression | ItemClassification.useful),
+    "Van Jun":              (ItemClassification.progression | ItemClassification.useful),
+    "Vesta":                (ItemClassification.progression | ItemClassification.useful),
+    "Zula":                 (ItemClassification.progression | ItemClassification.useful)
 }
 
 clunkmaster_companion_list = {
-    "Alloy":                (ItemClassification.useful),
-    "Biji":                 (ItemClassification.useful),
-    "Fizzle":               (ItemClassification.useful),
-    "Folby":                (ItemClassification.useful),
-    "Hazeblazer":           (ItemClassification.useful),
-    "Knuckles":             (ItemClassification.useful),
-    "Kreggo":               (ItemClassification.useful),
-    "Mama Tinkerson":       (ItemClassification.useful),
-    "Mini Mika":            (ItemClassification.useful),
-    "Needle":               (ItemClassification.useful),
-    "Nom & Stompy":         (ItemClassification.useful),
-    "Scaven":               (ItemClassification.useful),
-    "Tinkerson Jr.":        (ItemClassification.useful),
-    "Toaster":              (ItemClassification.useful),
+    "Alloy":                (ItemClassification.progression | ItemClassification.useful),
+    "Biji":                 (ItemClassification.progression | ItemClassification.useful),
+    "Fizzle":               (ItemClassification.progression | ItemClassification.useful),
+    "Folby":                (ItemClassification.progression | ItemClassification.useful),
+    "Hazeblazer":           (ItemClassification.progression | ItemClassification.useful),
+    "Knuckles":             (ItemClassification.progression | ItemClassification.useful),
+    "Kreggo":               (ItemClassification.progression | ItemClassification.useful),
+    "Mama Tinkerson":       (ItemClassification.progression | ItemClassification.useful),
+    "Mini Mika":            (ItemClassification.progression | ItemClassification.useful),
+    "Needle":               (ItemClassification.progression | ItemClassification.useful),
+    "Nom & Stompy":         (ItemClassification.progression | ItemClassification.useful),
+    "Scaven":               (ItemClassification.progression | ItemClassification.useful),
+    "Tinkerson Jr.":        (ItemClassification.progression | ItemClassification.useful),
+    "Toaster":              (ItemClassification.progression | ItemClassification.useful),
 }
 
 #   Name                    (Progression Level)
 general_charm_list = {
-    "Balance Charm":        (ItemClassification.useful),
-    "Battle Charm":         (ItemClassification.useful),
-    "Beetle Charm":         (ItemClassification.useful),
-    "Bling Charm":          (ItemClassification.useful),
-    "Block Charm":          (ItemClassification.useful),
-    "Bombskull Charm":      (ItemClassification.useful),
-    "Cake Charm":           (ItemClassification.useful),
-    "Chuckle Charm":        (ItemClassification.useful),
-    "Cloudberry Charm":     (ItemClassification.useful),
-    "Critical Charm":       (ItemClassification.useful),
-    "Durian Charm":         (ItemClassification.useful),
-    "Frenzy Charm":         (ItemClassification.useful),
-    "Frog Charm":           (ItemClassification.useful),
-    "Frosthand Charm":      (ItemClassification.useful),
-    "Frozen Heart Charm":   (ItemClassification.useful),
-    "Gnome Charm":          (ItemClassification.useful),
-    "Goat Charm":           (ItemClassification.useful),
-    "Greed Charm":          (ItemClassification.useful),
-    "Heart Charm":          (ItemClassification.useful),
-    "Hog Charm":            (ItemClassification.useful),
-    "Hook Charm":           (ItemClassification.useful),
-    "Jimbo Charm":          (ItemClassification.useful),
-    "Lumin Ring":          (ItemClassification.useful),
-    "Moko Charm":           (ItemClassification.useful),
-    "Molten Egg Charm":     (ItemClassification.useful),
-    "Moose Charm":          (ItemClassification.useful),
-    "Muncher Charm":        (ItemClassification.useful),
-    "Noomlin Charm":        (ItemClassification.useful),
-    "Nourish Charm":        (ItemClassification.useful),
-    "Pengu Charm":          (ItemClassification.useful),
-    "Pinch Charm":          (ItemClassification.useful),
-    "Pomegranate Charm":    (ItemClassification.useful),
-    "Punchfist Charm":      (ItemClassification.useful),
-    "Raspberry Charm":      (ItemClassification.useful),
-    "Scorchberry Charm":    (ItemClassification.useful),
-    "Scrap Charm":          (ItemClassification.useful), #Scrap charm is exclusive to both Snowdwellers and Clunkmasters, keeping it here for now
-    "Shade Slug":           (ItemClassification.useful),
-    "Snowball Charm":       (ItemClassification.useful),
-    "Spark Charm":          (ItemClassification.useful),
-    "Strawberry Charm":     (ItemClassification.useful),
-    "Sun Charm":            (ItemClassification.useful),
-    "Sunglass Charm":       (ItemClassification.useful),
-    "Zoomlin Charm":        (ItemClassification.useful)
+    "Balance Charm":        (ItemClassification.progression | ItemClassification.useful),
+    "Battle Charm":         (ItemClassification.progression | ItemClassification.useful),
+    "Beetle Charm":         (ItemClassification.progression | ItemClassification.useful),
+    "Bling Charm":          (ItemClassification.progression | ItemClassification.useful),
+    "Block Charm":          (ItemClassification.progression | ItemClassification.useful),
+    "Bombskull Charm":      (ItemClassification.progression | ItemClassification.useful),
+    "Cake Charm":           (ItemClassification.progression | ItemClassification.useful),
+    "Chuckle Charm":        (ItemClassification.progression | ItemClassification.useful),
+    "Cloudberry Charm":     (ItemClassification.progression | ItemClassification.useful),
+    "Critical Charm":       (ItemClassification.progression | ItemClassification.useful),
+    "Durian Charm":         (ItemClassification.progression | ItemClassification.useful),
+    "Frenzy Charm":         (ItemClassification.progression | ItemClassification.useful),
+    "Frog Charm":           (ItemClassification.progression | ItemClassification.useful),
+    "Frosthand Charm":      (ItemClassification.progression | ItemClassification.useful),
+    "Frozen Heart Charm":   (ItemClassification.progression | ItemClassification.useful),
+    "Gnome Charm":          (ItemClassification.progression | ItemClassification.useful),
+    "Goat Charm":           (ItemClassification.progression | ItemClassification.useful),
+    "Greed Charm":          (ItemClassification.progression | ItemClassification.useful),
+    "Heart Charm":          (ItemClassification.progression | ItemClassification.useful),
+    "Hog Charm":            (ItemClassification.progression | ItemClassification.useful),
+    "Hook Charm":           (ItemClassification.progression | ItemClassification.useful),
+    "Jimbo Charm":          (ItemClassification.progression | ItemClassification.useful),
+    "Lumin Ring":           (ItemClassification.progression | ItemClassification.useful),
+    "Moko Charm":           (ItemClassification.progression | ItemClassification.useful),
+    "Molten Egg Charm":     (ItemClassification.progression | ItemClassification.useful),
+    "Moose Charm":          (ItemClassification.progression | ItemClassification.useful),
+    "Muncher Charm":        (ItemClassification.progression | ItemClassification.useful),
+    "Noomlin Charm":        (ItemClassification.progression | ItemClassification.useful),
+    "Nourish Charm":        (ItemClassification.progression | ItemClassification.useful),
+    "Pengu Charm":          (ItemClassification.progression | ItemClassification.useful),
+    "Pinch Charm":          (ItemClassification.progression | ItemClassification.useful),
+    "Pomegranate Charm":    (ItemClassification.progression | ItemClassification.useful),
+    "Punchfist Charm":      (ItemClassification.progression | ItemClassification.useful),
+    "Raspberry Charm":      (ItemClassification.progression | ItemClassification.useful),
+    "Scorchberry Charm":    (ItemClassification.progression | ItemClassification.useful),
+    "Scrap Charm":          (ItemClassification.progression | ItemClassification.useful), #Scrap charm is exclusive to both Snowdwellers and Clunkmasters, keeping it here for now
+    "Shade Slug":           (ItemClassification.progression | ItemClassification.useful),
+    "Snowball Charm":       (ItemClassification.progression | ItemClassification.useful),
+    "Spark Charm":          (ItemClassification.progression | ItemClassification.useful),
+    "Strawberry Charm":     (ItemClassification.progression | ItemClassification.useful),
+    "Sun Charm":            (ItemClassification.progression | ItemClassification.useful),
+    "Sunglass Charm":       (ItemClassification.progression | ItemClassification.useful),
+    "Zoomlin Charm":        (ItemClassification.progression | ItemClassification.useful)
 }
 
 snowdweller_charm_list = {
-    "Acorn Charm":          (ItemClassification.useful),
-    "Jewelberry Charm":     (ItemClassification.useful),
-    "Peppernut Charm":      (ItemClassification.useful),
-    "Shield Charm":         (ItemClassification.useful),
-    "Shroom Charm":         (ItemClassification.useful),
-    "Spice Charm":          (ItemClassification.useful),
-    "Truffle Charm":        (ItemClassification.useful),
+    "Acorn Charm":          (ItemClassification.progression | ItemClassification.useful),
+    "Jewelberry Charm":     (ItemClassification.progression | ItemClassification.useful),
+    "Peppernut Charm":      (ItemClassification.progression | ItemClassification.useful),
+    "Shield Charm":         (ItemClassification.progression | ItemClassification.useful),
+    "Shroom Charm":         (ItemClassification.progression | ItemClassification.useful),
+    "Spice Charm":          (ItemClassification.progression | ItemClassification.useful),
+    "Truffle Charm":        (ItemClassification.progression | ItemClassification.useful),
 }
 
 shademancer_charm_list = {
-    "Bite Charm":           (ItemClassification.useful),
-    "Boonfire Charm":       (ItemClassification.useful),
-    "Flameblade Charm":     (ItemClassification.useful),
-    "Lamb Charm":           (ItemClassification.useful),
-    "Mime Charm":           (ItemClassification.useful),
-    "Tiger Charm":          (ItemClassification.useful),
+    "Bite Charm":           (ItemClassification.progression | ItemClassification.useful),
+    "Boonfire Charm":       (ItemClassification.progression | ItemClassification.useful),
+    "Flameblade Charm":     (ItemClassification.progression | ItemClassification.useful),
+    "Lamb Charm":           (ItemClassification.progression | ItemClassification.useful),
+    "Mime Charm":           (ItemClassification.progression | ItemClassification.useful),
+    "Tiger Charm":          (ItemClassification.progression | ItemClassification.useful),
 }
 
 clunkmaster_charm_list = {
-    "Bom Charm":            (ItemClassification.useful),
-    "Fidget Charm":         (ItemClassification.useful),
-    "Gear Charm":           (ItemClassification.useful),
-    "Recycle Charm":        (ItemClassification.useful),
-    "Squid Charm":          (ItemClassification.useful),
+    "Bom Charm":            (ItemClassification.progression | ItemClassification.useful),
+    "Fidget Charm":         (ItemClassification.progression | ItemClassification.useful),
+    "Gear Charm":           (ItemClassification.progression | ItemClassification.useful),
+    "Recycle Charm":        (ItemClassification.progression | ItemClassification.useful),
+    "Squid Charm":          (ItemClassification.progression | ItemClassification.useful),
 }
 
 #   Name                    (Progression Level)
-bell_list = {
+sun_bell_list = {
     # Sun Bells
     "Sun Bell of Hands":    (ItemClassification.useful),
     "Sun Bell of Fellowship":(ItemClassification.useful),
@@ -334,7 +367,10 @@ bell_list = {
     "Noomlin Sun Bell":     (ItemClassification.useful),
     "Sun Bell of Strength": (ItemClassification.useful),
     "Breakfast Sun Bell":   (ItemClassification.useful),
-    "Infinity Sun Bell":    (ItemClassification.useful),
+    "Infinity Sun Bell":    (ItemClassification.useful)
+}
+
+storm_bell_list = {
     # Storm Bells
     "Blingsnail Bell":      (ItemClassification.progression),
     "Bell of Death":        (ItemClassification.progression),
@@ -348,7 +384,10 @@ bell_list = {
     "Gobbler Bell":         (ItemClassification.progression),
     "Tyrant Bell":          (ItemClassification.progression),
     "Dread Bell":           (ItemClassification.progression),
-    "Blood Bell":           (ItemClassification.progression),
+    "Blood Bell":           (ItemClassification.progression)
+}
+
+voyage_bell_list = {
     # Voyage Bells
     "Battle Bell":          (ItemClassification.useful),
     "Blingsack Bell":       (ItemClassification.useful),
@@ -363,6 +402,8 @@ bell_list = {
     "Lumin Bell":           (ItemClassification.useful),
     "Party Bell":           (ItemClassification.useful)
 }
+
+bell_list = sun_bell_list | storm_bell_list | voyage_bell_list
 
 #   Name                    (Progression Level)
 filler_list = {
@@ -384,10 +425,20 @@ filler_list = {
     "Cursed Crown Trap":    (ItemClassification.trap)
 }
 
+progressive_list = {
+    "Progressive Act": (ItemClassification.progression),
+    "Progressive Fight": (ItemClassification.progression),
+    # Vase
+    "Broken Vase":          (ItemClassification.progression),
+    "Lumin Goop":           (ItemClassification.progression),
+    "The Lumin Vase":       (ItemClassification.progression)
+}
+
 buildings_map = {x: 10000 + i for i,x in enumerate(building_list)}
 tribe_map = {x: 20000 + i for i,x in enumerate(tribe_list)}
 pet_map = {x: 30000 + i for i,x in enumerate(pet_list)}
 map_event_map = {x: 40000 + i for i,x in enumerate(map_event_list)}
+battle_map = {x: 41000 + i for i,x in enumerate(battle_list)}
 
 general_item_cards = {x: 50000 + i for i,x in enumerate(general_item_card_list)}
 snow_item_cards = {x: 51000 + i for i,x in enumerate(snowdweller_item_card_list)}
@@ -410,16 +461,21 @@ clunk_charms = {x: 73000 + i for i,x in enumerate(clunkmaster_charm_list)}
 
 charm_map = general_charms | snow_charms | shade_charms | clunk_charms
 
-bell_map = {x: 80000 + i for i,x in enumerate(bell_list)}
+sun_bell_map = {x: 80000 + i for i,x in enumerate(sun_bell_list)}
+storm_bell_map = {x: 80000 + len(sun_bell_list) + i for i,x in enumerate(storm_bell_list)}
+voyage_bell_map = {x: 80000 + len(sun_bell_list) + len(storm_bell_list) + i for i,x in enumerate(voyage_bell_list)}
+bell_map = sun_bell_map | storm_bell_map | voyage_bell_map
+
 filler_map = {x: 90000 + i for i,x in enumerate(filler_list)}
+progressive_map = {x: 99999 - i for i,x in enumerate(progressive_list)}
 
 # Full name to ID
-ITEM_NAME_TO_ID = buildings_map | tribe_map | pet_map | map_event_map | item_card_map | companions_map | charm_map | bell_map | filler_map
+ITEM_NAME_TO_ID = buildings_map | tribe_map | pet_map | map_event_map | battle_map | item_card_map | companions_map | charm_map | bell_map | filler_map | progressive_map
 
-# There's a lot of dicts to combine, using intermediate dicts to not have a massive single line
-classification_a = building_list | tribe_list | pet_list | bell_list | filler_list | map_event_list
-classification_b = general_item_card_list | snowdweller_item_card_list | shademancer_item_card_list | clunkmaster_item_card_list
-classification_c = general_companion_list | snowdweller_companion_list | shademancer_companion_list | clunkmaster_companion_list
-classification_d = general_charm_list | snowdweller_charm_list | shademancer_charm_list | clunkmaster_charm_list
-# Full name to classification
-ITEM_NAME_TO_CLASSIFICATION = classification_a | classification_b | classification_c | classification_d
+
+
+ITEM_NAME_TO_CLASSIFICATION = building_list | tribe_list | pet_list | bell_list | filler_list | map_event_list | battle_list |\
+        general_item_card_list | snowdweller_item_card_list | shademancer_item_card_list | clunkmaster_item_card_list|\
+        general_companion_list | snowdweller_companion_list | shademancer_companion_list | clunkmaster_companion_list|\
+        general_charm_list | snowdweller_charm_list | shademancer_charm_list | clunkmaster_charm_list|\
+        progressive_list

@@ -2,7 +2,15 @@ from __future__ import annotations
 from BaseClasses import Location
 from . import Items
 from typing import TYPE_CHECKING
-from .data.LocationData import LOCATION_NAME_TO_ID, building_challenges_map, idols_map, enemy_kills_map, boss_kills_map, item_card_map, companions_map, charm_map, boss_reward_map
+from .data import LocationData
+from .data.LocationData import LOCATION_NAME_TO_ID, building_challenges_map,\
+    hotspring_challenges_map, icebreaker_challenges_map, inventors_challenges_map,\
+    pethouse_challenges_map, tribehall_challenges_map, idols_map, enemy_kills_map,\
+    miniboss_kills_map, boss_kills_map, extra_enemy_kills_map, item_card_map,\
+    companions_map, charm_map, boss_reward_map,\
+    snow_cards, snow_companions, snow_charms,\
+    shade_cards, shade_companions, shade_charms,\
+    clunk_cards, clunk_companions, clunk_charms
 
 if TYPE_CHECKING:
     from .World import WildfrostWorld
@@ -14,10 +22,119 @@ def create_all_locations(world: WildfrostWorld) -> None:
     create_regular_locations(world)
     create_events(world)
 
+def add_location_to_pool(world: WildfrostWorld, region: Region, location_name: str) -> WildfrostLocation: # type: ignore
+    "A basic function for adding a specific location to the location pool for the create_regular_locations function."
+    return (WildfrostLocation(world.player, location_name, LOCATION_NAME_TO_ID[location_name], region))
+
 def create_regular_locations(world: WildfrostWorld) -> None:
     # TODO: Place items in correct regions, and in correct amounts
-    snowdwell = world.get_region("Snowdwell")
-    snowdwell.locations += [(WildfrostLocation(world.player, locationName, LOCATION_NAME_TO_ID[locationName], snowdwell)) for locationName in LOCATION_NAME_TO_ID]
+    # TODO: Remove locations based on options, like tribe challenges.
+    locationpool: list[Location] = []
+
+    #Regions (I hope using string names works)
+    snowdwell    = world.get_region("Snowdwell")
+    snowdwellers = world.get_region("Snowdwellers")
+    shademancers = world.get_region("Shademancers")
+    clunkmasters = world.get_region("Clunkmasters")
+    pethouse     = world.get_region("Pet House")     
+    inventors    = world.get_region("Inventor's Hut")
+    icebreaker   = world.get_region("Icebreaker's Cabin")
+    hotspring    = world.get_region("Hot Springs")
+
+
+    #Add challenges from the buildings
+    if True:
+        locationpool += [add_location_to_pool(world, hotspring, locationName) for locationName in hotspring_challenges_map]
+        icebreaker.locations += [add_location_to_pool(world, icebreaker, locationName) for locationName in icebreaker_challenges_map]
+        inventors.locations += [add_location_to_pool(world, inventors, locationName) for locationName in inventors_challenges_map]
+        pethouse.locations += [add_location_to_pool(world, pethouse, locationName) for locationName in pethouse_challenges_map]
+        hotspring.locations += [add_location_to_pool(world, snowdwell, locationName) for locationName in tribehall_challenges_map]
+
+    #Add building challenge locations, if enabled:
+    if world.options.town_buildings:
+        locationpool += [add_location_to_pool(world, snowdwell, locationName) for locationName in building_challenges_map]
+    
+    #Add locations for idols, if enabled:
+    if True: #Always enabled (for now)
+        locationpool += [add_location_to_pool(world, snowdwell, locationName) for locationName in idols_map if locationName + " Idol" not in world.options.idol_difficulty] #Remove the idols disabled by the option
+    
+    #Add locations for enemy kills:
+    if "Enemies" in world.options.kill_checks.value:
+        locationpool += [add_location_to_pool(world, snowdwell, locationName) for locationName in enemy_kills_map]
+
+    #Add locations for miniboss kills:
+    if "Mini Bosses" in world.options.kill_checks.value: #Always enabled (for now)
+        locationpool += [add_location_to_pool(world, snowdwell, locationName) for locationName in miniboss_kills_map]
+
+    #Add locations for boss kills:
+    if "Bosses" in world.options.kill_checks.value: #Always enabled (for now)
+        locationpool += [add_location_to_pool(world, snowdwell, locationName) for locationName in boss_kills_map if \
+            (locationName != "Kill The Frost Guardian" or world.options.goal.value > 0)\
+                and ((not "Frost" in locationName or "Frost Guardian" in locationName) or world.options.goal.value > 1)]
+
+    #Add locations for eye of the storm kills:
+    if "Storm Only" in world.options.kill_checks.value: #Always enabled (for now)
+        locationpool += [add_location_to_pool(world, snowdwell, locationName) for locationName in extra_enemy_kills_map]
+    
+    #Add random location checks for item cards:
+    if True: #Always enabled (for now)
+        snowdwellers.locations += [add_location_to_pool(world, snowdwellers, locationName) for locationName in snow_cards]
+        shademancers.locations += [add_location_to_pool(world, shademancers, locationName) for locationName in shade_cards]
+        clunkmasters.locations += [add_location_to_pool(world, clunkmasters, locationName) for locationName in clunk_cards]
+        #locationpool += [add_location_to_pool(world, snowdwell, locationName) for locationName in item_card_map]
+    
+    #Add random location checks for companions:
+    if True: #Always enabled (for now)
+        snowdwellers.locations += [add_location_to_pool(world, snowdwellers, locationName) for locationName in snow_companions]
+        shademancers.locations += [add_location_to_pool(world, shademancers, locationName) for locationName in shade_companions]
+        clunkmasters.locations += [add_location_to_pool(world, clunkmasters, locationName) for locationName in clunk_companions]
+        #locationpool += [add_location_to_pool(world, snowdwell, locationName) for locationName in companions_map]
+    
+    #Add random locations checks for gaining charms:
+    if world.options.shuffle_charms: #Toggle
+        snowdwellers.locations += [add_location_to_pool(world, snowdwellers, locationName) for locationName in snow_charms]
+        shademancers.locations += [add_location_to_pool(world, shademancers, locationName) for locationName in shade_charms]
+        clunkmasters.locations += [add_location_to_pool(world, clunkmasters, locationName) for locationName in clunk_charms]
+        #locationpool += [add_location_to_pool(world, snowdwell, locationName) for locationName in charm_map]
+    
+    #Add locations for boss rewards:
+    if True: #Always enabled (for now)
+        locationpool += [add_location_to_pool(world, snowdwell, locationName) for locationName in boss_reward_map]
+
+    snowdwell.locations += locationpool
+
+    # snowdwell = world.get_region("Snowdwell")
+    # locations_to_use = LOCATION_NAME_TO_ID
+    # locations_to_remove = []
+    
+    # extra_enemies = (
+    #     "Grizzle",
+    #     "Plum",
+    #     "Willow",
+    #     "Bombarder",
+    #     "Mega Mimik",
+    #     "Plinker"
+    # )
+
+    # remove_bosses_flag        = not ("Bosses" in world.options.kill_checks.value)
+    # remove_minibosses_flag    = not ("Mini Bosses" in world.options.kill_checks.value)
+    # remove_enemies_flag       = not ("Enemy" in world.options.kill_checks.value)
+    # remove_extra_enemies_flag = not ("Extra" in world.options.kill_checks.value)
+
+    # for key in locations_to_use.keys():
+    #     if key in LocationData.boss_kills and remove_bosses_flag:
+    #         locations_to_remove.append(key)
+    #     if key in LocationData.miniboss_kills and remove_minibosses_flag:
+    #         locations_to_remove.append(key)
+    #     if key in LocationData.enemy_kills and not key[5::] in extra_enemies and remove_enemies_flag:
+    #         locations_to_remove.append(key)
+    #     if key[5::] in extra_enemies and remove_extra_enemies_flag:
+    #         locations_to_remove.append(key)
+            
+    # for key in locations_to_remove:
+    #     locations_to_use.pop(key, 0)
+                
+    # snowdwell.locations += [(WildfrostLocation(world.player, locationName, LOCATION_NAME_TO_ID[locationName], snowdwell)) for locationName in locations_to_use]
 
 def create_events(world: WildfrostWorld) -> None:
     #TODO: Improve

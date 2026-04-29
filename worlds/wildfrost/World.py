@@ -3,6 +3,7 @@ from . import Web_World, Regions, Locations, Items, Rules
 from . import Options as WildfrostOptions
 from .data.LocationData import LOCATION_NAME_TO_ID
 from .data.ItemData import ITEM_NAME_TO_ID
+from typing import Dict, Any
 
 class WildfrostWorld(World):
     """Take on the elements in Wildfrost, a tactical roguelike deckbuilder!"""
@@ -16,6 +17,8 @@ class WildfrostWorld(World):
     location_name_to_id = LOCATION_NAME_TO_ID
     options_dataclass = WildfrostOptions.WildfrostOptions
     options: WildfrostOptions.WildfrostOptions
+
+    
 
     #TODO - Override functions
     #def stage_assert_generate(cls, multiworld: "MultiWorld") -> None
@@ -36,3 +39,15 @@ class WildfrostWorld(World):
     def get_filler_item_name(self) -> str:
         return Items.get_random_filler_item_name(self)
     #def collect_item(self, state: "CollectionState", item: "Item", remove: bool = False) -> Optional[str]
+    def fill_slot_data(self) -> Dict[str, Any]:
+        return {
+            "goal": self.options.goal.value,
+            #"excluded_idols": self.options.idol_difficulty.value,
+            "bypass_town_order": self.options.bypass_town_order.value,
+            "bypass_building_order": self.options.bypass_building_order.value,
+            "bell_sanity": self.options.bell_sanity.value,
+            "fight_gating": self.options.fight_gating.value,
+            "fights_in_pool": self.options.fights_in_pool.value,
+            "fight_rando": self.options.random_fights.value,
+            "wave_rando": self.options.random_waves.value
+        }

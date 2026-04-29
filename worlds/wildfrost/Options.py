@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 import typing
 
-from Options import Option, Choice, Range, Toggle, DeathLink, OptionGroup, PerGameCommonOptions
+from Options import Option, Choice, Range, Toggle, DeathLink, OptionGroup, PerGameCommonOptions, OptionSet
 from worlds.ladx.LADXR.mapgen.wfc import Cell
 
 class Goal(Choice):
@@ -20,41 +20,51 @@ class Goal(Choice):
     default = option_frost_guardian
 
 class TownBuildings(Toggle):
-    """Buildings are added to the item pool. The building process provides an Archipelago check instead"""
-    display_name = "Town Buildings - WIP"
+    """Buildings are added to the item pool. Does nothing if Building Challenges is turned off""" #The building challenge provides an Archipelago check instead <- text was removed because (at least for now) those locations will exist either way
+    display_name = "Town Buildings"
 
 class BuildingChallenges(Toggle):
-    """In-building challenge rewards are added to the item pool. Challenges provide an Archipelago check instead"""
+    """In-building challenge rewards are added to the item pool.""" #Challenges provide an Archipelago check instead <- same as above ^
     display_name = "Building Challenges - WIP"
 
-class TownSequence(Choice):
-    """Determines the progression of town challenges.
-
-    Vanilla: Buildings/Challenges must be completed before the next building/challenge progression starts.
-
-    All Buildings: All buildings can be built at the same time.
-
-    All Challenges: Once a building is built, all challenges in that building can be progressed at the same time.
-
-    All At Once: Combines the All Buildings and All Challenges options.
-    Buildings must still be unlocked before their challenges can be started."""
-    display_name = "Town Unlock Sequence - WIP"
-    option_vanilla = 0
-    option_all_buildings = 1
-    option_all_challenges = 2
-    option_all_at_once = 3
-    default = option_vanilla
+class BypassTownOrder(Toggle):
+    """If enabled, you can progress towards any build challenge from the start.
+    Otherwise, you can only progress towards a build challenge if the previous one has been completed (like in vanilla).
+    Does nothing if \"Town Buildings\" is disabled.
+    """
+    display_name = "Bypass Town Order - WIP"
+    default = 1
+    
+class BypassBuildingOrder(Toggle):
+    """If enabled, you can progress towards any building quest as soon as the related building is built.
+    Otherwise, you can only progress towards a building quest if the previous one within the same building has been completed (like in vanilla).
+    Does nothing if \"Building Challenges\" is disabled.
+    """
+    display_name = "Bypass Building Order - WIP"
+    default = 1
 
 class ShuffleTribes(Toggle):
-    """Adds the Shademancers and Clunkmasters to the item pool.
-    Tribe Hall challenges become Archipelago checks."""
-    display_name = "Shuffle Tribes - WIP"
+    """Whether to randomize the three tribes.
+    Tribe Hall challenges become Archipelago checks if shuffled.
+    """
+    display_name = "Shuffle Tribes"
 
+class StartingTribes(OptionSet):
+    """Determines which tribes start unlocked.
+    Does nothing if \"Shuffle Tribes\" is disabled.
+    
+    Valid keys: Snowdwellers, Shademancers, Clunkmasters.
+    """
+    display_name = "Starting Tribes"
+    valid_keys = {"Snowdwellers", "Shademancers", "Clunkmasters"}
+    default = {"Snowdwellers"}
+
+#TODO
 class LockMoreEvents(Toggle):
-    """Adds the Injured Companion, Muncher, and Blingsnail map events to the item pool."""
+    """Adds the Injured Companion, Muncher, and Blingsnail Cave map events to the item pool."""
     display_name = "Lock More Map Events - WIP"
 
-class IdolDifficulty(Choice):
+class IdolDifficulty(OptionSet):
     """Chooses which tedious idols are removed from the Archipelago checks.
     Daily Voyage is not enabled while randomized, meaning that idol will always be removed.
     Removed idols will not be required for the \"Complete Snowdwell\" goal
@@ -64,24 +74,37 @@ class IdolDifficulty(Choice):
     Undefeated: Disables the idol for a 3 Win Streak. Auto-disabled for Frost Guardian victory condition.
     
     Gnomebringer: Disables the idol for winning with the Naked Gnome. Auto-disabled for Frost Guardian victory condition.
+    
+    Best Friends: Disables the idol for winning with only your pet as an active companion. Auto-disabled for Frost Guardian victory condition.
+    
+    Snowdweller: Disables the idol for winning with the Snowdwellers tribe. Auto-disabled for Frost Guardian victory condition.
+    
+    Shademancer: Disables the idol for winning with the Shademancers tribe. Auto-disabled for Frost Guardian victory condition.
+    
+    Clunkmaster: Disables the idol for winning with the Clunkmasters tribe. Auto-disabled for Frost Guardian victory condition.
+    
+    One Punch: Disables the idol for killing the Frost Guardian with a Scrappy Sword. Auto-disabled for Frost Guardian victory condition.
     """
     display_name = "Idol Difficulty - WIP"
-    option_none = 0
-    option_sunbringer = 1
-    option_undefeated = 2
-    option_gnomebringer = 3
-    option_sunbringer_undefeated = 4
-    option_sunbringer_gnomebringer = 5
-    option_undefeated_gnomebringer = 6
-    option_all_three = 7
-    default = option_none
+    valid_keys = {"Sunbringer", "Undefeated", "Gnomebringer", "Best Friends", "Clunkmaster", "Shademancer", "Snowdweller", "One Punch"}
+    default = valid_keys
 
+#TODO: implement this in the client
 class RandomInventory(Toggle):
     """Add items from the starting inventory to the item pool.
 
     Excludes Scrappy Sword, Tar Blade, Gearhammer, and Junk."""
     display_name = "Randomize Starting Inventory - WIP"
 
+class ShuffleCharms(Toggle):
+    """Option to add charms to the item pool.
+
+    When enabled, every charm will be locked at the start as items.
+    """ #Adds a random location for every charm. <- removed for same reasons as building challenges and town buildings had their similar text removed
+    display_name = "Shuffle Charms"
+    default = 1
+
+#TODO implement this in the client
 class RandomLuminVase(Choice):
     """Option to add the Lumin Vase to the item pool.
     
@@ -89,30 +112,36 @@ class RandomLuminVase(Choice):
     
     Single: The Lumin Vase is added to the item pool. Lumin parts will not appear until the Vase is found.
     
-    Parts: The Broken Vase, Lumin Goop, and The Lumin Vase are added to the item pool as separate items."""
+    Parts: The Broken Vase, Lumin Goop, and The Lumin Vase are added to the item pool as separate items. Lumin parts will not appear until the Vase is found"""
     display_name = "Randomize Lumin Vase - WIP"
     option_off = 0
     option_single = 1
     option_parts = 2
     default = option_off
 
-class RandomSnoof(Toggle):
-    """If enabled, Snoof is added to the list of randomized companions.
-    Otherwise, Snoof is unlocked as soon as the Pet House is built."""
-    display_name = "Randomize Snoof - WIP"
+class StartingPets(OptionSet):
+    """Determines what pets you start with unlocked
+    
+    Valid keys: Snoof, Booshu, Loki, Sneezle, Spike, Binku, Lil\' Gazi"""
+    display_name = "Starting Pets"
+    valid_keys = {"Snoof", "Booshu", "Loki", "Sneezle", "Spike", "Binku", "Lil\' Gazi"}
+    default = {"Snoof"}
 
 class SunBells(Toggle):
     """Adds Sun Bells to the item pool."""
-    display_name = "Sun Bells - WIP"
+    display_name = "Sun Bells"
 
+#TODO: implement this in the client
 class StormBells(Toggle):
     """Adds Storm Bells to the item pool."""
-    display_name = "Storm Bells - WIP"
+    display_name = "Storm Bells"
 
+#TODO: implement this in the client
 class VoyageBells(Toggle):
     """Adds Bells unique to the Daily Voyage to the item pool."""
     display_name = "Voyage Bells - WIP"
 
+#TODO: implement this in the client
 class BellSanity(Choice):
     """Changes how bell selection works.
 
@@ -131,33 +160,84 @@ class BellSanity(Choice):
     option_bellsanity = 2
     default = option_standard
 
+#TODO test that this works
+class FightGating(Choice):
+    """Whether or not fights should be locked behind progressive items.
+
+    None: All fights are available from the start.
+
+    Fight: Adds a "Progressive Fight" item. Each one lets you visit one more fight per run. You start with Fight 1 unlocked
+    
+    Act: Adds a "Progressive Act" item. Each one lets you visit one more area (Whatever the first one's called, Ice Caves, Frostlands) per run. You start with Act 1 unlocked
+    
+    Both: Same as "Fight" but you *also* need Progressive Act to move onto the next area.
+    """
+    display_name = "Fight Gating - WIP"
+    option_none = 0
+    option_fight = 1
+    option_act = 2
+    option_both = 3
+    default = option_act
+
+class ExtraProgressiveFights(Range):
+    """How many extra Progressive Fight items should be in the item pool. 
+    Does nothing if Fight Gating is set to None or Act.
+    Minimum value is 0 and maximum value is 8.
+    """
+    display_name = "Extra Progressive Fights"
+    range_start = 0
+    range_end = 8
+
+class ExtraProgressiveActs(Range):
+    """How many extra Progressive Act items should be in the item pool.
+    Does nothing if Fight Gating is set to None or Fight.
+    Minimum value is 0 and maximum value is 3.
+    """
+    display_name = "Extra Progressive Acts"
+    range_start = 0
+    range_end = 3
+
+#TODO: add support for this in the client
 class ArchipelaGnome(Toggle):
     """Replaces the Naked Gnome with the Archipela-Gnome. Gives a free hint when spared.
     Naked Gnome will instead appear in Frozen Travelers."""
     display_name = "Archipela-Gnome - WIP"
 
-class KillChecks(Choice):
+#TODO: add logic to this
+class KillChecks(OptionSet):
     """Adds extra checks for unique kills on enemies.
-    NOTE: Bosses only count when all phases/splits are defeated. Heart of the Storm bosses do not give checks.
-    
-    Off: Unique kills do not give checks.
+    NOTE: Boss kills only count as completed when the fight is won.
     
     Bosses: Bosses give extra checks.
     
-    Mini-Bosses: Bosses and Mini-Bosses give extra checks.
+    Mini Bosses: Mini-Bosses give extra checks.
     
-    Enemies: All enemies give extra checks, as well as Bosses and Mini-Bosses.
-    
-    Enemies+: Same as the Enemies option, but includes certain enemies that can
-    only appear in the Eye of the Storm, based on previous team compositions"""
-    display_name = "Add Unique Boss Kill Checks - WIP"
-    option_off = 0
-    option_bosses = 1
-    option_mini_bosses = 2
-    option_enemies = 3
-    option_enemies_plus = 4
-    default = option_off
+    Enemies: Regular enemies give extra checks.
 
+    ***NOT RECOMMENDED***
+    Storm Only: Certain enemies that can only appear in the Eye of the Storm, 
+    based on previous team compositions, give extra checks"""
+
+    display_name = "Add Unique Boss Kill Checks - WIP"
+    valid_keys = {"Bosses", "Mini Bosses", "Enemies", "Storm Only"}
+    default = ["Bosses", "Mini Bosses"]
+
+#TODO
+class FightsInPool(Choice):
+    """Determines whether or not battles are added to the item pool.
+    Off: Acts like vanilla. Most battles are unlocked from the start but some are locked behind the shademancers or clunkmasters tribe.
+
+    SemiVanilla: Battles that are normally locked behind tribes are added to the item pool.
+
+    Fightsanity: All battles are added to the item pool. If there aren't any battles for the next battle tier and \"Randomize Fight Appearance\" is disabled, the run restarts upon winning the last possible battle.
+    """
+    display_name = "Add Fights to Item Pools - WIP"
+    option_off = 0
+    option_semi_vanilla = 1
+    option_fightsanity = 2
+    default = option_semi_vanilla
+
+#TODO
 class RandomFights(Choice):
     """Changes the order of where fights will appear. Eye/Heart of the Storm will never be randomized.
     
@@ -172,7 +252,8 @@ class RandomFights(Choice):
     option_chaos = 2
     default = option_off
 
-class FightBalance(Choice):
+#TODO
+class RandomWaves(Choice):
     """Randomizes what enemy waves can appear within a fight.
     
     Off: Normal waves appear in each fight.
@@ -186,7 +267,7 @@ class FightBalance(Choice):
     option_wild = 2
     default = option_off
 
-
+#TODO
 class TrapsBoons(Choice):
     """Add traps and boons to the item pool. For each trap/boon added to the item pool, an
     additional check will be added to the companions, items, charms, or bells checks,
@@ -321,15 +402,18 @@ wildfrost_option_groups = [
     OptionGroup("Town Options", [
         TownBuildings,
         BuildingChallenges,
-        TownSequence,
+        BypassTownOrder,
+        BypassBuildingOrder,
         ShuffleTribes,
+        StartingTribes,
         LockMoreEvents,
-        IdolDifficulty
+        IdolDifficulty,
+        ShuffleCharms
     ]),
     OptionGroup("Inventory Options", [
         RandomInventory,
         RandomLuminVase,
-        RandomSnoof
+        StartingPets
     ]),
     OptionGroup("Bell Options", [
         SunBells,
@@ -338,10 +422,14 @@ wildfrost_option_groups = [
         BellSanity,
     ]),
     OptionGroup("Fight Options", [
+        FightGating,
+        ExtraProgressiveFights,
+        ExtraProgressiveActs,
         ArchipelaGnome,
         KillChecks,
+        FightsInPool,
         RandomFights,
-        FightBalance
+        RandomWaves
     ]),
     OptionGroup("Traps and Boons", [
         TrapsBoons,
@@ -370,24 +458,31 @@ class WildfrostOptions(PerGameCommonOptions):
 
     town_buildings: TownBuildings
     building_challenges: BuildingChallenges
-    town_sequence: TownSequence
+    bypass_town_order: BypassTownOrder
+    bypass_building_order: BypassBuildingOrder
     shuffle_tribes: ShuffleTribes
+    starting_tribes: StartingTribes
+    shuffle_charms: ShuffleCharms
     lock_more_events: LockMoreEvents
     idol_difficulty: IdolDifficulty
     
     random_inventory: RandomInventory
     random_lumin_vase: RandomLuminVase
-    random_snoof: RandomSnoof
+    starting_pets: StartingPets
 
     sun_bells: SunBells
     storm_bells: StormBells
     voyage_bells: VoyageBells
     bell_sanity: BellSanity
 
+    fight_gating: FightGating
+    extra_progressive_fights: ExtraProgressiveFights
+    extra_progressive_acts: ExtraProgressiveActs
     archipelagnome: ArchipelaGnome
     kill_checks: KillChecks
+    fights_in_pool: FightsInPool
     random_fights: RandomFights
-    fight_balance: FightBalance
+    random_waves: RandomWaves
     
     traps_boons: TrapsBoons
     tb_weight_count: TBWeightCount
